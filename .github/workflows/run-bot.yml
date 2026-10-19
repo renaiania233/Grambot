@@ -1,5 +1,5 @@
 
-name: Telegram Bot
+name: Telegram BotV2
 
 on:
   workflow_dispatch:
@@ -22,7 +22,7 @@ jobs:
           python-version: "3.12"
 
       - name: Install dependencies
-        run: pip install requests
+        run: pip install -r requirements.txt
 
       - name: Run bot
         env:
