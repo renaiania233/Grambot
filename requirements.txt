@@ -1,0 +1,6 @@
+colorama
+requests
+websocket-client
+pandas
+numpy
+matplotlib
