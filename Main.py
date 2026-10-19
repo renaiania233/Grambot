@@ -254,12 +254,12 @@ def REQUEST_(url,headers=None,payload=None,json=None):
 
 def BLOCK_MESSAGES():
     payl= {'chat_id': -1004324675339, 'permissions': {'can_send_messages': False, 'can_send_audios': False, 'can_send_documents': False, 'can_send_photos': False, 'can_send_videos': False, 'can_send_video_notes': False, 'can_send_voice_notes': False, 'can_send_polls': False, 'can_send_other_messages': False, 'can_add_web_page_previews': False}}
-    a = REQUEST_("https://api.telegram.org/bot8953744107:AAHfUaoG2aJZ3WpJzpD_rbGJIDist8pxqbc/setChatPermissions",json=payl)
+    a = REQUEST_("https://api.telegram.org/bot8953744107:AAGLDs_Yq_DlY73HZWdeAe2nnEIn2L3k3dw/setChatPermissions",json=payl)
 	#if a.text=='{"ok":true,"result":true}':
     return
 def UNBLOCK_MESSAGES():
     payl= {'chat_id': -1004324675339, 'permissions': {'can_send_messages': True, 'can_send_audios': True, 'can_send_documents': True, 'can_send_photos': True, 'can_send_videos': True, 'can_send_video_notes': True, 'can_send_voice_notes': True, 'can_send_polls': True, 'can_send_other_messages': True, 'can_add_web_page_previews': True}}
-    a = REQUEST_("https://api.telegram.org/bot8953744107:AAHfUaoG2aJZ3WpJzpD_rbGJIDist8pxqbc/setChatPermissions",json=payl)
+    a = REQUEST_("https://api.telegram.org/bot8953744107:AAGLDs_Yq_DlY73HZWdeAe2nnEIn2L3k3dw/setChatPermissions",json=payl)
 	#if a.text=='{"ok":true,"result":true}':
     return
 
@@ -274,7 +274,7 @@ def MAIN_TELEGRAM_RESPONDER():
             with open("db.json","w") as w :
                 w.write(json.dumps(db_manager))
 
-            ssd = REQUEST_("https://api.telegram.org/bot8953744107:AAHfUaoG2aJZ3WpJzpD_rbGJIDist8pxqbc/getUpdates?offset=-1").json()
+            ssd = REQUEST_("https://api.telegram.org/bot8953744107:AAGLDs_Yq_DlY73HZWdeAe2nnEIn2L3k3dw/getUpdates?offset=-1").json()
             #print(ssd)
             #print("--------------------------------------------")
             try:
@@ -294,7 +294,7 @@ def MAIN_TELEGRAM_RESPONDER():
                     #print(msg)
                 except :msg=""
                 if "/is_bot_online" in msg:
-                    ssd= REQUEST_("https://api.telegram.org/bot8953744107:AAHfUaoG2aJZ3WpJzpD_rbGJIDist8pxqbc/sendMessage?chat_id=-1004324675339&parse_mode=Markdown&text=[········🔥MARKETS_TRACKER_BOT🔥········](https://t.me/MARKETS_SIGNALS) \n BOT-STATUS : RUNNING ONLIGNE ✅")
+                    ssd= REQUEST_("https://api.telegram.org/bot8953744107:AAGLDs_Yq_DlY73HZWdeAe2nnEIn2L3k3dw/sendMessage?chat_id=-1004324675339&parse_mode=Markdown&text=[········🔥MARKETS_TRACKER_BOT🔥········](https://t.me/MARKETS_SIGNALS) \n BOT-STATUS : RUNNING ONLIGNE ✅")
                     time.sleep(2)
                 #    UNBLOCK_MESSAGES()
                 elif "/take_picture_from" in msg :
@@ -309,16 +309,16 @@ def MAIN_TELEGRAM_RESPONDER():
                         sti = threading.Thread(target=starter.CHECK_FVG_AVAILABILITY,args=(db_manager,0,True))
                         sti.start()
                     except KeyError :
-                        ssd= REQUEST_("https://api.telegram.org/bot8953744107:AAHfUaoG2aJZ3WpJzpD_rbGJIDist8pxqbc/sendMessage?chat_id=-1004324675339&parse_mode=Markdown&text=[········🔥MARKETS_TRACKER_BOT🔥········](https://t.me/MARKETS_SIGNALS) \n🚫 INVALID TIME FRAME ,PLEASE USE THIS FORMAT <PAIRE> <TIMEFRAME(min)> \n-AUTHORIZED TIMEFRAMES : [1,3,5,15,30,60,240,D,W,M] .")
+                        ssd= REQUEST_("https://api.telegram.org/bot8953744107:AAGLDs_Yq_DlY73HZWdeAe2nnEIn2L3k3dw/sendMessage?chat_id=-1004324675339&parse_mode=Markdown&text=[········🔥MARKETS_TRACKER_BOT🔥········](https://t.me/MARKETS_SIGNALS) \n🚫 INVALID TIME FRAME ,PLEASE USE THIS FORMAT <PAIRE> <TIMEFRAME(min)> \n-AUTHORIZED TIMEFRAMES : [1,3,5,15,30,60,240,D,W,M] .")
                     except Exception as e :
                         print(e)
-                        ssd= REQUEST_("https://api.telegram.org/bot8953744107:AAHfUaoG2aJZ3WpJzpD_rbGJIDist8pxqbc/sendMessage?chat_id=-1004324675339&parse_mode=Markdown&text=[········🔥MARKETS_TRACKER_BOT🔥········](https://t.me/MARKETS_SIGNALS) \n🚫   CHECK THIS COMMAND FORMAT:  COMMAND <PAIRE> <TIMEFRAME> \n {}  ".format(e))
+                        ssd= REQUEST_("https://api.telegram.org/bot8953744107:AAGLDs_Yq_DlY73HZWdeAe2nnEIn2L3k3dw/sendMessage?chat_id=-1004324675339&parse_mode=Markdown&text=[········🔥MARKETS_TRACKER_BOT🔥········](https://t.me/MARKETS_SIGNALS) \n🚫   CHECK THIS COMMAND FORMAT:  COMMAND <PAIRE> <TIMEFRAME> \n {}  ".format(e))
               #      UNBLOCK_MESSAGES()
                     
                 elif "/start_new_listenner_on" in msg :
                  #   BLOCK_MESSAGES()
                     if len(msg.split()) < 5 :
-                        ssd= REQUEST_("https://api.telegram.org/bot8953744107:AAHfUaoG2aJZ3WpJzpD_rbGJIDist8pxqbc/sendMessage?chat_id=-1004324675339&parse_mode=Markdown&text=[········🔥MARKETS_TRACKER_BOT🔥········](https://t.me/MARKETS_SIGNALS) \n🚫  NO ENOUGH PARAMETERS ,CHECK THIS FORM:  COMMAND <PAIRE> <TIMEFRAME> <PARAM> <SL-DISTANCE> <REFRESH(sec)>\n  ")
+                        ssd= REQUEST_("https://api.telegram.org/bot8953744107:AAGLDs_Yq_DlY73HZWdeAe2nnEIn2L3k3dw/sendMessage?chat_id=-1004324675339&parse_mode=Markdown&text=[········🔥MARKETS_TRACKER_BOT🔥········](https://t.me/MARKETS_SIGNALS) \n🚫  NO ENOUGH PARAMETERS ,CHECK THIS FORM:  COMMAND <PAIRE> <TIMEFRAME> <PARAM> <SL-DISTANCE> <REFRESH(sec)>\n  ")
                 	    #UNBLOCK_MESSAGES()
                 	    #continue
                     else:
@@ -338,7 +338,7 @@ def MAIN_TELEGRAM_RESPONDER():
 
     	        				#starter.CHECK_FVG_AVAILABILITY()
                         else:
-                            ssd= REQUEST_("https://api.telegram.org/bot8953744107:AAHfUaoG2aJZ3WpJzpD_rbGJIDist8pxqbc/sendMessage?chat_id=-1004324675339&parse_mode=Markdown&text=[········🔥MARKETS_TRACKER_BOT🔥········](https://t.me/MARKETS_SIGNALS) \n🚫  REQUESTED RUNNER WAS ALREADY RUNING ON THE DB ! \n  ")
+                            ssd= REQUEST_("https://api.telegram.org/bot8953744107:AAGLDs_Yq_DlY73HZWdeAe2nnEIn2L3k3dw/sendMessage?chat_id=-1004324675339&parse_mode=Markdown&text=[········🔥MARKETS_TRACKER_BOT🔥········](https://t.me/MARKETS_SIGNALS) \n🚫  REQUESTED RUNNER WAS ALREADY RUNING ON THE DB ! \n  ")
                   #  UNBLOCK_MESSAGES()
                 elif "/show_current_listenners" in msg :
                     print("listenner")
@@ -347,7 +347,7 @@ def MAIN_TELEGRAM_RESPONDER():
                         msg+="{})  {} \n\n".format(index,runner)
 
                     if msg=="":msg="\n\nNO LISTENNER CURRENTLY ON !, DB EMPTY"
-                    ssd= REQUEST_("https://api.telegram.org/bot8953744107:AAHfUaoG2aJZ3WpJzpD_rbGJIDist8pxqbc/sendMessage?chat_id=-1004324675339&parse_mode=Markdown&text=[········🔥MARKETS_TRACKER_BOT🔥········](https://t.me/MARKETS_SIGNALS) \n 🆗 THIS IS THE CURRENT DB-STATUS: \n{}  ".format(str(msg)))
+                    ssd= REQUEST_("https://api.telegram.org/bot8953744107:AAGLDs_Yq_DlY73HZWdeAe2nnEIn2L3k3dw/sendMessage?chat_id=-1004324675339&parse_mode=Markdown&text=[········🔥MARKETS_TRACKER_BOT🔥········](https://t.me/MARKETS_SIGNALS) \n 🆗 THIS IS THE CURRENT DB-STATUS: \n{}  ".format(str(msg)))
                  #   print(ssd.text)
                     #UNBLOCK_MESSAGES()
                 elif "/kill_listenner" in msg : 
@@ -355,17 +355,17 @@ def MAIN_TELEGRAM_RESPONDER():
                    # BLOCK_MESSAGES()
 
                     if len(msg.split()) < 2 :
-                        ssd= REQUEST_("https://api.telegram.org/bot8953744107:AAHfUaoG2aJZ3WpJzpD_rbGJIDist8pxqbc/sendMessage?chat_id=-1004324675339&parse_mode=Markdown&text=[········🔥MARKETS_TRACKER_BOT🔥········](https://t.me/MARKETS_SIGNALS) \n🚫  NO ENOUGH PARAMETERS ,CHECK THIS FORM:  COMMAND <INDEX[0,1,2,3,4,5,6,....]> \n  ")
+                        ssd= REQUEST_("https://api.telegram.org/bot8953744107:AAGLDs_Yq_DlY73HZWdeAe2nnEIn2L3k3dw/sendMessage?chat_id=-1004324675339&parse_mode=Markdown&text=[········🔥MARKETS_TRACKER_BOT🔥········](https://t.me/MARKETS_SIGNALS) \n🚫  NO ENOUGH PARAMETERS ,CHECK THIS FORM:  COMMAND <INDEX[0,1,2,3,4,5,6,....]> \n  ")
                     else:
                         index = int(msg.split()[-1])
                         try:
                                 targetted= db_manager[index]
                             #if targetted["RUNNING"]==True:
                                 del db_manager[index]
-                                ssd= REQUEST_("https://api.telegram.org/bot8953744107:AAHfUaoG2aJZ3WpJzpD_rbGJIDist8pxqbc/sendMessage?chat_id=-1004324675339&parse_mode=Markdown&text=[········🔥MARKETS_TRACKER_BOT🔥········](https://t.me/MARKETS_SIGNALS) \n  🚫 {} KILLED FROM DB-LISTENNERS \n  ".format(str(targetted)))
+                                ssd= REQUEST_("https://api.telegram.org/bot8953744107:AAGLDs_Yq_DlY73HZWdeAe2nnEIn2L3k3dw/sendMessage?chat_id=-1004324675339&parse_mode=Markdown&text=[········🔥MARKETS_TRACKER_BOT🔥········](https://t.me/MARKETS_SIGNALS) \n  🚫 {} KILLED FROM DB-LISTENNERS \n  ".format(str(targetted)))
                         
                         except IndexError :
-                            ssd= REQUEST_("https://api.telegram.org/bot8953744107:AAHfUaoG2aJZ3WpJzpD_rbGJIDist8pxqbc/sendMessage?chat_id=-1004324675339&parse_mode=Markdown&text=[········🔥MARKETS_TRACKER_BOT🔥········](https://t.me/MARKETS_SIGNALS) \n  ❌ ({}) NOT IN DB-LISTENNERS | INVALID SELECTION !\n  ".format(str(index)))
+                            ssd= REQUEST_("https://api.telegram.org/bot8953744107:AAGLDs_Yq_DlY73HZWdeAe2nnEIn2L3k3dw/sendMessage?chat_id=-1004324675339&parse_mode=Markdown&text=[········🔥MARKETS_TRACKER_BOT🔥········](https://t.me/MARKETS_SIGNALS) \n  ❌ ({}) NOT IN DB-LISTENNERS | INVALID SELECTION !\n  ".format(str(index)))
 
                     #UNBLOCK_MESSAGES()
                         
@@ -388,26 +388,26 @@ def MAIN_TELEGRAM_RESPONDER():
                             sti.start()
                         else:
                             print(db_trades)
-                            ssd= REQUEST_("https://api.telegram.org/bot8953744107:AAHfUaoG2aJZ3WpJzpD_rbGJIDist8pxqbc/sendMessage?chat_id=-1004324675339&parse_mode=Markdown&text=[········🔥MARKETS_TRACKER_BOT🔥········](https://t.me/MARKETS_SIGNALS) \n  ❌ {} NOT ALREADY REGISTERED AS TRADE ON THE DB !  \n  FAILED TO CHECK TRADE RESULT FOR THIS TRADE-ID".format(str(trade_id)))
+                            ssd= REQUEST_("https://api.telegram.org/bot8953744107:AAGLDs_Yq_DlY73HZWdeAe2nnEIn2L3k3dw/sendMessage?chat_id=-1004324675339&parse_mode=Markdown&text=[········🔥MARKETS_TRACKER_BOT🔥········](https://t.me/MARKETS_SIGNALS) \n  ❌ {} NOT ALREADY REGISTERED AS TRADE ON THE DB !  \n  FAILED TO CHECK TRADE RESULT FOR THIS TRADE-ID".format(str(trade_id)))
 
 
 
                     except Exception as e :
                         print("erroiii"+str(e))
-                        ssd= REQUEST_("https://api.telegram.org/bot8953744107:AAHfUaoG2aJZ3WpJzpD_rbGJIDist8pxqbc/sendMessage?chat_id=-1004324675339&parse_mode=Markdown&text=[········🔥MARKETS_TRACKER_BOT🔥········](https://t.me/MARKETS_SIGNALS) \n  ❌ INVALID COMMAND/ARGUMENTS : COMMAND <TRADE-ID>  ")
+                        ssd= REQUEST_("https://api.telegram.org/bot8953744107:AAGLDs_Yq_DlY73HZWdeAe2nnEIn2L3k3dw/sendMessage?chat_id=-1004324675339&parse_mode=Markdown&text=[········🔥MARKETS_TRACKER_BOT🔥········](https://t.me/MARKETS_SIGNALS) \n  ❌ INVALID COMMAND/ARGUMENTS : COMMAND <TRADE-ID>  ")
                 elif "pause_all_listenners" in msg :
                     for listener_ in db_manager:
                         listener_["RUNNING"]=False
                     pause=True
-                    ssd= REQUEST_("https://api.telegram.org/bot8953744107:AAHfUaoG2aJZ3WpJzpD_rbGJIDist8pxqbc/sendMessage?chat_id=-1004324675339&parse_mode=Markdown&text=[········🔥MARKETS_TRACKER_BOT🔥········](https://t.me/MARKETS_SIGNALS) \n✅ ALL CURRENT ACTIVE LISTENNERS ARE CURRENTLY SUSPENDED ! ")
+                    ssd= REQUEST_("https://api.telegram.org/bot8953744107:AAGLDs_Yq_DlY73HZWdeAe2nnEIn2L3k3dw/sendMessage?chat_id=-1004324675339&parse_mode=Markdown&text=[········🔥MARKETS_TRACKER_BOT🔥········](https://t.me/MARKETS_SIGNALS) \n✅ ALL CURRENT ACTIVE LISTENNERS ARE CURRENTLY SUSPENDED ! ")
                 elif "resume_all_listenners" in msg:
                     for listener_ in db_manager:
                         listener_["RUNNING"]=True
                     pause=False
-                    ssd= REQUEST_("https://api.telegram.org/bot8953744107:AAHfUaoG2aJZ3WpJzpD_rbGJIDist8pxqbc/sendMessage?chat_id=-1004324675339&parse_mode=Markdown&text=[········🔥MARKETS_TRACKER_BOT🔥········](https://t.me/MARKETS_SIGNALS) \n✅ ALL CURRENT ACTIVE LISTENNERS ARE CURRENTLY RELUNCHED SUCCESSFULLY ! ")
+                    ssd= REQUEST_("https://api.telegram.org/bot8953744107:AAGLDs_Yq_DlY73HZWdeAe2nnEIn2L3k3dw/sendMessage?chat_id=-1004324675339&parse_mode=Markdown&text=[········🔥MARKETS_TRACKER_BOT🔥········](https://t.me/MARKETS_SIGNALS) \n✅ ALL CURRENT ACTIVE LISTENNERS ARE CURRENTLY RELUNCHED SUCCESSFULLY ! ")
                 elif "execute_all_trades_with_stats" in msg:
                     if len(db_trades)==0:
-                        REQUEST_("https://api.telegram.org/bot8953744107:AAHfUaoG2aJZ3WpJzpD_rbGJIDist8pxqbc/sendMessage?chat_id=-1004324675339&parse_mode=Markdown&text=[········🔥MARKETS_TRACKER_BOT🔥········](https://t.me/MARKETS_SIGNALS) \n DB TRADES WAS EMPTY ! \nUNABLE TO START SIMULATION .")
+                        REQUEST_("https://api.telegram.org/bot8953744107:AAGLDs_Yq_DlY73HZWdeAe2nnEIn2L3k3dw/sendMessage?chat_id=-1004324675339&parse_mode=Markdown&text=[········🔥MARKETS_TRACKER_BOT🔥········](https://t.me/MARKETS_SIGNALS) \n DB TRADES WAS EMPTY ! \nUNABLE TO START SIMULATION .")
                         continue
                     factor = 10**2
                     balance = 0
@@ -438,7 +438,7 @@ def MAIN_TELEGRAM_RESPONDER():
                                 capital = 1000
                         except Exception as e : #IndexError:
                             print(e)
-                            ssd= REQUEST_("https://api.telegram.org/bot8953744107:AAHfUaoG2aJZ3WpJzpD_rbGJIDist8pxqbc/sendMessage?chat_id=-1004324675339&parse_mode=Markdown&text=[········🔥MARKETS_TRACKER_BOT🔥········](https://t.me/MARKETS_SIGNALS) \n INVALID TRADES RANGE FROM {} TO {} ❌\n COMMAND <start> <end> <capital[DEFAULT =1000$]>".format(msg.split()[1],msg.split()[2]))
+                            ssd= REQUEST_("https://api.telegram.org/bot8953744107:AAGLDs_Yq_DlY73HZWdeAe2nnEIn2L3k3dw/sendMessage?chat_id=-1004324675339&parse_mode=Markdown&text=[········🔥MARKETS_TRACKER_BOT🔥········](https://t.me/MARKETS_SIGNALS) \n INVALID TRADES RANGE FROM {} TO {} ❌\n COMMAND <start> <end> <capital[DEFAULT =1000$]>".format(msg.split()[1],msg.split()[2]))
                             continue
                     else:       
                         print(4444444444444444444444444444444444)
@@ -448,7 +448,7 @@ def MAIN_TELEGRAM_RESPONDER():
 
 
                     new_db_trades_ranges=db_trades.copy()
-                    message_id= REQUEST_("https://api.telegram.org/bot8953744107:AAHfUaoG2aJZ3WpJzpD_rbGJIDist8pxqbc/sendMessage?chat_id=-1004324675339&parse_mode=Markdown&text=[········🔥MARKETS_TRACKER_BOT🔥········](https://t.me/MARKETS_SIGNALS) \n PLEASE WAIT WHILE EXECUTING ...").json()["result"]["message_id"]
+                    message_id= REQUEST_("https://api.telegram.org/bot8953744107:AAGLDs_Yq_DlY73HZWdeAe2nnEIn2L3k3dw/sendMessage?chat_id=-1004324675339&parse_mode=Markdown&text=[········🔥MARKETS_TRACKER_BOT🔥········](https://t.me/MARKETS_SIGNALS) \n PLEASE WAIT WHILE EXECUTING ...").json()["result"]["message_id"]
                     time.sleep(2)
 
                     print(new_db_trades_ranges_keys)
@@ -456,7 +456,7 @@ def MAIN_TELEGRAM_RESPONDER():
                     for indx ,  t in enumerate(new_db_trades_ranges_keys):
                         processor=  int((indx/len(new_db_trades_ranges_keys))*100)/100 
                         updated_msg= "- PROCESSING SIMULATION {}%" .format(processor*100)
-                        updates____= REQUEST_("https://api.telegram.org/bot8953744107:AAHfUaoG2aJZ3WpJzpD_rbGJIDist8pxqbc/editMessageText?chat_id=-1004324675339&message_id={}&text={}".format(message_id,updated_msg))
+                        updates____= REQUEST_("https://api.telegram.org/bot8953744107:AAGLDs_Yq_DlY73HZWdeAe2nnEIn2L3k3dw/editMessageText?chat_id=-1004324675339&message_id={}&text={}".format(message_id,updated_msg))
                         entry=new_db_trades_ranges[t]["ENTRY"]
                         trade_type=new_db_trades_ranges[t]["TRADE-TYPE"]
                         tp1=new_db_trades_ranges[t]["TP1"]
@@ -509,7 +509,7 @@ AVERAGE-WIN : {} | AVERAGE-LOSS {}
                         """.format(counter,balance,win_trades,loss_trades,be_trades,r1_trades,r2_trades,buy_trades,sell_trades,win_rate,100-win_rate,max_profit,max_drawdown,profit_factor,expectency,average_win,average_loss,RISK_MANAGMENT_VERSION)
                     print(message)
 
-                    statestics = REQUEST_("https://api.telegram.org/bot8953744107:AAHfUaoG2aJZ3WpJzpD_rbGJIDist8pxqbc/editMessageText?chat_id=-1004324675339&message_id={}&text={}".format(message_id,message))
+                    statestics = REQUEST_("https://api.telegram.org/bot8953744107:AAGLDs_Yq_DlY73HZWdeAe2nnEIn2L3k3dw/editMessageText?chat_id=-1004324675339&message_id={}&text={}".format(message_id,message))
                 elif "show_previous_trades" in msg:
                     msg=""
                     for index,trade in enumerate(db_trades.keys()):
@@ -525,7 +525,7 @@ AVERAGE-WIN : {} | AVERAGE-LOSS {}
                             for ln in lisd :
                                 temp__+=ln
                                 temp__+="\n"
-                            ssd= REQUEST_("https://api.telegram.org/bot8953744107:AAHfUaoG2aJZ3WpJzpD_rbGJIDist8pxqbc/sendMessage?chat_id=-1004324675339&parse_mode=Markdown&text=[········🔥MARKETS_TRACKER_BOT🔥········](https://t.me/MARKETS_SIGNALS) \n {}  ".format(temp__.replace("_","-",9999)))
+                            ssd= REQUEST_("https://api.telegram.org/bot8953744107:AAGLDs_Yq_DlY73HZWdeAe2nnEIn2L3k3dw/sendMessage?chat_id=-1004324675339&parse_mode=Markdown&text=[········🔥MARKETS_TRACKER_BOT🔥········](https://t.me/MARKETS_SIGNALS) \n {}  ".format(temp__.replace("_","-",9999)))
                             temp__=""
                             lisd=[]
 
@@ -534,7 +534,7 @@ AVERAGE-WIN : {} | AVERAGE-LOSS {}
                         for ln in lisd :
                             temp__+=ln
                             temp__+="\n"
-                        ssd= REQUEST_("https://api.telegram.org/bot8953744107:AAHfUaoG2aJZ3WpJzpD_rbGJIDist8pxqbc/sendMessage?chat_id=-1004324675339&parse_mode=Markdown&text=[········🔥MARKETS_TRACKER_BOT🔥········](https://t.me/MARKETS_SIGNALS) \n {}  ".format(temp__.replace("_","-",9999)))
+                        ssd= REQUEST_("https://api.telegram.org/bot8953744107:AAGLDs_Yq_DlY73HZWdeAe2nnEIn2L3k3dw/sendMessage?chat_id=-1004324675339&parse_mode=Markdown&text=[········🔥MARKETS_TRACKER_BOT🔥········](https://t.me/MARKETS_SIGNALS) \n {}  ".format(temp__.replace("_","-",9999)))
                     #print(ssd.text)
                 elif "set_risk_management" in msg:
                     if len(msg.split())==2:
@@ -542,11 +542,11 @@ AVERAGE-WIN : {} | AVERAGE-LOSS {}
                         if version_ in RISK_MANAGEMENT_MODES:
                             
                             if RISK_MANAGMENT_VERSION==version_:
-                                ssd= REQUEST_('https://api.telegram.org/bot8953744107:AAHfUaoG2aJZ3WpJzpD_rbGJIDist8pxqbc/sendMessage?chat_id=-1004324675339&parse_mode=Markdown&text=[········🔥MARKETS_TRACKER_BOT🔥········](https://t.me/MARKETS_SIGNALS) \n RISK MANAGEMENT MODE WAS ALREADY SET TO :  "{}" ✅'.format(version_))
+                                ssd= REQUEST_('https://api.telegram.org/bot8953744107:AAGLDs_Yq_DlY73HZWdeAe2nnEIn2L3k3dw/sendMessage?chat_id=-1004324675339&parse_mode=Markdown&text=[········🔥MARKETS_TRACKER_BOT🔥········](https://t.me/MARKETS_SIGNALS) \n RISK MANAGEMENT MODE WAS ALREADY SET TO :  "{}" ✅'.format(version_))
                                 print(ssd.json())
                             else : 
                                 RISK_MANAGMENT_VERSION=version_
-                                ssd= REQUEST_("https://api.telegram.org/bot8953744107:AAHfUaoG2aJZ3WpJzpD_rbGJIDist8pxqbc/sendMessage?chat_id=-1004324675339&parse_mode=Markdown&text=[········🔥MARKETS_TRACKER_BOT🔥········](https://t.me/MARKETS_SIGNALS) \n RISK MANAGEMENT MODE SET TO  {} ✅".format(version_))
+                                ssd= REQUEST_("https://api.telegram.org/bot8953744107:AAGLDs_Yq_DlY73HZWdeAe2nnEIn2L3k3dw/sendMessage?chat_id=-1004324675339&parse_mode=Markdown&text=[········🔥MARKETS_TRACKER_BOT🔥········](https://t.me/MARKETS_SIGNALS) \n RISK MANAGEMENT MODE SET TO  {} ✅".format(version_))
                                 print(ssd.json())
                         else:
                             msg_= "           RISK MANAGEMENT MODES  \n"
@@ -554,26 +554,26 @@ AVERAGE-WIN : {} | AVERAGE-LOSS {}
                                 msg_+="{} : {}\n\n ".format(md, RISK_MANAGEMENT_MODES[md])
                             msg_+='RISK MANAGMENT CURRENT MODE : "{}"'.format(RISK_MANAGMENT_VERSION)
                             print(msg_)
-                            ssd= REQUEST_('https://api.telegram.org/bot8953744107:AAHfUaoG2aJZ3WpJzpD_rbGJIDist8pxqbc/sendMessage?chat_id=-1004324675339&parse_mode=Markdown&text=[········🔥MARKETS_TRACKER_BOT🔥········](https://t.me/MARKETS_SIGNALS) \n "{}" INVALID RISK MANAGEMENT MODE! ❌\n\n {} '.format(version_,str(msg_)))
+                            ssd= REQUEST_('https://api.telegram.org/bot8953744107:AAGLDs_Yq_DlY73HZWdeAe2nnEIn2L3k3dw/sendMessage?chat_id=-1004324675339&parse_mode=Markdown&text=[········🔥MARKETS_TRACKER_BOT🔥········](https://t.me/MARKETS_SIGNALS) \n "{}" INVALID RISK MANAGEMENT MODE! ❌\n\n {} '.format(version_,str(msg_)))
                     else:
                         msg_= "           *RISK MANAGEMENT MODES*  \n"
                         for md in RISK_MANAGEMENT_MODES:
                             msg_+="{} : {}\n\n ".format(md, RISK_MANAGEMENT_MODES[md])
                         msg_+='RISK MANAGMENT CURRENT MODE : "{}"'.format(RISK_MANAGMENT_VERSION)
                         print(msg_)
-                        ssd= REQUEST_('https://api.telegram.org/bot8953744107:AAHfUaoG2aJZ3WpJzpD_rbGJIDist8pxqbc/sendMessage?chat_id=-1004324675339&parse_mode=Markdown&text=[········🔥MARKETS_TRACKER_BOT🔥········](https://t.me/MARKETS_SIGNALS) \n {} '.format(msg_))
+                        ssd= REQUEST_('https://api.telegram.org/bot8953744107:AAGLDs_Yq_DlY73HZWdeAe2nnEIn2L3k3dw/sendMessage?chat_id=-1004324675339&parse_mode=Markdown&text=[········🔥MARKETS_TRACKER_BOT🔥········](https://t.me/MARKETS_SIGNALS) \n {} '.format(msg_))
                         print(ssd.json())
 
                 else:
-                    ssd= REQUEST_("https://api.telegram.org/bot8953744107:AAHfUaoG2aJZ3WpJzpD_rbGJIDist8pxqbc/sendMessage?chat_id=-1004324675339&parse_mode=Markdown&text=[········🔥MARKETS_TRACKER_BOT🔥········](https://t.me/MARKETS_SIGNALS) \n {} : WAS AN INVALID COMMAND ❌".format(msg))
+                    ssd= REQUEST_("https://api.telegram.org/bot8953744107:AAGLDs_Yq_DlY73HZWdeAe2nnEIn2L3k3dw/sendMessage?chat_id=-1004324675339&parse_mode=Markdown&text=[········🔥MARKETS_TRACKER_BOT🔥········](https://t.me/MARKETS_SIGNALS) \n {} : WAS AN INVALID COMMAND ❌".format(msg))
                 indexed_db["last_message"]=checkpoint
                 #UNBLOCK_MESSAGES()
         except ZeroDivisionError :
-            REQUEST_("https://api.telegram.org/bot8953744107:AAHfUaoG2aJZ3WpJzpD_rbGJIDist8pxqbc/sendMessage?chat_id=-1004324675339&parse_mode=Markdown&text=[········🔥MARKETS_TRACKER_BOT🔥········](https://t.me/MARKETS_SIGNALS) \n ❌CURRENTLY UNABLE TO CALCULATE STATS ! \nPlease wait/try again after some time!")
+            REQUEST_("https://api.telegram.org/bot8953744107:AAGLDs_Yq_DlY73HZWdeAe2nnEIn2L3k3dw/sendMessage?chat_id=-1004324675339&parse_mode=Markdown&text=[········🔥MARKETS_TRACKER_BOT🔥········](https://t.me/MARKETS_SIGNALS) \n ❌CURRENTLY UNABLE TO CALCULATE STATS ! \nPlease wait/try again after some time!")
         except Exception as e :
             error = traceback.format_exc()
             print("err "+str(error))
-            REQUEST_("https://api.telegram.org/bot8953744107:AAHfUaoG2aJZ3WpJzpD_rbGJIDist8pxqbc/sendMessage?chat_id=-1004324675339&parse_mode=Markdown&text=[········🔥MARKETS_TRACKER_BOT🔥········](https://t.me/MARKETS_SIGNALS) \n {} : WAS AN INVALID COMMAND/ARGUMENT ❌".format(str(e)))
+            REQUEST_("https://api.telegram.org/bot8953744107:AAGLDs_Yq_DlY73HZWdeAe2nnEIn2L3k3dw/sendMessage?chat_id=-1004324675339&parse_mode=Markdown&text=[········🔥MARKETS_TRACKER_BOT🔥········](https://t.me/MARKETS_SIGNALS) \n {} : WAS AN INVALID COMMAND/ARGUMENT ❌".format(str(e)))
         print("sleeping for 10sec....")
         time.sleep(10)
 class GET_CNDLSTICKS_CHART():
@@ -629,7 +629,7 @@ class GET_CNDLSTICKS_CHART():
                     time.sleep(10)
                     self.PREPARE_REQUEST(confirmation=confirmation)
                     return
-                ssd= REQUEST_("https://api.telegram.org/bot8953744107:AAHfUaoG2aJZ3WpJzpD_rbGJIDist8pxqbc/sendMessage?chat_id=-1004324675339&parse_mode=Markdown&text=[········🔥MARKETS_TRACKER_BOT🔥········](https://t.me/MARKETS_SIGNALS) \n {}  ".format(str(self.response).replace("_"," " ,999)))
+                ssd= REQUEST_("https://api.telegram.org/bot8953744107:AAGLDs_Yq_DlY73HZWdeAe2nnEIn2L3k3dw/sendMessage?chat_id=-1004324675339&parse_mode=Markdown&text=[········🔥MARKETS_TRACKER_BOT🔥········](https://t.me/MARKETS_SIGNALS) \n {}  ".format(str(self.response).replace("_"," " ,999)))
                 return False
             except Exception as err:
                # print(err)
@@ -679,7 +679,7 @@ class GET_CNDLSTICKS_CHART():
                 print("+"+str(self.response.text)+"+")
                 if str("IP address is temporarily blocked") in str(self.response.text):
                     print("TRUE TRUE TRUE ")
-                    requests.get("https://api.telegram.org/bot8953744107:AAHfUaoG2aJZ3WpJzpD_rbGJIDist8pxqbc/sendMessage?chat_id=-1004324675339&parse_mode=Markdown&text=[········🔥MARKETS_TRACKER_BOT🔥········](https://t.me/MARKETS_SIGNALS) \nERROR : RECIVED RESPONSE : \nIP address is temporarily blocked")
+                    requests.get("https://api.telegram.org/bot8953744107:AAGLDs_Yq_DlY73HZWdeAe2nnEIn2L3k3dw/sendMessage?chat_id=-1004324675339&parse_mode=Markdown&text=[········🔥MARKETS_TRACKER_BOT🔥········](https://t.me/MARKETS_SIGNALS) \nERROR : RECIVED RESPONSE : \nIP address is temporarily blocked")
                     proxies={"https":"http://oyymhzrz-rotate:a23d27ck5y6u@p.webshare.io:80"}
                     continue
                 else:
@@ -1526,7 +1526,7 @@ class GET_CNDLSTICKS_CHART():
         elif ssxx== True:
             if send_confirmation==True:
                 if already_alerted_started_ok==False:
-                    ssd= REQUEST_("https://api.telegram.org/bot8953744107:AAHfUaoG2aJZ3WpJzpD_rbGJIDist8pxqbc/sendMessage?chat_id=-1004324675339&parse_mode=Markdown&text=[········🔥MARKETS_TRACKER_BOT🔥········](https://t.me/MARKETS_SIGNALS) \n✅LISTENNER STARTED ON :\nPAIRE: {}\nTIME-FRAME: {}\nPARAM: {}\nMIN-SL: {}\nREFRESH(sec): {}".format(self.symbol,self.tf,self.param,self.min_sl,timing___))
+                    ssd= REQUEST_("https://api.telegram.org/bot8953744107:AAGLDs_Yq_DlY73HZWdeAe2nnEIn2L3k3dw/sendMessage?chat_id=-1004324675339&parse_mode=Markdown&text=[········🔥MARKETS_TRACKER_BOT🔥········](https://t.me/MARKETS_SIGNALS) \n✅LISTENNER STARTED ON :\nPAIRE: {}\nTIME-FRAME: {}\nPARAM: {}\nMIN-SL: {}\nREFRESH(sec): {}".format(self.symbol,self.tf,self.param,self.min_sl,timing___))
                     already_alerted_started_ok=True
                     di = {"PAIRE":self.symbol,"RUNNING":True,"TF-NAME":self.tfcc,"TIMEFRAME":self.tf,"TIMING":timing___,"SETTINGS":self.param,"MIN-SL":self.min_sl}
                     if di not in db_manager:
@@ -1543,7 +1543,7 @@ class GET_CNDLSTICKS_CHART():
             print(spp)
             if spp==True:
                                     
-                                    TOKEN = "8953744107:AAHfUaoG2aJZ3WpJzpD_rbGJIDist8pxqbc"
+                                    TOKEN = "8953744107:AAGLDs_Yq_DlY73HZWdeAe2nnEIn2L3k3dw"
                                     CHAT_ID = "-1004324675339"
                                     while True:
                                         try:
@@ -1567,7 +1567,7 @@ class GET_CNDLSTICKS_CHART():
                                         except Exception as e :  print("RECIVED RSP" +str(e));time.sleep(10)
 
             else:
-                REQUEST_("https://api.telegram.org/bot8953744107:AAHfUaoG2aJZ3WpJzpD_rbGJIDist8pxqbc/sendMessage?chat_id=-1004324675339&parse_mode=Markdown&text=[········🔥MARKETS_TRACKER_BOT🔥········](https://t.me/MARKETS_SIGNALS) \nERROR OCCURED WHEN TRYING TO GENERTE THE PICTURE , PLEASE RETRY AGAIN !")
+                REQUEST_("https://api.telegram.org/bot8953744107:AAGLDs_Yq_DlY73HZWdeAe2nnEIn2L3k3dw/sendMessage?chat_id=-1004324675339&parse_mode=Markdown&text=[········🔥MARKETS_TRACKER_BOT🔥········](https://t.me/MARKETS_SIGNALS) \nERROR OCCURED WHEN TRYING TO GENERTE THE PICTURE , PLEASE RETRY AGAIN !")
             return 
         ##############################################################################################################################################################
         if result_byID==True:
@@ -1688,7 +1688,7 @@ class GET_CNDLSTICKS_CHART():
             print(ind)
             pp = self.GET_MANUAL_PICTURE(type=db_trades[old_start]["TRADE-TYPE"],signal="{}_{}".format(self.symbol,db_trades[old_start]["TRADE-TYPE"]),candles=self.db,entry_index=new_indox_start,entry_price=entry,tp_price=tp2,sl_price=sl,rectangle_width=new_indox_final,take_picture_only=False,price_min_=None,price_max_=None)
             if pp==True:
-                                    TOKEN = "8953744107:AAHfUaoG2aJZ3WpJzpD_rbGJIDist8pxqbc"
+                                    TOKEN = "8953744107:AAGLDs_Yq_DlY73HZWdeAe2nnEIn2L3k3dw"
                                     CHAT_ID = "-1004324675339"
                                     while True:
                                         try:
@@ -1903,7 +1903,7 @@ class GET_CNDLSTICKS_CHART():
                     if id__ in ALREADY_ALERTED_TRADES:continue
                     print("COUNTER OF DB ")
                     print(len(self.db))
-                    REQUEST_("https://api.telegram.org/bot8953744107:AAHfUaoG2aJZ3WpJzpD_rbGJIDist8pxqbc/sendMessage?chat_id=-1004324675339&parse_mode=Markdown&text=[········🔥MARKETS_TRACKER_BOT🔥········](https://t.me/MARKETS_SIGNALS) \nSELL SIGNAL DETECTED")
+                    REQUEST_("https://api.telegram.org/bot8953744107:AAGLDs_Yq_DlY73HZWdeAe2nnEIn2L3k3dw/sendMessage?chat_id=-1004324675339&parse_mode=Markdown&text=[········🔥MARKETS_TRACKER_BOT🔥········](https://t.me/MARKETS_SIGNALS) \nSELL SIGNAL DETECTED")
 
                  #   pp = self.GET_TRADE_PICTURE_FROM_CHART(signal="SELL_{}".format(self.symbol),details=[sl,entry,tp2],start_timing=int(candle["time"]))
                     #print(pp)
@@ -1911,7 +1911,7 @@ class GET_CNDLSTICKS_CHART():
                     pp = self.GET_MANUAL_PICTURE(type="SELL TRADE",signal="SELL_{}".format(self.symbol),candles=self.db[len(self.db)-80:],entry_index=len(self.db[len(self.db)-80:])-8,entry_price=entry,tp_price=tp2,sl_price=sl)
          
                     if pp==True:
-                                    TOKEN = "8953744107:AAHfUaoG2aJZ3WpJzpD_rbGJIDist8pxqbc"
+                                    TOKEN = "8953744107:AAGLDs_Yq_DlY73HZWdeAe2nnEIn2L3k3dw"
                                     CHAT_ID = "-1004324675339"
                                     while True:
                                         try:
@@ -2083,7 +2083,7 @@ class GET_CNDLSTICKS_CHART():
                     indox = self.db.index(candle)
                     id__ = str(self.db[indox]["time"])  #int(time.time()) candle["ctm"] #int(float(candle["open"])+float(candle["close"])+float(candle["high"])+float(candle["low"]))
                     if id__ in ALREADY_ALERTED_TRADES:continue
-                    REQUEST_("https://api.telegram.org/bot8953744107:AAHfUaoG2aJZ3WpJzpD_rbGJIDist8pxqbc/sendMessage?chat_id=-1004324675339&parse_mode=Markdown&text=[········🔥MARKETS_TRACKER_BOT🔥········](https://t.me/MARKETS_SIGNALS) \nBUY SIGNAL DETECTED")
+                    REQUEST_("https://api.telegram.org/bot8953744107:AAGLDs_Yq_DlY73HZWdeAe2nnEIn2L3k3dw/sendMessage?chat_id=-1004324675339&parse_mode=Markdown&text=[········🔥MARKETS_TRACKER_BOT🔥········](https://t.me/MARKETS_SIGNALS) \nBUY SIGNAL DETECTED")
                     print("COUNTER OF DB ")
                     print(len(self.db))
                     ########################################## picture ##########################   
@@ -2092,7 +2092,7 @@ class GET_CNDLSTICKS_CHART():
                     pp = self.GET_MANUAL_PICTURE(type="LONG TRADE",signal="BUY_{}".format(self.symbol),candles=self.db[len(self.db)-80:],entry_index=len(self.db[len(self.db)-80:])-8,entry_price=entry,tp_price=tp2,sl_price=sl)
                 
                     if pp==True:
-                                    TOKEN = "8953744107:AAHfUaoG2aJZ3WpJzpD_rbGJIDist8pxqbc"
+                                    TOKEN = "8953744107:AAGLDs_Yq_DlY73HZWdeAe2nnEIn2L3k3dw"
                                     CHAT_ID = "-1004324675339"
                                     while True:
                                         try:
