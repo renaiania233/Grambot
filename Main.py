@@ -800,7 +800,7 @@ class GET_CNDLSTICKS_CHART():
         for candle in self.db:
             highs.append(float(candle["high"]))
             lows.append(float(candle["low"]))
-        self.hma_values = self.calculate_hma(highs, lows, length=12)
+        self.hma_values = self.calculate_hma(highs, lows, length=9)
 
  
     def calculate_wma(self,data, length):
@@ -1514,6 +1514,7 @@ class GET_CNDLSTICKS_CHART():
 
         self.calculate_hma_base()
         self.calculate_sma()
+        adxdb = self.calculate_adx()
 
        # self.calculate_hma_base2()
         #self.calculate_hma_base3()
@@ -1816,6 +1817,7 @@ class GET_CNDLSTICKS_CHART():
                    # print("CHECKER = {}".format(check))
                   #  if checkpoint - prev_checkpoint<5:continue
                     entry = float(self.db[checkpoint]["close"])
+                    if adxdb[checkpoint] < 20 :continue
                     temp_lst =[]
                     for k in self.db[checkpoint-5:checkpoint+1]:
                         temp_lst.append(float(k["high"])) 
@@ -2009,6 +2011,7 @@ class GET_CNDLSTICKS_CHART():
                #     if  checkpoint - prev_checkpoint<2 :continue
 
                     entry = float(self.db[checkpoint]["close"])
+                    if adxdb[checkpoint] < 20 :continue
                     temp_lst =[]
                     for k in self.db[checkpoint-5:checkpoint+1]:
                         temp_lst.append(float(k["low"])) 
