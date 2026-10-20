@@ -1793,7 +1793,7 @@ class GET_CNDLSTICKS_CHART():
 #                    if prev_checkpoint==None: prev_checkpoint=  checkpoint;continue 
                   #  ind =self.db.index(candle)
                  #   if float(candle["close"]) > self.sma_values2[ind]:continue
-                   # if adxdb[checkpoint] ==None or adxdb[checkpoint]<20 : continue
+                    if adxdb[checkpoint] ==None or adxdb[checkpoint]<20 : continue
 #                    engulf =None 
 #                    wicks = None  
 #                    wicks_nbr = 0
@@ -1817,7 +1817,7 @@ class GET_CNDLSTICKS_CHART():
                    # print("CHECKER = {}".format(check))
                   #  if checkpoint - prev_checkpoint<5:continue
                     entry = float(self.db[checkpoint]["close"])
-                    if adxdb[checkpoint] < 20 :continue
+                    #if adxdb[checkpoint] < 20 :continue
                     temp_lst =[]
                     for k in self.db[checkpoint-5:checkpoint+1]:
                         temp_lst.append(float(k["high"])) 
@@ -1986,7 +1986,7 @@ class GET_CNDLSTICKS_CHART():
 #                    if prev_checkpoint==None: prev_checkpoint=  checkpoint;continue
                    # ind =self.db.index(candle)
                     #if float(candle["close"]) < self.sma_values2[ind]:continue
-                  #  if adxdb[checkpoint] ==None or adxdb[checkpoint]<20 : continue
+                    if adxdb[checkpoint] ==None or adxdb[checkpoint]<20 : continue
 #                    engulf =None 
 #                    wicks = None  
 #                    wicks_nbr = 0
@@ -2011,7 +2011,7 @@ class GET_CNDLSTICKS_CHART():
                #     if  checkpoint - prev_checkpoint<2 :continue
 
                     entry = float(self.db[checkpoint]["close"])
-                    if adxdb[checkpoint] < 20 :continue
+                    #if adxdb[checkpoint] < 20 :continue
                     temp_lst =[]
                     for k in self.db[checkpoint-5:checkpoint+1]:
                         temp_lst.append(float(k["low"])) 
