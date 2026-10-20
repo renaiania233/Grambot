@@ -1149,6 +1149,82 @@ class GET_CNDLSTICKS_CHART():
                 })
 
         return fvgs
+    def stochastic_rsi(self,db, rsi_length=14, stoch_length=14,
+                       smooth_k=3, smooth_d=3):
+        """
+        db: list of candle dictionaries containing 'close'
+
+        Returns:
+            k_line: list of %K values
+            d_line: list of %D values
+
+        TradingView default settings:
+            RSI Length = 14
+            Stochastic Length = 14
+            K Smoothing = 3
+            D Smoothing = 3
+        """
+
+
+        close = pd.Series(
+            [float(c["close"]) for c in db],
+            dtype="float64"
+        )
+
+        # 1. Calculate RSI using Wilder's RMA
+        delta = close.diff()
+
+        gain = delta.clip(lower=0)
+        loss = -delta.clip(upper=0)
+
+        avg_gain = gain.ewm(
+            alpha=1 / rsi_length,
+            min_periods=rsi_length,
+            adjust=False
+        ).mean()
+
+        avg_loss = loss.ewm(
+            alpha=1 / rsi_length,
+            min_periods=rsi_length,
+            adjust=False
+        ).mean()
+
+        rs = avg_gain / avg_loss
+        rsi = 100 - (100 / (1 + rs))
+
+        # Handle zero-loss and zero-gain edge cases
+        rsi = rsi.mask((avg_loss == 0) & (avg_gain > 0), 100.0)
+        rsi = rsi.mask((avg_gain == 0) & (avg_loss > 0), 0.0)
+
+        # 2. Stochastic applied to RSI
+        lowest_rsi = rsi.rolling(
+            window=stoch_length,
+            min_periods=stoch_length
+        ).min()
+
+        highest_rsi = rsi.rolling(
+            window=stoch_length,
+            min_periods=stoch_length
+        ).max()
+
+        rsi_range = highest_rsi - lowest_rsi
+
+        stoch_rsi = (
+            (rsi - lowest_rsi) / rsi_range.replace(0, np.nan)
+        ) * 100
+
+        # 3. Smooth %K and %D using SMA
+        k_line = stoch_rsi.rolling(
+            window=smooth_k,
+            min_periods=smooth_k
+        ).mean()
+
+        d_line = k_line.rolling(
+            window=smooth_d,
+            min_periods=smooth_d
+        ).mean()
+
+        return k_line.tolist(), d_line.tolist()
     def GET_MANUAL_PICTURE(self,type,signal,candles, entry_index, entry_price, tp_price, sl_price,rectangle_width=10,take_picture_only=False,price_min_=None,price_max_=None):
       try:
         print("hello inside")
@@ -1515,6 +1591,7 @@ class GET_CNDLSTICKS_CHART():
         self.calculate_hma_base()
         self.calculate_sma()
         adxdb = self.calculate_adx()
+        k_line, d_line = self.stochastic_rsi(self.db)
 
        # self.calculate_hma_base2()
         #self.calculate_hma_base3()
@@ -1793,7 +1870,9 @@ class GET_CNDLSTICKS_CHART():
 #                    if prev_checkpoint==None: prev_checkpoint=  checkpoint;continue 
                   #  ind =self.db.index(candle)
                  #   if float(candle["close"]) > self.sma_values2[ind]:continue
-                    if adxdb[checkpoint] ==None or adxdb[checkpoint]<20 : continue
+                    if adxdb[checkpoint] ==None or d_line[checkpoint]==None : continue
+                    if adxdb[checkpoint]>20  and  d_line[checkpoint]<20:continue
+                    if adxdb[checkpoint] < 20 : continue
 #                    engulf =None 
 #                    wicks = None  
 #                    wicks_nbr = 0
@@ -1986,7 +2065,10 @@ class GET_CNDLSTICKS_CHART():
 #                    if prev_checkpoint==None: prev_checkpoint=  checkpoint;continue
                    # ind =self.db.index(candle)
                     #if float(candle["close"]) < self.sma_values2[ind]:continue
-                    if adxdb[checkpoint] ==None or adxdb[checkpoint]<20 : continue
+                    #if adxdb[checkpoint] ==None or adxdb[checkpoint]<20 : continue
+                    if adxdb[checkpoint] ==None or d_line[checkpoint]==None : continue
+                    if adxdb[checkpoint]>20  and  d_line[checkpoint]>80:continue
+                    if adxdb[checkpoint] < 20 : continue
 #                    engulf =None 
 #                    wicks = None  
 #                    wicks_nbr = 0
