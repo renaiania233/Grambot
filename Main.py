@@ -71,8 +71,8 @@ def EXECUTE_TRADE_V1(candles,trade_type,entry,sl,tp1,tp2,capital):# WITH SL MOVI
                                 r1_trades+=1
                             if r1_reached ==True and float(c["high"]) >= entry:
                                 win_trades+=1
-                                total_profit+=(capital*0.5/100)#25
-                                balance+=(capital*0.5/100)#25
+                                total_profit+=(capital*1/100)#25
+                                balance+=(capital*1/100)#25
                                 profit_counter+=1
                                 if max_profit<=profit_counter:
                                     max_profit=profit_counter
@@ -92,11 +92,11 @@ def EXECUTE_TRADE_V1(candles,trade_type,entry,sl,tp1,tp2,capital):# WITH SL MOVI
                                 return
                             if float(c["low"])<=tp2:
                                # print("  SELL TP +75$")
-                                balance+=(capital*1.5/100)#75
+                                balance+=(capital*2/100)#75
                                 win_trades+=1
                                 r2_trades+=1
                                 r1_trades-=1
-                                total_profit+=(capital*1.5/100)#75
+                                total_profit+=(capital*2/100)#75
                                 profit_counter+=1
                                 if max_profit<=profit_counter:
                                     max_profit=profit_counter
@@ -118,8 +118,8 @@ def EXECUTE_TRADE_V1(candles,trade_type,entry,sl,tp1,tp2,capital):# WITH SL MOVI
                                 r1_trades+=1
                             if r1_reached ==True and float(c["low"]) <= entry:
                                 win_trades+=1
-                                total_profit+=(capital*0.5/100)#25
-                                balance+=(capital*0.5/100)#25
+                                total_profit+=(capital*1/100)#25
+                                balance+=(capital*1/100)#25
                                 profit_counter+=1
                                 if max_profit<=profit_counter:
                                     max_profit=profit_counter
@@ -130,6 +130,7 @@ def EXECUTE_TRADE_V1(candles,trade_type,entry,sl,tp1,tp2,capital):# WITH SL MOVI
                                # print("  BUY SL -50$")
                                 balance-=(capital*1/100)
                                 loss_trades+=1
+                                total_losses+=(capital*1/100)
                                 profit_counter=0
                                 draw_counter+=1
                                 if max_drawdown<draw_counter:
@@ -138,11 +139,11 @@ def EXECUTE_TRADE_V1(candles,trade_type,entry,sl,tp1,tp2,capital):# WITH SL MOVI
                                 return
                             if float(c["high"])>=tp2:
                                 #print("  BUY TP +75$")
-                                balance+=(capital*1.5/100)
+                                balance+=(capital*2/100)
                                 win_trades+=1
                                 r2_trades+=1
                                 r1_trades-=1
-                                total_profit+=(capital*1.5/100)
+                                total_profit+=(capital*2/100)
                                 profit_counter+=1
                                 if max_profit<=profit_counter:
                                     max_profit=profit_counter
@@ -1863,16 +1864,20 @@ class GET_CNDLSTICKS_CHART():
         #win_times=[]
         for candle in self.db[checkpoint:]:
             checkpoint = self.db.index(candle)
-            if self.hma_values[checkpoint]<self.hma_values[checkpoint-1] and  self.hma_values[checkpoint-1]> self.hma_values[checkpoint-2]:
+            if self.hma_values[checkpoint]<self.hma_values[checkpoint-1] and  self.hma_values[checkpoint-1]> self.hma_values[checkpoint-2] and  self.hma_values[checkpoint-4]> self.hma_values[checkpoint-5]:
             #if counter ==0 :
 #            if self.sma_values[checkpoint-1]<self.hma_values[checkpoint-1] and self.sma_values[checkpoint]>self.hma_values[checkpoint]:#sell signal
 #                if  self.sma_values2[-1]>self.hma_values2[-1]:#sell signal higher time frame
 #                    if prev_checkpoint==None: prev_checkpoint=  checkpoint;continue 
                   #  ind =self.db.index(candle)
                  #   if float(candle["close"]) > self.sma_values2[ind]:continue
-                    if adxdb[checkpoint] ==None or d_line[checkpoint]==None : continue
-                    if adxdb[checkpoint]>20  and  d_line[checkpoint]<20:continue
-                    if adxdb[checkpoint] < 20 : continue
+
+
+#                    if adxdb[checkpoint] ==None or d_line[checkpoint]==None : continue
+#                    if adxdb[checkpoint]>20  and  d_line[checkpoint]<20:continue
+#                    if adxdb[checkpoint] < 20 : continue
+
+
 #                    engulf =None 
 #                    wicks = None  
 #                    wicks_nbr = 0
@@ -2059,16 +2064,19 @@ class GET_CNDLSTICKS_CHART():
                     prev_checkpoint=  checkpoint   
                     #print("\033[31m* SELL TRADE CLOSED AT CANDLE : \033[36m{}\033[37m".format(c["time"])) 
                     #print("\033[33m-----------------------------------------------------------------")  
-            if self.hma_values[checkpoint]>self.hma_values[checkpoint-1] and  self.hma_values[checkpoint-1]<self.hma_values[checkpoint-2]: 
+            if self.hma_values[checkpoint]>self.hma_values[checkpoint-1] and  self.hma_values[checkpoint-1]<self.hma_values[checkpoint-2] and  self.hma_values[checkpoint-4]<self.hma_values[checkpoint-5]: 
 #            if self.sma_values[checkpoint-1]>self.hma_values[checkpoint-1] and self.sma_values[checkpoint]<self.hma_values[checkpoint]:#buy signal
 #                if  self.sma_values2[-1]<self.hma_values2[-1]:#buy signal higher time frame 2 
 #                    if prev_checkpoint==None: prev_checkpoint=  checkpoint;continue
                    # ind =self.db.index(candle)
                     #if float(candle["close"]) < self.sma_values2[ind]:continue
                     #if adxdb[checkpoint] ==None or adxdb[checkpoint]<20 : continue
-                    if adxdb[checkpoint] ==None or d_line[checkpoint]==None : continue
-                    if adxdb[checkpoint]>20  and  d_line[checkpoint]>80:continue
-                    if adxdb[checkpoint] < 20 : continue
+
+#                    if adxdb[checkpoint] ==None or d_line[checkpoint]==None : continue
+#                    if adxdb[checkpoint]>20  and  d_line[checkpoint]>80:continue
+#                    if adxdb[checkpoint] < 20 : continue
+
+
 #                    engulf =None 
 #                    wicks = None  
 #                    wicks_nbr = 0
