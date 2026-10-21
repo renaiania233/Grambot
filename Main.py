@@ -135,7 +135,7 @@ def GITHUB_FILE(update=False,data=None,name=None):
             REQUEST_("https://api.telegram.org/bot8953744107:AAGLDs_Yq_DlY73HZWdeAe2nnEIn2L3k3dw/sendMessage?chat_id=-1004324675339&parse_mode=Markdown&text=[········🔥MARKETS_TRACKER_BOT🔥········](https://t.me/MARKETS_SIGNALS) \n ERROR UPDATING_FILE: {}.json \n{}".format(name,str(e)))
     elif update==False:
         datoss = requests.get("https://raw.githubusercontent.com/renaiania233/Grambot/refs/heads/main/{}.json".format(name)).json()
-        return(datos)
+        return(datoss)
 
 
 db_manager=[]
