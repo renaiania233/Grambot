@@ -20,7 +20,7 @@ from requests import session
 
 from matplotlib.patches import Rectangle
 def AUTO_RELUNCH():
-    time.sleep(150)
+    time.sleep(21000)
     while True:
         try:
             dss={"workflow":".github/workflows/run-bot.yml",
