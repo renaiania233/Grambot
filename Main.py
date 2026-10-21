@@ -851,7 +851,7 @@ class GET_CNDLSTICKS_CHART():
         return final_hma
 
 
-    def calculate_adx(self, period=14):
+    def calculate_adx(self, period=9):
         """Calculates ADX (Average Directional Index) using pure Python math (Wilder's Smoothing)."""
         highs=[]
         lows=[]
@@ -1875,7 +1875,7 @@ class GET_CNDLSTICKS_CHART():
 
 #                    if adxdb[checkpoint] ==None or d_line[checkpoint]==None : continue
 #                    if adxdb[checkpoint]>20  and  d_line[checkpoint]<20:continue
-#                    if adxdb[checkpoint] < 20 : continue
+                    if adxdb[checkpoint] < 20 : continue
 
 
 #                    engulf =None 
@@ -2074,7 +2074,7 @@ class GET_CNDLSTICKS_CHART():
 
 #                    if adxdb[checkpoint] ==None or d_line[checkpoint]==None : continue
 #                    if adxdb[checkpoint]>20  and  d_line[checkpoint]>80:continue
-#                    if adxdb[checkpoint] < 20 : continue
+                    if adxdb[checkpoint] < 20 : continue
 
 
 #                    engulf =None 
