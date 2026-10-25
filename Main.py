@@ -20,7 +20,7 @@ from requests import session
 
 from matplotlib.patches import Rectangle
 TOKEN_ = os.environ.get("TELEGRAM_BOT_TOKEN")
-ptint(TOKEN_)
+print(TOKEN_)
 CHAT_ID=os.environ.get("TELEGRAM_CHAT_ID")
 print(CHAT_ID)
 def AUTO_RELUNCH():
