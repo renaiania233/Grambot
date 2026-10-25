@@ -33,7 +33,7 @@ def AUTO_RELUNCH():
                 }
             headers={
                 "accept":"*/*",
-                "accept-encoding":"gzip, deflate, br, zstd",
+              #  "accept-encoding":"gzip, deflate, br, zstd",
                 "accept-language":"fr-FR,fr;q=0.9,ar-DZ;q=0.8,ar;q=0.7,en-US;q=0.6,en;q=0.5",
                 "baggage":"session.id=7704c922-d471-401a-a49d-341cc347c7c5",
                 "content-length":"369",
@@ -74,7 +74,7 @@ def GITHUB_FILE(update=False,data=None,name=None):
             p.headers={}
             p.headers.update({
                 "accept":"text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7",
-                "accept-encoding":"gzip, deflate, br, zstd" ,
+             #   "accept-encoding":"gzip, deflate, br, zstd" ,
                 "accept-language":"fr-FR,fr;q=0.9,ar-DZ;q=0.8,ar;q=0.7,en-US;q=0.6,en;q=0.5",
                 "cache-control":"max-age=0",
                 "cookie":"_octo=GH1.1.929647033.1783641681; _device_id=90a830c932a17d311d8cc595ca371818; datadome=DloIDqvQsMLo__CffHftNY2G_hhG6ShTEdq75~h_Imub~o~NrfEjcXiPQOcwobdXQFEKVw6fCb7GIRLDkHAfaeHwAg2jGz~g45C~FVZeXep~vhxzvhicRyfLrmnFCdW8; cpu_bucket=lg; preferred_color_mode=light; tz=Africa%2FLagos; saved_user_sessions=211106746%3A1mnBBPD0qWO4O4pZanjvqZDl_he_KkT-_mKM_dBBcQ3sU11I; user_session=1mnBBPD0qWO4O4pZanjvqZDl_he_KkT-_mKM_dBBcQ3sU11I; __Host-user_session_same_site=1mnBBPD0qWO4O4pZanjvqZDl_he_KkT-_mKM_dBBcQ3sU11I; tz=Africa%2FLagos; color_mode=%7B%22color_mode%22%3A%22auto%22%2C%22light_theme%22%3A%7B%22name%22%3A%22light%22%2C%22color_mode%22%3A%22light%22%7D%2C%22dark_theme%22%3A%7B%22name%22%3A%22dark%22%2C%22color_mode%22%3A%22dark%22%7D%7D; logged_in=yes; dotcom_user=renaiania233; ui_eligible=true; last_write_ms=1792609408195; _dd_s_v2=isExpired=1&c=0; _gh_sess=ncOWUmds%2F1bnLRX%2BR7gRbFrVwThFK3%2B0FB4LSFkkfUiHQ6WNiGa6sCiifkYfCSJ%2Bwl5pvPyADPrV5uz164j4lN5EYZxKENRoXjqCln0q%2BfxXekPrwKHNQHD28ugqiqpMyWI4OxMpLjPRh%2BEmyOSxTL%2FH74shvAcLNuAK42uYzsMNiDnwPCCDk31wiT0r%2BKp0PwuEq1vuhQJIfANeMDHm9FUev5m%2FM3o%2BQgve9cmeSSH%2F3dGT1fKYDbd9I7Zhl0JFW9OqLrNnnmTAwH%2FsolID%2FKAOUFkE%2Fb6i5Ai6fALJLab9c9G5gOymHrEThEuyuFQ%2Fa%2B3KOSw49RnBhsImsut6z8GG4mYzZvJXNgB4AAaqCvRZKNQsH8EPIrS4LTitw3bYzhjty96NLQ56g1gUTGvjNMNoFlkNrFd9wY0FUXs6qibu7LJ0TukHn9%2Bzdd1ALYn4n9wIXgdSgn7c5b%2Bfj%2FkqRnZHECps4mjckYvWToGQCE%2BqYneR6nPc9O2b6Q%2BEQNAs6ctQ%2F9RibLRkaCpBgmhztNbq6rzgHx6p--puF6E%2BK8I5p1fH%2FI--4ookhcE%2BD21j%2B1KY4ypLmA%3D%3D",
