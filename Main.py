@@ -380,12 +380,12 @@ def REQUEST_(url,headers=None,payload=None,json=None):
 
 def BLOCK_MESSAGES():
     payl= {'chat_id': -1004324675339, 'permissions': {'can_send_messages': False, 'can_send_audios': False, 'can_send_documents': False, 'can_send_photos': False, 'can_send_videos': False, 'can_send_video_notes': False, 'can_send_voice_notes': False, 'can_send_polls': False, 'can_send_other_messages': False, 'can_add_web_page_previews': False}}
-    a = REQUEST_("https://api.telegram.org/bot8953744107:AAGT84f18dCY4Lwxnam1P_TixecJ9LHDuU8/setChatPermissions",json=payl)
+    a = REQUEST_("https://api.telegram.org/bot"+TOKEN_+"/setChatPermissions",json=payl)
 	#if a.text=='{"ok":true,"result":true}':
     return
 def UNBLOCK_MESSAGES():
     payl= {'chat_id': -1004324675339, 'permissions': {'can_send_messages': True, 'can_send_audios': True, 'can_send_documents': True, 'can_send_photos': True, 'can_send_videos': True, 'can_send_video_notes': True, 'can_send_voice_notes': True, 'can_send_polls': True, 'can_send_other_messages': True, 'can_add_web_page_previews': True}}
-    a = REQUEST_("https://api.telegram.org/bot8953744107:AAGT84f18dCY4Lwxnam1P_TixecJ9LHDuU8/setChatPermissions",json=payl)
+    a = REQUEST_("https://api.telegram.org/bot"+TOKEN_+"/setChatPermissions",json=payl)
 	#if a.text=='{"ok":true,"result":true}':
     return
 
@@ -402,7 +402,7 @@ def MAIN_TELEGRAM_RESPONDER():
             ####################################
             updx= GITHUB_FILE(update=True,data=json.dumps(db_manager),name="db")
 #####################################
-            ssd = REQUEST_("https://api.telegram.org/bot8953744107:AAGT84f18dCY4Lwxnam1P_TixecJ9LHDuU8/getUpdates?offset=-1").json()
+            ssd = REQUEST_("https://api.telegram.org/bot"+TOKEN_+"/getUpdates?offset=-1").json()
             #print(ssd)
             #print("--------------------------------------------")
             try:
