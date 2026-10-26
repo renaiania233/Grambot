@@ -1972,7 +1972,7 @@ class GET_CNDLSTICKS_CHART():
         counter=0
         self.first_trade_timestamp=None
         #######################
-        checkpoint=20
+        checkpoint=22
         prev_checkpoint=None
         #######################
         buy_trades=0
