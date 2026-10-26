@@ -368,11 +368,12 @@ def EXECUTE_TRADE_V2(candles,trade_type,entry,sl,tp1,tp2,capital):#without sl mo
                         buy_trades-=1 
                         counter-=1
 def REQUEST_(url,headers=None,payload=None,json=None):
-    for i in range(0,20):
+    for i in range(0,50):
         try:
            # print(json)
             req = requests.get(url,timeout=30,headers=headers,json=json)
           #  print(req)
+            if "Too Many Requests" in req.text:print("Too Many Requests");time.sleep(3);continue
             return req
         except Exception as e :
             print(e)
