@@ -590,7 +590,7 @@ def MAIN_TELEGRAM_RESPONDER():
                     for indx ,  t in enumerate(new_db_trades_ranges_keys):
                         processor=  int((indx/len(new_db_trades_ranges_keys))*100)/100 
                         updated_msg= "- PROCESSING SIMULATION {}%" .format(processor*100)
-                        updates____= REQUEST_("https://api.telegram.org/bot8953744107:AAGT84f18dCY4Lwxnam1P_TixecJ9LHDuU8/editMessageText?chat_id=-1004324675339&message_id={}&text={}".format(message_id,updated_msg))
+                        updates____= REQUEST_("https://api.telegram.org/bot"+TOKEN_+"/editMessageText?chat_id="+CHAT_ID+"&message_id={}&text={}".format(message_id,updated_msg))
                         entry=new_db_trades_ranges[t]["ENTRY"]
                         trade_type=new_db_trades_ranges[t]["TRADE-TYPE"]
                         tp1=new_db_trades_ranges[t]["TP1"]
