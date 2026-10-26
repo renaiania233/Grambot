@@ -2133,11 +2133,11 @@ class GET_CNDLSTICKS_CHART():
                     pp = self.GET_MANUAL_PICTURE(type="SELL TRADE",signal="SELL_{}".format(self.symbol),candles=self.db[len(self.db)-80:],entry_index=len(self.db[len(self.db)-80:])-8,entry_price=entry,tp_price=tp2,sl_price=sl)
          
                     if pp==True:
-                                    TOKEN = "8953744107:AAGT84f18dCY4Lwxnam1P_TixecJ9LHDuU8"
-                                    CHAT_ID = "-1004324675339"
+                                 #   TOKEN = "8953744107:AAGT84f18dCY4Lwxnam1P_TixecJ9LHDuU8"
+                                 #   CHAT_ID = "-1004324675339"
                                     while True:
                                         try:
-                                            url = f"https://api.telegram.org/bot{TOKEN}/sendPhoto"  
+                                            url = f"https://api.telegram.org/bot{TOKEN_}/sendPhoto"  
                                             with open("SELL_{}.png".format(self.symbol), "rb") as photo:
                                             #    if result_byID==True:
                                              #       data={
@@ -2323,12 +2323,12 @@ class GET_CNDLSTICKS_CHART():
                     pp = self.GET_MANUAL_PICTURE(type="LONG TRADE",signal="BUY_{}".format(self.symbol),candles=self.db[len(self.db)-80:],entry_index=len(self.db[len(self.db)-80:])-8,entry_price=entry,tp_price=tp2,sl_price=sl)
                 
                     if pp==True:
-                                    TOKEN = "8953744107:AAGT84f18dCY4Lwxnam1P_TixecJ9LHDuU8"
-                                    CHAT_ID = "-1004324675339"
+                                 #   TOKEN = "8953744107:AAGT84f18dCY4Lwxnam1P_TixecJ9LHDuU8"
+                                #    CHAT_ID = "-1004324675339"
                                     while True:
                                         try:
 
-                                            url = f"https://api.telegram.org/bot{TOKEN}/sendPhoto"
+                                            url = f"https://api.telegram.org/bot{TOKEN_}/sendPhoto"
                                             with open("BUY_{}.png".format(self.symbol), "rb") as photo:
                                         #        if result_byID==True:
                                          #           data={
