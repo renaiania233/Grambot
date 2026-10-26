@@ -1757,11 +1757,11 @@ class GET_CNDLSTICKS_CHART():
             print(spp)
             if spp==True:
                                     
-                                    TOKEN = "8953744107:AAGT84f18dCY4Lwxnam1P_TixecJ9LHDuU8"
-                                    CHAT_ID = "-1004324675339"
+                              #      TOKEN = "8953744107:AAGT84f18dCY4Lwxnam1P_TixecJ9LHDuU8"
+                                 #   CHAT_ID = "-1004324675339"
                                     while True:
                                         try:
-                                            url = f"https://api.telegram.org/bot{TOKEN}/sendPhoto"  
+                                            url = f"https://api.telegram.org/bot{TOKEN_}/sendPhoto"  
                                             with open("pic_{}.png".format(self.symbol), "rb") as photo:
                                                 r = requests.post(
                                                     url,
@@ -1902,12 +1902,12 @@ class GET_CNDLSTICKS_CHART():
             print(ind)
             pp = self.GET_MANUAL_PICTURE(type=db_trades[old_start]["TRADE-TYPE"],signal="{}_{}".format(self.symbol,db_trades[old_start]["TRADE-TYPE"]),candles=self.db,entry_index=new_indox_start,entry_price=entry,tp_price=tp2,sl_price=sl,rectangle_width=new_indox_final,take_picture_only=False,price_min_=None,price_max_=None)
             if pp==True:
-                                    TOKEN = "8953744107:AAGT84f18dCY4Lwxnam1P_TixecJ9LHDuU8"
-                                    CHAT_ID = "-1004324675339"
+                                #    TOKEN = "8953744107:AAGT84f18dCY4Lwxnam1P_TixecJ9LHDuU8"
+                              #      CHAT_ID = "-1004324675339"
                                     while True:
                                         try:
 
-                                            url = f"https://api.telegram.org/bot{TOKEN}/sendPhoto"
+                                            url = f"https://api.telegram.org/bot{TOKEN_}/sendPhoto"
                                             with open("{}_{}.png".format(self.symbol,db_trades[self.start]["TRADE-TYPE"]), "rb") as photo:
                                                 if db_trades[self.start]["TRADE-TYPE"]=="SELL_TRADE":
                                                     data={
