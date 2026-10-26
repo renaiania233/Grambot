@@ -643,8 +643,10 @@ AVERAGE-WIN : {} | AVERAGE-LOSS {}
                         """.format(counter,balance,win_trades,loss_trades,be_trades,r1_trades,r2_trades,buy_trades,sell_trades,win_rate,100-win_rate,max_profit,max_drawdown,profit_factor,expectency,average_win,average_loss,RISK_MANAGMENT_VERSION)
                     print(message)
                     updates____= REQUEST_("https://api.telegram.org/bot"+TOKEN_+"/editMessageText?chat_id="+CHAT_ID+"&message_id={}&text={}".format(message_id,"- PROCESSING SIMULATION 100%"))
+					print(updates____.text)
                     time.sleep(1)
                     statestics = REQUEST_("https://api.telegram.org/bot"+TOKEN_+"/editMessageText?chat_id="+CHAT_ID+"&message_id={}&text={}".format(message_id,message))
+					print(statestics.text)
                 elif "show_previous_trades" in msg:
                     msg=""
                     for index,trade in enumerate(db_trades.keys()):
