@@ -909,13 +909,13 @@ class GET_CNDLSTICKS_CHART():
                 window = hl2[i - length + 1 : i + 1]
                 sma.append(sum(window) / float(length))
         self.sma_values2 = sma
-    def calculate_hma_base4 (self,periode=15):
+    def calculate_hma_base4 (self,periode=5):
         highs=[]
         lows=[]
         for candle in self.db:
             highs.append(float(candle["low"]))
             lows.append(float(candle["low"]))
-        self.hma_values4 = self.calculate_hma(highs, lows, length=15)
+        self.hma_values4 = self.calculate_hma(highs, lows, length=5)
     def calculate_hma_base3 (self,periode=15):
         highs=[]
         lows=[]
@@ -1729,6 +1729,7 @@ class GET_CNDLSTICKS_CHART():
         self.calculate_hma_base()
         self.calculate_hma_base2()
         self.calculate_hma_base3()
+		self.calculate_hma_base4()
         self.calculate_sma()
         adxdb = self.calculate_adx()
         #k_line, d_line = self.stochastic_rsi(self.db)
@@ -2016,6 +2017,7 @@ class GET_CNDLSTICKS_CHART():
 #                    if adxdb[checkpoint]>20  and  d_line[checkpoint]<20:continue
                     if self.hma_values3[checkpoint] > self.hma_values2[checkpoint] and adxdb[checkpoint] > 45: continue
                     if adxdb[checkpoint] < 20 : continue
+					if  self.hma_values4[checkpoint] > self.hma_values4[checkpoint-1]:continue
 
 
 #                    engulf =None 
@@ -2217,6 +2219,7 @@ class GET_CNDLSTICKS_CHART():
 #                    if adxdb[checkpoint]>20  and  d_line[checkpoint]>80:continue
                     if self.hma_values3[checkpoint] < self.hma_values2[checkpoint] and adxdb[checkpoint] > 45: continue
                     if adxdb[checkpoint] < 20 : continue
+					if  self.hma_values4[checkpoint] < self.hma_values4[checkpoint-1]:continue
 
 
 #                    engulf =None 
