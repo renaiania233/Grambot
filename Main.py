@@ -1729,7 +1729,7 @@ class GET_CNDLSTICKS_CHART():
         self.calculate_hma_base()
         self.calculate_hma_base2()
         self.calculate_hma_base3()
-		self.calculate_hma_base4()
+        self.calculate_hma_base4()
         self.calculate_sma()
         adxdb = self.calculate_adx()
         #k_line, d_line = self.stochastic_rsi(self.db)
@@ -2017,7 +2017,7 @@ class GET_CNDLSTICKS_CHART():
 #                    if adxdb[checkpoint]>20  and  d_line[checkpoint]<20:continue
                     if self.hma_values3[checkpoint] > self.hma_values2[checkpoint] and adxdb[checkpoint] > 45: continue
                     if adxdb[checkpoint] < 20 : continue
-					if  self.hma_values4[checkpoint] > self.hma_values4[checkpoint-1]:continue
+                    if  self.hma_values4[checkpoint] > self.hma_values4[checkpoint-1]:continue
 
 
 #                    engulf =None 
@@ -2219,7 +2219,7 @@ class GET_CNDLSTICKS_CHART():
 #                    if adxdb[checkpoint]>20  and  d_line[checkpoint]>80:continue
                     if self.hma_values3[checkpoint] < self.hma_values2[checkpoint] and adxdb[checkpoint] > 45: continue
                     if adxdb[checkpoint] < 20 : continue
-					if  self.hma_values4[checkpoint] < self.hma_values4[checkpoint-1]:continue
+                    if  self.hma_values4[checkpoint] < self.hma_values4[checkpoint-1]:continue
 
 
 #                    engulf =None 
