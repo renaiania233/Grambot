@@ -2096,14 +2096,16 @@ class GET_CNDLSTICKS_CHART():
                     for i in range(0,50):
                         try:
                             htf_candles=[]
-                            risp =requests.get("https://my.litefinance.org/chart/get-history?symbol={}&resolution={}&from={}&to={}".format(self.symbol,60,int(time.time())-423000*2,int(time.time())+8*3600),headers=headers).json()
+                            risp =requests.get("https://my.litefinance.org/chart/get-history?symbol={}&resolution={}&from={}&to={}".format(self.symbol,60,int(time.time())-423000*2,int(time.time())+8*3600),headers=headers).text
+                            print(risp)
+                            risp=risp.json()
                             for i in range(0,len(risp["data"]["t"])):
                                     htf_candles.append({"time":risp["data"]["t"][i],"open":risp["data"]["o"][i],"close":risp["data"]["c"][i],"high":risp["data"]["h"][i],"low":risp["data"]["l"][i]})
                             print("HTF SELL  CANDLES  checked ")
                             break
                         except Exception as err: 
                             print("unable to fetch htf candles (1H CANDLES ) !")
-                            print(e)
+                            print(err)
                             time.sleep(5)
                             continue
                     htf_hma = self.calculate_hma_base2(source=htf_candles,periode=self.htf_periode)
@@ -2314,14 +2316,16 @@ class GET_CNDLSTICKS_CHART():
                     for i in range(0,50):
                         try:
                             htf_candles=[]
-                            risp =requests.get("https://my.litefinance.org/chart/get-history?symbol={}&resolution={}&from={}&to={}".format(self.symbol,60,int(time.time())-423000*2,int(time.time())+8*3600),headers=headers).json()
+                            risp =requests.get("https://my.litefinance.org/chart/get-history?symbol={}&resolution={}&from={}&to={}".format(self.symbol,60,int(time.time())-423000*2,int(time.time())+8*3600),headers=headers).text
+                            print(risp)
+                            risp=risp.json()
                             for i in range(0,len(risp["data"]["t"])):
                                     htf_candles.append({"time":risp["data"]["t"][i],"open":risp["data"]["o"][i],"close":risp["data"]["c"][i],"high":risp["data"]["h"][i],"low":risp["data"]["l"][i]})
                             print("HTF buy  CANDLES  checked ")
                             break
                         except Exception as err: 
                             print("unable to fetch htf candles (1H CANDLES ) !")
-                            print(e)
+                            print(err)
                             time.sleep(5)
                             continue
                     htf_hma = self.calculate_hma_base2(source=htf_candles,periode=self.htf_periode)
