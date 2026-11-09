@@ -2040,7 +2040,21 @@ class GET_CNDLSTICKS_CHART():
                     if adxdb[checkpoint] < self.adx_var_check : continue
                     print("adx chrcked")
                #     if  self.hma_values4[checkpoint] > self.hma_values4[checkpoint-1]:continue
-
+                ############################################################################################
+                    avoid_trade=False
+                    for cndl in self.db[checkpoint-100:checkpoint][::-1] :
+                        chkp = self.db[checkpoint-100:checkpoint][::-1].index(cndl)
+                        if chkp == 0 or chkp >= len(self.db[checkpoint-100:checkpoint][::-1]) - 1:continue
+                        if cndl["open"]<cndl["close"] : 
+                            calcul=(abs(cndl["close"]-cndl["open"])/cndl["open"])*100*100
+                            if tp2 > cndl["open"] and tp2<cndl["close"]  and  calcul > self.param: avoid_trade=True;break
+                            elif  self.db[checkpoint-100:checkpoint][::-1][chkp-1]["open"] < self.db[checkpoint-100:checkpoint][::-1][chkp-1]["close"]:
+                                 if self.db[checkpoint-100:checkpoint][::-1][chkp+1]["open"] < self.db[checkpoint-100:checkpoint][::-1][chkp+1]["close"]:
+                                    avoid_trade=True
+                                    break
+                            else:break
+                    if avoid_trade==True:continue
+                 ######################################################################################
 
 #                    engulf =None 
 #                    wicks = None  
@@ -2267,6 +2281,21 @@ class GET_CNDLSTICKS_CHART():
                    # if self.hma_values3[checkpoint] < self.hma_values2[checkpoint] and adxdb[checkpoint] > 45: continue
                     if adxdb[checkpoint] < self.adx_var_check : continue
                   #  if  self.hma_values4[checkpoint] < self.hma_values4[checkpoint-1]:continue
+                ##########################################################################################################
+                    avoid_trade=False
+                    for cndl in self.db[checkpoint-100:checkpoint][::-1] :
+                        chkp = self.db[checkpoint-100:checkpoint][::-1].index(cndl)
+                        if chkp == 0 or chkp >= len(self.db[checkpoint-100:checkpoint][::-1]) - 1:continue
+                        if cndl["open"]>cndl["close"] :
+                            calcul=(abs(cndl["close"]-cndl["open"])/cndl["open"])*100*100
+                            if tp2 < cndl["open"] and tp2>cndl["close"]  and  calcul > self.param: avoid_trade=True;break
+                            elif  self.db[checkpoint-100:checkpoint][::-1][chkp-1]["open"] > self.db[checkpoint-100:checkpoint][::-1][chkp-1]["close"]:
+                                 if self.db[checkpoint-100:checkpoint][::-1][chkp+1]["open"] > self.db[checkpoint-100:checkpoint][::-1][chkp+1]["close"]:
+                                    avoid_trade=True
+                                    break
+                            else:break
+                    if avoid_trade==True:continue
+                ###########################################################################################################
 
 
 #                    engulf =None 
