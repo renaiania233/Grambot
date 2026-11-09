@@ -37,7 +37,7 @@ def AUTO_RELUNCH():
                 "accept-language":"fr-FR,fr;q=0.9,ar-DZ;q=0.8,ar;q=0.7,en-US;q=0.6,en;q=0.5",
                 "baggage":"session.id=7704c922-d471-401a-a49d-341cc347c7c5",
                 "content-length":"369",
-                "cookie":"_octo=GH1.1.929647033.1783641681; _device_id=90a830c932a17d311d8cc595ca371818; datadome=DloIDqvQsMLo__CffHftNY2G_hhG6ShTEdq75~h_Imub~o~NrfEjcXiPQOcwobdXQFEKVw6fCb7GIRLDkHAfaeHwAg2jGz~g45C~FVZeXep~vhxzvhicRyfLrmnFCdW8; cpu_bucket=lg; preferred_color_mode=light; tz=Africa%2FLagos; saved_user_sessions=211106746%3A1mnBBPD0qWO4O4pZanjvqZDl_he_KkT-_mKM_dBBcQ3sU11I; user_session=1mnBBPD0qWO4O4pZanjvqZDl_he_KkT-_mKM_dBBcQ3sU11I; __Host-user_session_same_site=1mnBBPD0qWO4O4pZanjvqZDl_he_KkT-_mKM_dBBcQ3sU11I; tz=Africa%2FLagos; color_mode=%7B%22color_mode%22%3A%22auto%22%2C%22light_theme%22%3A%7B%22name%22%3A%22light%22%2C%22color_mode%22%3A%22light%22%7D%2C%22dark_theme%22%3A%7B%22name%22%3A%22dark%22%2C%22color_mode%22%3A%22dark%22%7D%7D; logged_in=yes; dotcom_user=renaiania233; ui_eligible=true; last_write_ms=1792623745691; _gh_sess=HdFXwSmTijhzpL%2BqDh0zQNbnhQI%2FXGUERASbnFLFytrTT1ZtMEmPlSf6HuV6U9NkTe3djHU4vLsw5eeauRf06n4bJRfYfTmjfndwViAUAeRJE276229hKClIrrzKXJd1%2BJHHfSlMnC5nlTL7%2Bn6thK2%2FGLijMeSXbOaKAkl1jzzsf3KUHMKKo79NHCztq%2Fd3FjDIIWCKVYFesdvixC3OIOQuNGKnU1MAfNrTCU2wKiFpLHbyflrDIF%2BNahNZoxC4BFvAENMHUVzBze%2BEOepG0hgCSCaFygTH85Qg3rDvCLdkxli6SUPe%2F4hty69MYBBqgxZXkqI5qLTzMZ%2FskoZzkxG91M6%2Fn%2FKM0J745phgN1QjpzRffUP0uiZ0WP8TsnmwOS83UN14LYoszKDMa0B1B%2Fl90vg6fXZkNO7fj6EmjxuNn95e49HGyNk7EE7Zo8%2BLOfoPa67IWE7Ky%2Bdm451lDrVXvmqCUVyf6uYwD26thjA%2FEHB86azxyrQBwalBYbqPYSSmBWazB09Jqv0bpiDU9nl11xWyrjTVlx2rzVQgKRgbV5y8YLMa07NlSyXEPcLj%2F5%2BQA3AfedvBU2ED7nDtQ87VKgjilhTOUmYL2KVDmFRvUtyHpAoiUT90dIiZjju8NO%2B3JNIVQ4EHYAQg--35In7dNGjCyR0%2B5w--RlV%2FnLUJW7yfJEDmC7eMDw%3D%3D; _dd_s_v2=id=7704c922-d471-401a-a49d-341cc347c7c5&created=1792620998728&expire=1792624749306&c=0",
+                "cookie":"_octo=GH1.1.929647033.1783641681; _device_id=90a830c932a17d311d8cc595ca371818; datadome=DloIDqvQsMLo__CffHftNY2G_hhG6ShTEdq75~h_Imub~o~NrfEjcXiPQOcwobdXQFEKVw6fCb7GIRLDkHAfaeHwAg2jGz~g45C~FVZeXep~vhxzvhicRyfLrmnFCdW8; saved_user_sessions=211106746%3ARlWkHD2k076ZhfLBUQYKeTk-DS4wmt7OqoX2KNRj1hqSIypg; user_session=RlWkHD2k076ZhfLBUQYKeTk-DS4wmt7OqoX2KNRj1hqSIypg; __Host-user_session_same_site=RlWkHD2k076ZhfLBUQYKeTk-DS4wmt7OqoX2KNRj1hqSIypg; logged_in=yes; dotcom_user=renaiania233; ui_eligible=true; color_mode=%7B%22color_mode%22%3A%22auto%22%2C%22light_theme%22%3A%7B%22name%22%3A%22light%22%2C%22color_mode%22%3A%22light%22%7D%2C%22dark_theme%22%3A%7B%22name%22%3A%22dark%22%2C%22color_mode%22%3A%22dark%22%7D%7D; cpu_bucket=lg; preferred_color_mode=light; tz=Africa%2FLagos; _dd_s_v2=id=b972019f-9841-4ee8-8c08-388b2f4c0289&created=1794181486719&expire=1794183269687&c=0; _gh_sess=KfW4c0JcUt7S3RTA%2FCuZ6r4K%2BRTtXD7Eec84WGcayrOIF6xotV148KSZLnv1MzpTVRgEWrSm%2F9NK8m%2BtqpapQSXC12gxyPHlYWo%2B%2BqT1jyojHJeXGeZWS%2B%2Bq5D56shADRpW4hlBShc6T4phdxQo1jiT%2Fav0lrfqVd0yHZHYZJ52ogwcnzCuMp0Ze7AB6rUkEtpfEuRi8gK9g2chpWusGI3MON0TOSnI4x%2FlACjdAgOOabmD1FQkkhdTpBzHRvBt47RW5%2FVKeaHVdUxhaDy5M2vzIryl9avOeh%2BXKRSPVp%2BeZZ227c6rp%2Fu9vYEcJ74cTnbSd%2Bgvjg5IzIAJuO2PrgpY3qXfV3WJmOMYmTH78gdXiy9%2FXanCpS4h85fCUYBCl--boJkWJR0b3cnzgMe--IkrwUwMZK7vRlWt9vcYWKQ%3D%3D",
                 "github-verified-fetch":"true",
                 "origin":"https://github.com",
                 "priority":"u=1, i",
@@ -77,7 +77,7 @@ def GITHUB_FILE(update=False,data=None,name=None):
              #   "accept-encoding":"gzip, deflate, br, zstd" ,
                 "accept-language":"fr-FR,fr;q=0.9,ar-DZ;q=0.8,ar;q=0.7,en-US;q=0.6,en;q=0.5",
                 "cache-control":"max-age=0",
-                "cookie":"_octo=GH1.1.929647033.1783641681; _device_id=90a830c932a17d311d8cc595ca371818; datadome=DloIDqvQsMLo__CffHftNY2G_hhG6ShTEdq75~h_Imub~o~NrfEjcXiPQOcwobdXQFEKVw6fCb7GIRLDkHAfaeHwAg2jGz~g45C~FVZeXep~vhxzvhicRyfLrmnFCdW8; cpu_bucket=lg; preferred_color_mode=light; tz=Africa%2FLagos; saved_user_sessions=211106746%3A1mnBBPD0qWO4O4pZanjvqZDl_he_KkT-_mKM_dBBcQ3sU11I; user_session=1mnBBPD0qWO4O4pZanjvqZDl_he_KkT-_mKM_dBBcQ3sU11I; __Host-user_session_same_site=1mnBBPD0qWO4O4pZanjvqZDl_he_KkT-_mKM_dBBcQ3sU11I; tz=Africa%2FLagos; color_mode=%7B%22color_mode%22%3A%22auto%22%2C%22light_theme%22%3A%7B%22name%22%3A%22light%22%2C%22color_mode%22%3A%22light%22%7D%2C%22dark_theme%22%3A%7B%22name%22%3A%22dark%22%2C%22color_mode%22%3A%22dark%22%7D%7D; logged_in=yes; dotcom_user=renaiania233; ui_eligible=true; last_write_ms=1792609408195; _dd_s_v2=isExpired=1&c=0; _gh_sess=ncOWUmds%2F1bnLRX%2BR7gRbFrVwThFK3%2B0FB4LSFkkfUiHQ6WNiGa6sCiifkYfCSJ%2Bwl5pvPyADPrV5uz164j4lN5EYZxKENRoXjqCln0q%2BfxXekPrwKHNQHD28ugqiqpMyWI4OxMpLjPRh%2BEmyOSxTL%2FH74shvAcLNuAK42uYzsMNiDnwPCCDk31wiT0r%2BKp0PwuEq1vuhQJIfANeMDHm9FUev5m%2FM3o%2BQgve9cmeSSH%2F3dGT1fKYDbd9I7Zhl0JFW9OqLrNnnmTAwH%2FsolID%2FKAOUFkE%2Fb6i5Ai6fALJLab9c9G5gOymHrEThEuyuFQ%2Fa%2B3KOSw49RnBhsImsut6z8GG4mYzZvJXNgB4AAaqCvRZKNQsH8EPIrS4LTitw3bYzhjty96NLQ56g1gUTGvjNMNoFlkNrFd9wY0FUXs6qibu7LJ0TukHn9%2Bzdd1ALYn4n9wIXgdSgn7c5b%2Bfj%2FkqRnZHECps4mjckYvWToGQCE%2BqYneR6nPc9O2b6Q%2BEQNAs6ctQ%2F9RibLRkaCpBgmhztNbq6rzgHx6p--puF6E%2BK8I5p1fH%2FI--4ookhcE%2BD21j%2B1KY4ypLmA%3D%3D",
+                "cookie":"_octo=GH1.1.929647033.1783641681; _device_id=90a830c932a17d311d8cc595ca371818; datadome=DloIDqvQsMLo__CffHftNY2G_hhG6ShTEdq75~h_Imub~o~NrfEjcXiPQOcwobdXQFEKVw6fCb7GIRLDkHAfaeHwAg2jGz~g45C~FVZeXep~vhxzvhicRyfLrmnFCdW8; saved_user_sessions=211106746%3ARlWkHD2k076ZhfLBUQYKeTk-DS4wmt7OqoX2KNRj1hqSIypg; user_session=RlWkHD2k076ZhfLBUQYKeTk-DS4wmt7OqoX2KNRj1hqSIypg; __Host-user_session_same_site=RlWkHD2k076ZhfLBUQYKeTk-DS4wmt7OqoX2KNRj1hqSIypg; logged_in=yes; dotcom_user=renaiania233; ui_eligible=true; color_mode=%7B%22color_mode%22%3A%22auto%22%2C%22light_theme%22%3A%7B%22name%22%3A%22light%22%2C%22color_mode%22%3A%22light%22%7D%2C%22dark_theme%22%3A%7B%22name%22%3A%22dark%22%2C%22color_mode%22%3A%22dark%22%7D%7D; cpu_bucket=lg; preferred_color_mode=light; tz=Africa%2FLagos; _dd_s_v2=id=b972019f-9841-4ee8-8c08-388b2f4c0289&created=1794181486719&expire=1794183269687&c=0; _gh_sess=KfW4c0JcUt7S3RTA%2FCuZ6r4K%2BRTtXD7Eec84WGcayrOIF6xotV148KSZLnv1MzpTVRgEWrSm%2F9NK8m%2BtqpapQSXC12gxyPHlYWo%2B%2BqT1jyojHJeXGeZWS%2B%2Bq5D56shADRpW4hlBShc6T4phdxQo1jiT%2Fav0lrfqVd0yHZHYZJ52ogwcnzCuMp0Ze7AB6rUkEtpfEuRi8gK9g2chpWusGI3MON0TOSnI4x%2FlACjdAgOOabmD1FQkkhdTpBzHRvBt47RW5%2FVKeaHVdUxhaDy5M2vzIryl9avOeh%2BXKRSPVp%2BeZZ227c6rp%2Fu9vYEcJ74cTnbSd%2Bgvjg5IzIAJuO2PrgpY3qXfV3WJmOMYmTH78gdXiy9%2FXanCpS4h85fCUYBCl--boJkWJR0b3cnzgMe--IkrwUwMZK7vRlWt9vcYWKQ%3D%3D",
                 "priority":"u=0, i",
                 "sec-fetch-dest":"document",
                 "sec-fetch-mode":"navigate",
@@ -384,12 +384,12 @@ def REQUEST_(url,headers=None,payload=None,json=None):
 def BLOCK_MESSAGES():
     payl= {'chat_id': -1004324675339, 'permissions': {'can_send_messages': False, 'can_send_audios': False, 'can_send_documents': False, 'can_send_photos': False, 'can_send_videos': False, 'can_send_video_notes': False, 'can_send_voice_notes': False, 'can_send_polls': False, 'can_send_other_messages': False, 'can_add_web_page_previews': False}}
     a = REQUEST_("https://api.telegram.org/bot"+TOKEN_+"/setChatPermissions",json=payl)
-	#if a.text=='{"ok":true,"result":true}':
+    #if a.text=='{"ok":true,"result":true}':
     return
 def UNBLOCK_MESSAGES():
     payl= {'chat_id': -1004324675339, 'permissions': {'can_send_messages': True, 'can_send_audios': True, 'can_send_documents': True, 'can_send_photos': True, 'can_send_videos': True, 'can_send_video_notes': True, 'can_send_voice_notes': True, 'can_send_polls': True, 'can_send_other_messages': True, 'can_add_web_page_previews': True}}
     a = REQUEST_("https://api.telegram.org/bot"+TOKEN_+"/setChatPermissions",json=payl)
-	#if a.text=='{"ok":true,"result":true}':
+    #if a.text=='{"ok":true,"result":true}':
     return
 
 UNBLOCK_MESSAGES()
@@ -448,30 +448,36 @@ def MAIN_TELEGRAM_RESPONDER():
                     
                 elif "/start_new_listenner_on" in msg :
                  #   BLOCK_MESSAGES()
-                    if len(msg.split()) < 5 :
-                        ssd= REQUEST_("https://api.telegram.org/bot"+TOKEN_+"/sendMessage?chat_id="+CHAT_ID+"&parse_mode=Markdown&text=[········🔥MARKETS_TRACKER_BOT🔥········](https://t.me/MARKETS_SIGNALS) \n🚫  NO ENOUGH PARAMETERS ,CHECK THIS FORM:  COMMAND <PAIRE> <TIMEFRAME> <PARAM> <SL-DISTANCE> <REFRESH(sec)>\n  ")
-                	    #UNBLOCK_MESSAGES()
-                	    #continue
+                    if len(msg.split()) < 11 :
+                        ssd= REQUEST_("https://api.telegram.org/bot"+TOKEN_+"/sendMessage?chat_id="+CHAT_ID+"&parse_mode=Markdown&text=[········🔥MARKETS_TRACKER_BOT🔥········](https://t.me/MARKETS_SIGNALS) \n🚫  NO ENOUGH PARAMETERS ,CHECK THIS FORM:  COMMAND <PAIRE> <TIMEFRAME> <UNKNOWN-PARAM> <MIN-SL-DISTANCE> <MAX-SL-DISTANCE> <LTF-PERIODE-HMA> <HTF-PERIODE-HMA> <LTF-ADX-PERIODE> <LTF-ADX-VARIABLE-CHECK> <REFRESH(sec)>\n  ")
+                        #UNBLOCK_MESSAGES()
+                        #continue
                     else:
                         paire = msg.split()[1]
                         timeframe= str(msg.split()[2])
                         param = float(msg.split()[3])
                         min_stop_distance= float(msg.split()[4])
-                        timing_ = int(msg.split()[5])
+                        max_stop_distance= float(msg.split()[5])
+                        ltf_periode=float(msg.split()[6])
+                        htf_periode=float(msg.split()[7])
+                        adx_ltf= float(msg.split()[8])
+                        adx_chk= float(msg.split()[9])
+                        
+                        timing_ = int(msg.split()[10])
                         j = dbass[timeframe]
                         sti=liss[timeframe]
-                        di = {"PAIRE":paire,"RUNNING":True,"TF-NAME":j,"TIMEFRAME":timeframe,"TIMING":timing_,"SETTINGS":param,"MIN-SL":min_stop_distance}
+                        di = {"PAIRE":paire,"RUNNING":True,"TF-NAME":j,"TIMEFRAME":timeframe,"TIMING":timing_,"SETTINGS":param,"MIN-SL":min_stop_distance,"MAX-SL":max_stop_distance,"LTF-PERIODE":ltf_periode,"HTF-PERIODE":htf_periode,"ADX-LTF-PERIODE":adx_ltf,"ADX-LTF-CHK":adx_chk}
                         print(di)
                         print(db_manager)
                         print(type(di))
                         print(type(db_manager))
                         if di not in db_manager:
                             
-                            starter = GET_CNDLSTICKS_CHART(timeframe,j,int(time.time())-sti,int(time.time())+8*3600,paire,param,min_stop_distance)
+                            starter = GET_CNDLSTICKS_CHART(timeframe,j,int(time.time())-sti,int(time.time())+8*3600,paire,param,min_stop_distance,max_stop_distance,ltf_periode,htf_periode,adx_periode,adx_chk)
                             sti = threading.Thread(target=starter.CHECK_FVG_AVAILABILITY,args=(di,timing_,False,False,True))
                             sti.start()
 
-    	        				#starter.CHECK_FVG_AVAILABILITY()
+                                #starter.CHECK_FVG_AVAILABILITY()
                         else:
                             ssd= REQUEST_("https://api.telegram.org/bot"+TOKEN_+"/sendMessage?chat_id="+CHAT_ID+"&parse_mode=Markdown&text=[········🔥MARKETS_TRACKER_BOT🔥········](https://t.me/MARKETS_SIGNALS) \n🚫  REQUESTED RUNNER WAS ALREADY RUNING ON THE DB ! \n  ")
                   #  UNBLOCK_MESSAGES()
@@ -605,10 +611,10 @@ def MAIN_TELEGRAM_RESPONDER():
                         NEW_DB_RESULT= starter.db
                         time.sleep(1)
                         if RISK_MANAGMENT_VERSION=="V2":
-                            EXECUTE_TRADE_V2(candles=NEW_DB_RESULT,trade_type=trade_type,entry=entry,sl=sl,tp1=tp1,tp2=tp2,capital=capital)
+                            EXECUTE_TRADE_V2(candles=NEW_DB_RESULT[1:],trade_type=trade_type,entry=entry,sl=sl,tp1=tp1,tp2=tp2,capital=capital)
                         #print(balance)
                         elif RISK_MANAGMENT_VERSION=="V1":
-                            EXECUTE_TRADE_V1(candles=NEW_DB_RESULT,trade_type=trade_type,entry=entry,sl=sl,tp1=tp1,tp2=tp2,capital=capital)
+                            EXECUTE_TRADE_V1(candles=NEW_DB_RESULT[1:],trade_type=trade_type,entry=entry,sl=sl,tp1=tp1,tp2=tp2,capital=capital)
                     sell_trades=(counter-buy_trades)
                     try:
                         average_win= int((total_profit/win_trades)*100)/100
@@ -715,7 +721,7 @@ AVERAGE-WIN : {} | AVERAGE-LOSS {}
         print("sleeping for 10sec....")
         time.sleep(10)
 class GET_CNDLSTICKS_CHART():
-    def __init__(self,TIME_FRAME,TF_TO_STR,START,END,SYMBOL,PARAM=0,min_sl=0):
+    def __init__(self,TIME_FRAME,TF_TO_STR,START,END,SYMBOL,PARAM=0,min_sl=0,max_sl=0,ltf_periode=7,htf_periode=17,adx_periode=9,adx_var_check=22,):
         self.tf=TIME_FRAME
         self.tfcc =TF_TO_STR 
         print(self.tfcc)
@@ -727,6 +733,11 @@ class GET_CNDLSTICKS_CHART():
         self.param=PARAM
         self.result_byID=False
         self.min_sl=min_sl
+        self.max_sl=max_sl
+        self.ltf_periode=ltf_periode
+        self.htf_periode=htf_periode
+        self.adx_periode=adx_periode
+        self.adx_var_check=adx_var_check
     def PREPARE_REQUEST(self,confirmation=False):
         try:
             payload = {
@@ -923,22 +934,22 @@ class GET_CNDLSTICKS_CHART():
             highs.append(float(candle["high"]))
             lows.append(float(candle["low"]))
         self.hma_values3 = self.calculate_hma(highs, lows, length=15)
-    def calculate_hma_base2 (self,periode=20):
+    def calculate_hma_base2 (self,source,periode=20):
         highs=[]
         lows=[]
-        for candle in self.db:
+        for candle in source:
             highs.append(float(candle["high"]))
             lows.append(float(candle["low"]))
-        self.hma_values2 = self.calculate_hma(highs, lows, length=20)
-
+        self.hma_values2 = self.calculate_hma(highs, lows, length=periode)
+        return self.hma_values2
 #25 28 5 min  52%win rate dd8 mp12 $26501365 trades
-    def calculate_hma_base (self,periode=9):
+    def calculate_hma_base (self,periode=7):
         highs=[]
         lows=[]
         for candle in self.db:
             highs.append(float(candle["high"]))
             lows.append(float(candle["low"]))
-        self.hma_values = self.calculate_hma(highs, lows, length=9)
+        self.hma_values = self.calculate_hma(highs, lows, length=periode)
 
  
     def calculate_wma(self,data, length):
@@ -1726,12 +1737,12 @@ class GET_CNDLSTICKS_CHART():
         ################################
        # fvgaps=  self.detect_fvgs(self.db)
 
-        self.calculate_hma_base()
-        self.calculate_hma_base2()
-        self.calculate_hma_base3()
-        self.calculate_hma_base4()
-        self.calculate_sma()
-        adxdb = self.calculate_adx()
+        ltf = self.calculate_hma_base(periode=self.ltf_periode)
+        #
+      #  self.calculate_hma_base3()
+      #  self.calculate_hma_base4()
+      #  self.calculate_sma()
+        adxdb = self.calculate_adx(period=self.adx_periode)
         #k_line, d_line = self.stochastic_rsi(self.db)
 
        # self.calculate_hma_base2()
@@ -1747,7 +1758,7 @@ class GET_CNDLSTICKS_CHART():
                 if already_alerted_started_ok==False:
                     ssd= REQUEST_("https://api.telegram.org/bot"+TOKEN_+"/sendMessage?chat_id="+CHAT_ID+"&parse_mode=Markdown&text=[········🔥MARKETS_TRACKER_BOT🔥········](https://t.me/MARKETS_SIGNALS) \n✅LISTENNER STARTED ON :\nPAIRE: {}\nTIME-FRAME: {}\nPARAM: {}\nMIN-SL: {}\nREFRESH(sec): {}".format(self.symbol,self.tf,self.param,self.min_sl,timing___))
                     already_alerted_started_ok=True
-                    di = {"PAIRE":self.symbol,"RUNNING":True,"TF-NAME":self.tfcc,"TIMEFRAME":self.tf,"TIMING":timing___,"SETTINGS":self.param,"MIN-SL":self.min_sl}
+                    di = {"PAIRE":self.symbol,"RUNNING":True,"TF-NAME":self.tfcc,"TIMEFRAME":self.tf,"TIMING":timing___,"SETTINGS":self.param,"MIN-SL":self.min_sl,"MAX-SL":self.max_sl,"LTF-PERIODE":self.ltf_periode,"HTF-PERIODE":self.htf_periode,"ADX-LTF-PERIODE":self.adx_periode,"ADX-LTF-CHK":self.adx_var_check}
                     if di not in db_manager:
                         db_manager.append(di)
         else:
@@ -2015,9 +2026,9 @@ class GET_CNDLSTICKS_CHART():
 
 #                    if adxdb[checkpoint] ==None or d_line[checkpoint]==None : continue
 #                    if adxdb[checkpoint]>20  and  d_line[checkpoint]<20:continue
-                    if self.hma_values3[checkpoint] > self.hma_values2[checkpoint] and adxdb[checkpoint] > 45: continue
-                    if adxdb[checkpoint] < 20 : continue
-                    if  self.hma_values4[checkpoint] > self.hma_values4[checkpoint-1]:continue
+              #      if self.hma_values3[checkpoint] > self.hma_values2[checkpoint] and adxdb[checkpoint] > 45: continue
+                    if adxdb[checkpoint] < self.adx_var_check : continue
+               #     if  self.hma_values4[checkpoint] > self.hma_values4[checkpoint-1]:continue
 
 
 #                    engulf =None 
@@ -2059,14 +2070,32 @@ class GET_CNDLSTICKS_CHART():
                     tp2 = (entry-stop_distance*2)
                     ##########################################
                    # if int(entry)==int(sl):print("TRADE AVOIDED");continue
-                    if abs(float(entry) -  float(sl)) >self.min_sl:print("SELL TRADE SKIPPED DUE TO SL-DISTANCE");continue
+                    if abs(float(entry) -  float(sl)) >self.min_sl:print("SELL TRADE SKIPPED DUE TO max SL-DISTANCE");continue
+                    if abs(float(entry) -  float(sl)) <self.min_sl:print("SELL TRADE SKIPPED DUE TO min SL-DISTANCE");continue
                     ############# FVG AVOIDING ###############
                     ############# FVG AVOIDING ###############
                     if (entry) == (sl): continue    ################################newly added for buy and sell 
                   #  blocked = self.is_tp_blocked(entry=entry,tp=tp2,direction="short",fvgs=fvgaps,current_index=checkpoint,atr=1)
                   #  vulnerable = self.is_sl_vulnerable(entry=entry,sl=sl,direction="short",fvgs=fvgaps,current_index=checkpoint,atr=1)
                   #  if blocked ==True : continue
+                    ####################################################
+                     headers= {"accept":"text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7","sec-ch-ua":'"Google Chrome";v="149", "Chromium";v="149", "Not)A;Brand";v="24"',"sec-ch-ua-mobile":"?0","sec-ch-ua-platform":'"Windows"',"accept-language":"en-US,en;q=0.9","priority":"u=0, i","sec-fetch-dest":"document","sec-fetch-mode":"navigate","sec-fetch-site":"none","sec-fetch-user":"?1","upgrade-insecure-requests":"1","user-agent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/149.0.0.0 Safari/537.36"}
+                     for i in range(0,50):
+                        try:
+                            htf_candles=[]
+                            risp =requests.get("https://my.litefinance.org/chart/get-history?symbol={}&resolution={}&from={}&to={}".format(self.symbol,60,int(time.time())-423000*2,int(time.time())+8*3600),headers=headers).json()
+                            for i in range(0,len(risp["data"]["t"])):
+                                    htf_candles.append({"time":risp["data"]["t"][i],"open":risp["data"]["o"][i],"close":risp["data"]["c"][i],"high":risp["data"]["h"][i],"low":risp["data"]["l"][i]})
 
+                            break
+                        except Exception as err: 
+                            print("unable to fetch htf candles (1H CANDLES ) !")
+                            print(e)
+                            time.sleep(5)
+                            continue
+                    htf_hma = self.calculate_hma_base2(source=htf_candles,periode=self.htf_periode)
+                    #tmm = (int(self.db[checkpoint]["time"])// 3600 * 3600)
+                    if htf_hma[-1]>htf_hma[-2]:continue
                     ####################################################
  
 #+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -2217,9 +2246,9 @@ class GET_CNDLSTICKS_CHART():
 
 #                    if adxdb[checkpoint] ==None or d_line[checkpoint]==None : continue
 #                    if adxdb[checkpoint]>20  and  d_line[checkpoint]>80:continue
-                    if self.hma_values3[checkpoint] < self.hma_values2[checkpoint] and adxdb[checkpoint] > 45: continue
-                    if adxdb[checkpoint] < 20 : continue
-                    if  self.hma_values4[checkpoint] < self.hma_values4[checkpoint-1]:continue
+                   # if self.hma_values3[checkpoint] < self.hma_values2[checkpoint] and adxdb[checkpoint] > 45: continue
+                    if adxdb[checkpoint] < self.adx_var_check : continue
+                  #  if  self.hma_values4[checkpoint] < self.hma_values4[checkpoint-1]:continue
 
 
 #                    engulf =None 
@@ -2261,7 +2290,27 @@ class GET_CNDLSTICKS_CHART():
                     tp2 = (entry+stop_distance*2)
                     ##########################################
                     if (entry) == (sl): continue 
-                    if abs(float(entry) -  float(sl)) >self.min_sl:print("BUY TRADE SKIPPED DUE TO SL-DISTANCE");continue
+                    if abs(float(entry) -  float(sl)) >self.min_sl:print("BUY TRADE SKIPPED DUE TO max SL-DISTANCE");continue
+                    if abs(float(entry) -  float(sl)) <self.min_sl:print("BUY TRADE SKIPPED DUE TO min SL-DISTANCE");continue
+                    ####################################################
+                     headers= {"accept":"text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7","sec-ch-ua":'"Google Chrome";v="149", "Chromium";v="149", "Not)A;Brand";v="24"',"sec-ch-ua-mobile":"?0","sec-ch-ua-platform":'"Windows"',"accept-language":"en-US,en;q=0.9","priority":"u=0, i","sec-fetch-dest":"document","sec-fetch-mode":"navigate","sec-fetch-site":"none","sec-fetch-user":"?1","upgrade-insecure-requests":"1","user-agent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/149.0.0.0 Safari/537.36"}
+                     for i in range(0,50):
+                        try:
+                            htf_candles=[]
+                            risp =requests.get("https://my.litefinance.org/chart/get-history?symbol={}&resolution={}&from={}&to={}".format(self.symbol,60,int(time.time())-423000*2,int(time.time())+8*3600),headers=headers).json()
+                            for i in range(0,len(risp["data"]["t"])):
+                                    htf_candles.append({"time":risp["data"]["t"][i],"open":risp["data"]["o"][i],"close":risp["data"]["c"][i],"high":risp["data"]["h"][i],"low":risp["data"]["l"][i]})
+
+                            break
+                        except Exception as err: 
+                            print("unable to fetch htf candles (1H CANDLES ) !")
+                            print(e)
+                            time.sleep(5)
+                            continue
+                    htf_hma = self.calculate_hma_base2(source=htf_candles,periode=self.htf_periode)
+                    #tmm = (int(self.db[checkpoint]["time"])// 3600 * 3600)
+                    if htf_hma[-1]<htf_hma[-2]:continue
+                    ####################################################
                     ############# FVG AVOIDING ###############
                  #   if int(entry) == int(sl): continue    ################################newly added for buy and sell 
            #         blocked = self.is_tp_blocked(entry=entry,tp=tp2,direction="long",fvgs=fvgaps,current_index=checkpoint,atr=1)
@@ -2536,7 +2585,7 @@ with open("db.json","r") as r :
     print(db_manager)
     for runner  in dito :
             sti=liss[runner["TIMEFRAME"]]
-            starter = GET_CNDLSTICKS_CHART(runner["TIMEFRAME"],runner["TF-NAME"],int(time.time())-sti,int(time.time())+8*3600,runner["PAIRE"],runner["SETTINGS"],runner["MIN-SL"])
+            starter = GET_CNDLSTICKS_CHART(runner["TIMEFRAME"],runner["TF-NAME"],int(time.time())-sti,int(time.time())+8*3600,runner["PAIRE"],runner["SETTINGS"],runner["MIN-SL"],runner["MAX-SL"],runner["LTF-PERIODE"],runner["HTF-PERIODE"],runner["ADX-LTF-PERIODE"],runner["ADX-LTF-CHK"])
             sti = threading.Thread(target=starter.CHECK_FVG_AVAILABILITY,args=(runner,runner["TIMING"],False))
             sti.start()
 
