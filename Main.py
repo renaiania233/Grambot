@@ -946,8 +946,8 @@ class GET_CNDLSTICKS_CHART():
     def calculate_hma_base (self,periode=7):
         highs=[]
         lows=[]
-        print("PERIODE : ".format(periode))
-        print(self.db)
+        #print("PERIODE : ".format(periode))
+        #print(self.db)
         for candle in self.db:
             highs.append(float(candle["high"]))
             lows.append(float(candle["low"]))
@@ -1738,7 +1738,7 @@ class GET_CNDLSTICKS_CHART():
         ssxx = self.PREPARE_REQUEST()
         ################################
        # fvgaps=  self.detect_fvgs(self.db)
-        print(self.ltf_periode)
+        #print(self.ltf_periode)
         ltf = self.calculate_hma_base(periode=self.ltf_periode)
         #
       #  self.calculate_hma_base3()
