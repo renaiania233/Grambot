@@ -2028,8 +2028,10 @@ class GET_CNDLSTICKS_CHART():
 
 #                    if adxdb[checkpoint] ==None or d_line[checkpoint]==None : continue
 #                    if adxdb[checkpoint]>20  and  d_line[checkpoint]<20:continue
+                    print("sell trade checked ")
               #      if self.hma_values3[checkpoint] > self.hma_values2[checkpoint] and adxdb[checkpoint] > 45: continue
                     if adxdb[checkpoint] < self.adx_var_check : continue
+                    print("adx chrcked")
                #     if  self.hma_values4[checkpoint] > self.hma_values4[checkpoint-1]:continue
 
 
@@ -2248,6 +2250,7 @@ class GET_CNDLSTICKS_CHART():
 
 #                    if adxdb[checkpoint] ==None or d_line[checkpoint]==None : continue
 #                    if adxdb[checkpoint]>20  and  d_line[checkpoint]>80:continue
+                    print("buy trade checked ")
                    # if self.hma_values3[checkpoint] < self.hma_values2[checkpoint] and adxdb[checkpoint] > 45: continue
                     if adxdb[checkpoint] < self.adx_var_check : continue
                   #  if  self.hma_values4[checkpoint] < self.hma_values4[checkpoint-1]:continue
