@@ -1758,7 +1758,7 @@ class GET_CNDLSTICKS_CHART():
         elif ssxx== True:
             if send_confirmation==True:
                 if already_alerted_started_ok==False:
-                    ssd= REQUEST_("https://api.telegram.org/bot"+TOKEN_+"/sendMessage?chat_id="+CHAT_ID+"&parse_mode=Markdown&text=[········🔥MARKETS_TRACKER_BOT🔥········](https://t.me/MARKETS_SIGNALS) \n✅LISTENNER STARTED ON :\nPAIRE: {}\nTIME-FRAME: {}\nPARAM: {}\nMIN-SL: {}\nREFRESH(sec): {}".format(self.symbol,self.tf,self.param,self.min_sl,timing___))
+                    ssd= REQUEST_("https://api.telegram.org/bot"+TOKEN_+"/sendMessage?chat_id="+CHAT_ID+"&parse_mode=Markdown&text=[········🔥MARKETS_TRACKER_BOT🔥········](https://t.me/MARKETS_SIGNALS) \n✅LISTENNER STARTED ON :\nPAIRE: {}\nTIME-FRAME: {}\nPARAM: {}\nMIN-SL: {}\nMAX-SL: {}\nLTF-HMA-PERIOD: {}\nHTF-HMA-PERIOD: {}\nLTF-ADX-PERIOD: {}\nADX-VAR-CHK: {}\n REFRESH(sec): {}\n-----------".format(self.symbol,self.tf,self.param,self.min_sl,self.max_sl,self.ltf_periode,self.htf_periode,self.adx_periode,self.adx_var_check,timing___))
                     already_alerted_started_ok=True
                     di = {"PAIRE":self.symbol,"RUNNING":True,"TF-NAME":self.tfcc,"TIMEFRAME":self.tf,"TIMING":timing___,"SETTINGS":self.param,"MIN-SL":self.min_sl,"MAX-SL":self.max_sl,"LTF-PERIODE":self.ltf_periode,"HTF-PERIODE":self.htf_periode,"ADX-LTF-PERIODE":self.adx_periode,"ADX-LTF-CHK":self.adx_var_check}
                     if di not in db_manager:
