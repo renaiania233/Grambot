@@ -2091,27 +2091,7 @@ class GET_CNDLSTICKS_CHART():
                   #  blocked = self.is_tp_blocked(entry=entry,tp=tp2,direction="short",fvgs=fvgaps,current_index=checkpoint,atr=1)
                   #  vulnerable = self.is_sl_vulnerable(entry=entry,sl=sl,direction="short",fvgs=fvgaps,current_index=checkpoint,atr=1)
                   #  if blocked ==True : continue
-                    ####################################################
-                    headers= {"accept":"text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7","sec-ch-ua":'"Google Chrome";v="149", "Chromium";v="149", "Not)A;Brand";v="24"',"sec-ch-ua-mobile":"?0","sec-ch-ua-platform":'"Windows"',"accept-language":"en-US,en;q=0.9","priority":"u=0, i","sec-fetch-dest":"document","sec-fetch-mode":"navigate","sec-fetch-site":"none","sec-fetch-user":"?1","upgrade-insecure-requests":"1","user-agent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/149.0.0.0 Safari/537.36"}
-                    for i in range(0,50):
-                        try:
-                            htf_candles=[]
-                            risp =requests.get("https://my.litefinance.org/chart/get-history?symbol={}&resolution={}&from={}&to={}".format(self.symbol,60,int(time.time())-423000*2,int(time.time())+8*3600),headers=headers)
-                            print(risp.text)
-                            risp=risp.json()
-                            for i in range(0,len(risp["data"]["t"])):
-                                    htf_candles.append({"time":risp["data"]["t"][i],"open":risp["data"]["o"][i],"close":risp["data"]["c"][i],"high":risp["data"]["h"][i],"low":risp["data"]["l"][i]})
-                            print("HTF SELL  CANDLES  checked ")
-                            break
-                        except Exception as err: 
-                            print("unable to fetch htf candles (1H CANDLES ) !")
-                            print(err)
-                            time.sleep(5)
-                            continue
-                    htf_hma = self.calculate_hma_base2(source=htf_candles,periode=self.htf_periode)
-                    #tmm = (int(self.db[checkpoint]["time"])// 3600 * 3600)
-                    if htf_hma[-1]>htf_hma[-2]:continue
-                    ####################################################
+
  
 #+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 #                    start_range = None
@@ -2170,10 +2150,31 @@ class GET_CNDLSTICKS_CHART():
                     print("every thing was good ")
                     ###########################################################################
                     if  self.db[-1]!=candle :continue
-                    print("BOOOOM")
                     indox = self.db.index(candle)
                     id__ =str(self.db[indox]["time"]) #int(float(candle["open"])+float(candle["close"])+float(candle["high"])+float(candle["low"]))
                     if id__ in ALREADY_ALERTED_TRADES:continue
+                    ####################################################
+                    headers= {"accept":"text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7","sec-ch-ua":'"Google Chrome";v="149", "Chromium";v="149", "Not)A;Brand";v="24"',"sec-ch-ua-mobile":"?0","sec-ch-ua-platform":'"Windows"',"accept-language":"en-US,en;q=0.9","priority":"u=0, i","sec-fetch-dest":"document","sec-fetch-mode":"navigate","sec-fetch-site":"none","sec-fetch-user":"?1","upgrade-insecure-requests":"1","user-agent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/149.0.0.0 Safari/537.36"}
+                    for i in range(0,50):
+                        try:
+                            htf_candles=[]
+                            risp =requests.get("https://my.litefinance.org/chart/get-history?symbol={}&resolution={}&from={}&to={}".format(self.symbol,60,int(time.time())-423000*2,int(time.time())+8*3600),headers=headers)
+                            risp=risp.json()
+                            for i in range(0,len(risp["data"]["t"])):
+                                    htf_candles.append({"time":risp["data"]["t"][i],"open":risp["data"]["o"][i],"close":risp["data"]["c"][i],"high":risp["data"]["h"][i],"low":risp["data"]["l"][i]})
+                            print("HTF SELL  CANDLES  checked ")
+                            break
+                        except Exception as err: 
+                            print("unable to fetch htf candles (1H CANDLES ) !")
+                            print(err)
+                            time.sleep(5)
+                            continue
+                    htf_hma = self.calculate_hma_base2(source=htf_candles,periode=self.htf_periode)
+                    #tmm = (int(self.db[checkpoint]["time"])// 3600 * 3600)
+                    if htf_hma[-1]>htf_hma[-2]:continue
+                    ####################################################
+                    print("BOOOOM")
+                    
                     print("COUNTER OF DB ")
                     print(len(self.db))
                     REQUEST_("https://api.telegram.org/bot"+TOKEN_+"/sendMessage?chat_id="+CHAT_ID+"&parse_mode=Markdown&text=[········🔥MARKETS_TRACKER_BOT🔥········](https://t.me/MARKETS_SIGNALS) \nSELL SIGNAL DETECTED")
@@ -2311,27 +2312,7 @@ class GET_CNDLSTICKS_CHART():
                         if abs(float(entry) -  float(sl)) >self.max_sl:print("BUY TRADE SKIPPED DUE TO max SL-DISTANCE");continue
                     if self.min_sl !=0:
                         if abs(float(entry) -  float(sl)) <self.min_sl:print("BUY TRADE SKIPPED DUE TO min SL-DISTANCE");continue
-                    ####################################################
-                    headers= {"accept":"text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7","sec-ch-ua":'"Google Chrome";v="149", "Chromium";v="149", "Not)A;Brand";v="24"',"sec-ch-ua-mobile":"?0","sec-ch-ua-platform":'"Windows"',"accept-language":"en-US,en;q=0.9","priority":"u=0, i","sec-fetch-dest":"document","sec-fetch-mode":"navigate","sec-fetch-site":"none","sec-fetch-user":"?1","upgrade-insecure-requests":"1","user-agent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/149.0.0.0 Safari/537.36"}
-                    for i in range(0,50):
-                        try:
-                            htf_candles=[]
-                            risp =requests.get("https://my.litefinance.org/chart/get-history?symbol={}&resolution={}&from={}&to={}".format(self.symbol,60,int(time.time())-423000*2,int(time.time())+8*3600),headers=headers)
-                            print(risp.text)
-                            risp=risp.json()
-                            for i in range(0,len(risp["data"]["t"])):
-                                    htf_candles.append({"time":risp["data"]["t"][i],"open":risp["data"]["o"][i],"close":risp["data"]["c"][i],"high":risp["data"]["h"][i],"low":risp["data"]["l"][i]})
-                            print("HTF buy  CANDLES  checked ")
-                            break
-                        except Exception as err: 
-                            print("unable to fetch htf candles (1H CANDLES ) !")
-                            print(err)
-                            time.sleep(5)
-                            continue
-                    htf_hma = self.calculate_hma_base2(source=htf_candles,periode=self.htf_periode)
-                    #tmm = (int(self.db[checkpoint]["time"])// 3600 * 3600)
-                    if htf_hma[-1]<htf_hma[-2]:continue
-                    ####################################################
+                    
                     ############# FVG AVOIDING ###############
                  #   if int(entry) == int(sl): continue    ################################newly added for buy and sell 
            #         blocked = self.is_tp_blocked(entry=entry,tp=tp2,direction="long",fvgs=fvgaps,current_index=checkpoint,atr=1)
@@ -2388,10 +2369,32 @@ class GET_CNDLSTICKS_CHART():
                     #print(self.db[-1])
                     print("buy goood well")
                     if  self.db[-1]!=candle :continue
-                    print("BOOOOM")
+
                     indox = self.db.index(candle)
                     id__ = str(self.db[indox]["time"])  #int(time.time()) candle["ctm"] #int(float(candle["open"])+float(candle["close"])+float(candle["high"])+float(candle["low"]))
                     if id__ in ALREADY_ALERTED_TRADES:continue
+                    ####################################################
+                    headers= {"accept":"text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7","sec-ch-ua":'"Google Chrome";v="149", "Chromium";v="149", "Not)A;Brand";v="24"',"sec-ch-ua-mobile":"?0","sec-ch-ua-platform":'"Windows"',"accept-language":"en-US,en;q=0.9","priority":"u=0, i","sec-fetch-dest":"document","sec-fetch-mode":"navigate","sec-fetch-site":"none","sec-fetch-user":"?1","upgrade-insecure-requests":"1","user-agent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/149.0.0.0 Safari/537.36"}
+                    for i in range(0,50):
+                        try:
+                            htf_candles=[]
+                            risp =requests.get("https://my.litefinance.org/chart/get-history?symbol={}&resolution={}&from={}&to={}".format(self.symbol,60,int(time.time())-423000*2,int(time.time())+8*3600),headers=headers)
+                            risp=risp.json()
+                            for i in range(0,len(risp["data"]["t"])):
+                                    htf_candles.append({"time":risp["data"]["t"][i],"open":risp["data"]["o"][i],"close":risp["data"]["c"][i],"high":risp["data"]["h"][i],"low":risp["data"]["l"][i]})
+                            print("HTF buy  CANDLES  checked ")
+                            break
+                        except Exception as err: 
+                            print("unable to fetch htf candles (1H CANDLES ) !")
+                            print(err)
+                            time.sleep(5)
+                            continue
+                    htf_hma = self.calculate_hma_base2(source=htf_candles,periode=self.htf_periode)
+                    #tmm = (int(self.db[checkpoint]["time"])// 3600 * 3600)
+                    if htf_hma[-1]<htf_hma[-2]:continue
+                    ####################################################
+                    print("BOOOOM")
+                    
                     REQUEST_("https://api.telegram.org/bot"+TOKEN_+"/sendMessage?chat_id="+CHAT_ID+"&parse_mode=Markdown&text=[········🔥MARKETS_TRACKER_BOT🔥········](https://t.me/MARKETS_SIGNALS) \nBUY SIGNAL DETECTED")
                     print("COUNTER OF DB ")
                     print(len(self.db))
