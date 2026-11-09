@@ -1724,18 +1724,20 @@ class GET_CNDLSTICKS_CHART():
     
     def CHECK_FVG_AVAILABILITY(self,management,timing___,pic,result_byID=False,send_confirmation=False):
       already_alerted_started_ok =False
+      self.db=[]
+      ssxx = self.PREPARE_REQUEST()
       while True:
        try:
         while pause ==True:
             time.sleep(5)
             continue
-        self.db=[]
+        #self.db=[]
         print("running iteration ....")
         
         #if management[self.symbol]==False:return
         #self.tf=60
         
-        ssxx = self.PREPARE_REQUEST()
+        #ssxx = self.PREPARE_REQUEST()
         ################################
        # fvgaps=  self.detect_fvgs(self.db)
         #print(self.ltf_periode)
@@ -1977,7 +1979,11 @@ class GET_CNDLSTICKS_CHART():
 #        print("motherfucker")
 #        print(self.synctf)
 #        print(self.tf)
-#        self.PREPARE_REQUEST(confirmation=True)
+        self.db=[]
+        sti=liss[self.tf]
+        self.start=int(time.time())-sti
+        self.end=int(time.time())+8*3600
+        self.PREPARE_REQUEST()
 #        self.calculate_hma_base2()
 #        self.calculate_sma2()
 #        self.tf=base_tf
