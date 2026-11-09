@@ -473,7 +473,7 @@ def MAIN_TELEGRAM_RESPONDER():
                         print(type(db_manager))
                         if di not in db_manager:
                             
-                            starter = GET_CNDLSTICKS_CHART(timeframe,j,int(time.time())-sti,int(time.time())+8*3600,paire,param,min_stop_distance,max_stop_distance,ltf_periode,htf_periode,adx_periode,adx_chk)
+                            starter = GET_CNDLSTICKS_CHART(timeframe,j,int(time.time())-sti,int(time.time())+8*3600,paire,param,min_stop_distance,max_stop_distance,ltf_periode,htf_periode,adx_ltf ,adx_chk)
                             sti = threading.Thread(target=starter.CHECK_FVG_AVAILABILITY,args=(di,timing_,False,False,True))
                             sti.start()
 
