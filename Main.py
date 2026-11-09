@@ -2293,8 +2293,8 @@ class GET_CNDLSTICKS_CHART():
                     if abs(float(entry) -  float(sl)) >self.min_sl:print("BUY TRADE SKIPPED DUE TO max SL-DISTANCE");continue
                     if abs(float(entry) -  float(sl)) <self.min_sl:print("BUY TRADE SKIPPED DUE TO min SL-DISTANCE");continue
                     ####################################################
-                     headers= {"accept":"text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7","sec-ch-ua":'"Google Chrome";v="149", "Chromium";v="149", "Not)A;Brand";v="24"',"sec-ch-ua-mobile":"?0","sec-ch-ua-platform":'"Windows"',"accept-language":"en-US,en;q=0.9","priority":"u=0, i","sec-fetch-dest":"document","sec-fetch-mode":"navigate","sec-fetch-site":"none","sec-fetch-user":"?1","upgrade-insecure-requests":"1","user-agent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/149.0.0.0 Safari/537.36"}
-                     for i in range(0,50):
+                    headers= {"accept":"text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7","sec-ch-ua":'"Google Chrome";v="149", "Chromium";v="149", "Not)A;Brand";v="24"',"sec-ch-ua-mobile":"?0","sec-ch-ua-platform":'"Windows"',"accept-language":"en-US,en;q=0.9","priority":"u=0, i","sec-fetch-dest":"document","sec-fetch-mode":"navigate","sec-fetch-site":"none","sec-fetch-user":"?1","upgrade-insecure-requests":"1","user-agent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/149.0.0.0 Safari/537.36"}
+                    for i in range(0,50):
                         try:
                             htf_candles=[]
                             risp =requests.get("https://my.litefinance.org/chart/get-history?symbol={}&resolution={}&from={}&to={}".format(self.symbol,60,int(time.time())-423000*2,int(time.time())+8*3600),headers=headers).json()
