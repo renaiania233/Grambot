@@ -458,9 +458,9 @@ def MAIN_TELEGRAM_RESPONDER():
                         param = float(msg.split()[3])
                         min_stop_distance= float(msg.split()[4])
                         max_stop_distance= float(msg.split()[5])
-                        ltf_periode=float(msg.split()[6])
-                        htf_periode=float(msg.split()[7])
-                        adx_ltf= float(msg.split()[8])
+                        ltf_periode=int(msg.split()[6])
+                        htf_periode=int(msg.split()[7])
+                        adx_ltf= int(msg.split()[8])#adx peridoe
                         adx_chk= float(msg.split()[9])
                         
                         timing_ = int(msg.split()[10])
