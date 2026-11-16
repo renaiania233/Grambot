@@ -386,7 +386,7 @@ class GET_CNDLSTICKS_CHART():
         self.adx_periode=adx_periode
         self.adx_var_check=adx_var_check
 
-    def detect_finished_run(self,candles, min_run=self.param, mode="body"):
+    def detect_finished_run(self,candles, min_run=3, mode="body"):
         """
         candles : list of CLOSED candle dicts, oldest -> newest (open, high, low, close, ctm)
         Returns a dict when the newest candle is an OPPOSITE candle that just ended
@@ -1450,7 +1450,7 @@ class GET_CNDLSTICKS_CHART():
         check_buffer=None
 
         if True :
-                    response_check = self.detect_finished_run(self.db)
+                    response_check = self.detect_finished_run(self.db,self.param)
                     if response_check==None:
                         break
                     
