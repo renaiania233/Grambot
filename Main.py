@@ -102,12 +102,13 @@ def GITHUB_FILE(update=False,data=None,name=None):
                     cookie_dead_alert=True
             else:
                 if str(os.environ.get("COOKIE")) !=str(COOKIE_):
+                    print("cookie RENEWED !")
                     REQUEST_("https://api.telegram.org/bot"+TOKEN_+"/sendMessage?chat_id="+CHAT_ID+"&parse_mode=Markdown&text=[········🔥MARKETS_TRACKER_BOT🔥········](https://t.me/MARKETS_SIGNALS) \n 🟢 COOKIE UPDATED SUCCESSFULLY  !  \n")
                     COOKIE_= os.environ.get("COOKIE")
                 cookie_dead_alert=False
 
 
-            #print("TOKENNN : {}".format(token))
+            print("TOKENNN : {}".format(token))
             p.headers.update({
                 
             "accept":"application/json",
