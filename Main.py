@@ -207,17 +207,19 @@ def UNBLOCK_MESSAGES():
     return
 
 UNBLOCK_MESSAGES()
-
+old_db_manager=[]
 def MAIN_TELEGRAM_RESPONDER():
-    global RISK_MANAGMENT_VERSION ,pause , balance, win_trades, loss_trades ,counter ,buy_trades, sell_trades, draw_counter, max_profit, max_drawdown ,profit_counter ,duplicated_drawdown ,r1_trades,r2_trades, total_profit ,total_losses ,be_trades
+    global pause ,old_db_manager
 
    # global pause
     while True:
         try:
-            with open("db.json","w") as w :
-                w.write(json.dumps(db_manager))
-            ####################################
-            updx= GITHUB_FILE(update=True,data=json.dumps(db_manager),name="db")
+            if old_db_manager!=db_manager:
+                with open("db.json","w") as w :
+                    w.write(json.dumps(db_manager))
+                ####################################
+                updx= GITHUB_FILE(update=True,data=json.dumps(db_manager),name="db")
+                old_db_manager=db_manager.copy()
 #####################################
             ssd = REQUEST_("https://api.telegram.org/bot"+TOKEN_+"/getUpdates?offset=-1").json()
             #print(ssd)
@@ -402,7 +404,7 @@ class GET_CNDLSTICKS_CHART():
         self.higher_tf=higher_tf
         self.adx_periode=adx_periode
         self.adx_var_check=adx_var_check
-    def detect_all_runs(candles, min_run=3, mode="body"):
+    def detect_all_runs(self,candles, min_run=3, mode="body"):
         """
         candles : list of CLOSED candle dicts, oldest -> newest
         Scans the WHOLE list and returns a list of dicts, one for every run of
