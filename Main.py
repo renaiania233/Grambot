@@ -1487,6 +1487,7 @@ class GET_CNDLSTICKS_CHART():
         self.start=int(time.time())-sti
         self.end=int(time.time())+8*3600
         self.PREPARE_REQUEST()
+        self.db=self.db[:len(self.db)-1]
         if self.adx_periode !=0:
             adxdb = self.calculate_adx(period=self.adx_periode)
 #        self.calculate_hma_base2()
