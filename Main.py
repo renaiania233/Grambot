@@ -108,7 +108,7 @@ def GITHUB_FILE(update=False,data=None,name=None):
                 cookie_dead_alert=False
 
 
-            print("TOKENNN : {}".format(token))
+         #   print("TOKENNN : {}".format(token))
             p.headers.update({
                 
             "accept":"application/json",
@@ -152,7 +152,7 @@ def GITHUB_FILE(update=False,data=None,name=None):
             }
         
             test= p.post("https://github.com/renaiania233/Grambot/tree-save/main/{}.json".format(name),data=payload).json()["data"]["commitQuorumPollPath"]
-            print(test)
+           # print(test)
             return(True)
         except Exception as e:
             REQUEST_("https://api.telegram.org/bot"+TOKEN_+"/sendMessage?chat_id="+CHAT_ID+"&parse_mode=Markdown&text=[········🔥MARKETS_TRACKER_BOT🔥········](https://t.me/MARKETS_SIGNALS) \n ERROR UPDATING_FILE: {}.json \n{}".format(name,str(e)))
@@ -402,6 +402,60 @@ class GET_CNDLSTICKS_CHART():
         self.higher_tf=higher_tf
         self.adx_periode=adx_periode
         self.adx_var_check=adx_var_check
+    def detect_all_runs(candles, min_run=3, mode="body"):
+        """
+        candles : list of CLOSED candle dicts, oldest -> newest
+        Scans the WHOLE list and returns a list of dicts, one for every run of
+        >= min_run same-color candles that was ended by an opposite candle.
+        A run still going at the end of the list is not returned.
+        All indexes refer to positions in `candles`.
+        """
+        def color(c):
+            o, cl = float(c["open"]), float(c["close"])
+            return 1 if cl > o else -1 if cl < o else 0
+     
+        colors = [color(c) for c in candles]
+        n = len(candles)
+        runs = []
+     
+        i = 0
+        while i < n:
+            col = colors[i]
+            if col == 0:                         # doji, skip
+                i += 1
+                continue
+     
+            j = i
+            while j + 1 < n and colors[j + 1] == col:
+                j += 1                           # run is candles[i..j]
+     
+            finished = j + 1 < n and colors[j + 1] == -col
+            if j - i + 1 >= min_run and finished:
+                run = candles[i:j + 1]
+                if mode == "body":
+                    a, b = float(run[0]["open"]), float(run[-1]["close"])
+                    top, bottom = max(a, b), min(a, b)
+                else:
+                    top = max(float(c["high"]) for c in run)
+                    bottom = min(float(c["low"]) for c in run)
+     
+                runs.append({
+                    "direction": "bullish" if col == 1 else "bearish",
+                    "length": j - i + 1,
+                    "top": top,
+                    "bottom": bottom,
+                    "mid": (top + bottom) / 2,
+                    "start_idx": i,
+                    "end_idx": j,
+                    "finish_idx": j + 1,
+                    "start_ctm": candles[i]["ctm"],
+                    "end_ctm": candles[j]["ctm"],
+                    "finish_ctm": candles[j + 1]["ctm"],
+                })
+            i = j + 1
+     
+        return runs
+     
 
     def detect_finished_run(self,candles, min_run=3, mode="body"):
         """
@@ -1467,7 +1521,7 @@ class GET_CNDLSTICKS_CHART():
         check_buffer=None
 
         if True :
-                    response_check = self.detect_finished_run(self.db,self.param)
+                    response_check = self.detect_all_runs(self.db,self.param)[-1]
                     print("RESPONSE FVGS")
                     print(response_check)
                     if response_check==None:
