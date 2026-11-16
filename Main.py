@@ -246,7 +246,7 @@ def MAIN_TELEGRAM_RESPONDER():
                 elif "/start_new_listenner_on" in msg :
                  #   BLOCK_MESSAGES()
                     if len(msg.split()) < 10 :
-                        ssd= REQUEST_("https://api.telegram.org/bot"+TOKEN_+"/sendMessage?chat_id="+CHAT_ID+"&parse_mode=Markdown&text=[········🔥MARKETS_TRACKER_BOT🔥········](https://t.me/MARKETS_SIGNALS) \n🚫  NO ENOUGH PARAMETERS ,CHECK THIS FORM:  COMMAND <PAIRE> <TIMEFRAME> <UNKNOWN-PARAM> <MIN-SL-DISTANCE> <MAX-SL-DISTANCE> <LTF-PERIODE-HMA> <HTF-PERIODE-HMA> <LTF-ADX-PERIODE> <LTF-ADX-VARIABLE-CHECK> <REFRESH(sec)>\n  ")
+                        ssd= REQUEST_("https://api.telegram.org/bot"+TOKEN_+"/sendMessage?chat_id="+CHAT_ID+"&parse_mode=Markdown&text=[········🔥MARKETS_TRACKER_BOT🔥········](https://t.me/MARKETS_SIGNALS) \n🚫  NO ENOUGH PARAMETERS ,CHECK THIS FORM:  COMMAND <PAIRE> <TIMEFRAME> <UNKNOWN-PARAM> <MIN-SL-DISTANCE> <MAX-SL-DISTANCE> <LTF-PERIODE-HMA> <HIGHER-TF-HMA> <LTF-ADX-PERIODE> <LTF-ADX-VARIABLE-CHECK> <REFRESH(sec)>\n  ")
                         #UNBLOCK_MESSAGES()
                         #continue
                     else:
@@ -256,10 +256,10 @@ def MAIN_TELEGRAM_RESPONDER():
                         min_stop_distance= float(msg.split()[4])
                         max_stop_distance= float(msg.split()[5])
                         #ltf_periode=int(msg.split()[6])
-                        htf_periode=str(msg.split()[6])
+                        higher_tf=str(msg.split()[6])
                         try:
-                            j = dbass[htf_periode]
-                            sti=liss[htf_periode]
+                            j = dbass[higher_tf]
+                            sti=liss[higher_tf]
                         except Exception as e :
                             print(e)
                             ssd= REQUEST_("https://api.telegram.org/bot"+TOKEN_+"/sendMessage?chat_id="+CHAT_ID+"&parse_mode=Markdown&text=[········🔥MARKETS_TRACKER_BOT🔥········](https://t.me/MARKETS_SIGNALS) \n🚫  ERROR PARAMETER HIGHER TIME FRAME TO CAPTURE\n  ")
@@ -273,14 +273,14 @@ def MAIN_TELEGRAM_RESPONDER():
                         timing_ = int(msg.split()[9])
                         j = dbass[timeframe]
                         sti=liss[timeframe]
-                        di = {"PAIRE":paire,"RUNNING":True,"TF-NAME":j,"TIMEFRAME":timeframe,"TIMING":timing_,"SETTINGS":param,"MIN-SL":min_stop_distance,"MAX-SL":max_stop_distance,"HTF-PERIODE":htf_periode,"ADX-LTF-PERIODE":adx_ltf,"ADX-LTF-CHK":adx_chk}
+                        di = {"PAIRE":paire,"RUNNING":True,"TF-NAME":j,"TIMEFRAME":timeframe,"TIMING":timing_,"SETTINGS":param,"MIN-SL":min_stop_distance,"MAX-SL":max_stop_distance,"HIGHER-TF":higher_tf,"ADX-LTF-PERIODE":adx_ltf,"ADX-LTF-CHK":adx_chk}
                         print(di)
                         print(db_manager)
                         print(type(di))
                         print(type(db_manager))
                         if di not in db_manager:
                             
-                            starter = GET_CNDLSTICKS_CHART(timeframe,j,int(time.time())-sti,int(time.time())+8*3600,paire,param,min_stop_distance,max_stop_distance,htf_periode,adx_ltf ,adx_chk)
+                            starter = GET_CNDLSTICKS_CHART(timeframe,j,int(time.time())-sti,int(time.time())+8*3600,paire,param,min_stop_distance,max_stop_distance,higher_tf,adx_ltf ,adx_chk)
                             sti = threading.Thread(target=starter.CHECK_FVG_AVAILABILITY,args=(di,timing_,False,False,True))
                             sti.start()
 
@@ -369,7 +369,7 @@ def MAIN_TELEGRAM_RESPONDER():
         print("sleeping for 10sec....")
         time.sleep(10)
 class GET_CNDLSTICKS_CHART():
-    def __init__(self,TIME_FRAME,TF_TO_STR,START,END,SYMBOL,PARAM=3,min_sl=0,max_sl=0,htf_periode=17,adx_periode=9,adx_var_check=22,):
+    def __init__(self,TIME_FRAME,TF_TO_STR,START,END,SYMBOL,PARAM=3,min_sl=0,max_sl=0,higher_tf=60,adx_periode=9,adx_var_check=22,):
         self.tf=TIME_FRAME
         self.tfcc =TF_TO_STR 
         print(self.tfcc)
@@ -382,7 +382,7 @@ class GET_CNDLSTICKS_CHART():
         self.result_byID=False
         self.min_sl=min_sl
         self.max_sl=max_sl
-        self.htf_periode=htf_periode
+        self.higher_tf=higher_tf
         self.adx_periode=adx_periode
         self.adx_var_check=adx_var_check
 
@@ -1189,9 +1189,9 @@ class GET_CNDLSTICKS_CHART():
         elif ssxx== True:
             if send_confirmation==True:
                 if already_alerted_started_ok==False:
-                    ssd= REQUEST_("https://api.telegram.org/bot"+TOKEN_+"/sendMessage?chat_id="+CHAT_ID+"&parse_mode=Markdown&text=[········🔥MARKETS_TRACKER_BOT🔥········](https://t.me/MARKETS_SIGNALS) \n✅LISTENNER STARTED ON :\nPAIRE: {}\nTIME-FRAME: {}\nPARAM: {}\nMIN-SL: {}\nMAX-SL: {}\nLTF-HMA-PERIOD: {}\nHTF-HMA-PERIOD: {}\nLTF-ADX-PERIOD: {}\nADX-VAR-CHK: {}\n REFRESH(sec): {}\n-----------".format(self.symbol,self.tf,self.param,self.min_sl,self.max_sl,self.ltf_periode,self.htf_periode,self.adx_periode,self.adx_var_check,timing___))
+                    ssd= REQUEST_("https://api.telegram.org/bot"+TOKEN_+"/sendMessage?chat_id="+CHAT_ID+"&parse_mode=Markdown&text=[········🔥MARKETS_TRACKER_BOT🔥········](https://t.me/MARKETS_SIGNALS) \n✅LISTENNER STARTED ON :\nPAIRE: {}\nTIME-FRAME: {}\nFVG(inCANDLES): {}\nMIN-SL: {}\nMAX-SL: {}\nHIGHER-TF: {}\nLTF-ADX-PERIOD: {}\nADX-VAR-CHK: {}\n REFRESH(sec): {}\n-----------".format(self.symbol,self.tf,self.param,self.min_sl,self.max_sl,self.higher_tf,self.adx_periode,self.adx_var_check,timing___))
                     already_alerted_started_ok=True
-                    di = {"PAIRE":self.symbol,"RUNNING":True,"TF-NAME":self.tfcc,"TIMEFRAME":self.tf,"TIMING":timing___,"SETTINGS":self.param,"MIN-SL":self.min_sl,"MAX-SL":self.max_sl,"HTF-PERIODE":self.htf_periode,"ADX-LTF-PERIODE":self.adx_periode,"ADX-LTF-CHK":self.adx_var_check}
+                    di = {"PAIRE":self.symbol,"RUNNING":True,"TF-NAME":self.tfcc,"TIMEFRAME":self.tf,"TIMING":timing___,"SETTINGS":self.param,"MIN-SL":self.min_sl,"MAX-SL":self.max_sl,"HIGHER-TF":self.higher_tf,"ADX-LTF-PERIODE":self.adx_periode,"ADX-LTF-CHK":self.adx_var_check}
                     if di not in db_manager:
                         db_manager.append(di)
         else:
@@ -1477,9 +1477,9 @@ class GET_CNDLSTICKS_CHART():
                         caption="     🔴➖ SELL SIGNAL DETECTED ➖🔴 \n\n * ENTRY: {} \n\n * STOP_LOSS: {}  \n\n * TAKE_PROFIT2: {} \n\n * RUNNER? :  AFTER TP2 \n\n➖➖➖➖(ID: {})➖➖➖➖".format(math.trunc(entry*factor)/factor,math.trunc(sl*factor)/factor,math.trunc(tp2*factor)/factor,str(id__))
                         pp = self.GET_MANUAL_PICTURE(type="SELL TRADE",signal="SELL_{}".format(self.symbol),candles=self.db[len(self.db)-80:],entry_index=len(self.db[len(self.db)-80:])-8,entry_price=entry,tp_price=tp2,sl_price=sl,lines=[(sl, "#ff5252"),(entry, "#ff5252")])
                         if pp==True:
-                            j = dbass[self.htf_periode]
-                            sti=liss[self.htf_periode]
-                            starter = GET_CNDLSTICKS_CHART(self.htf_periode,j,int(time.time())-sti,int(time.time())+ 3600*8,self.symbol,PARAM=None)
+                            j = dbass[self.higher_tf]
+                            sti=liss[self.higher_tf]
+                            starter = GET_CNDLSTICKS_CHART(self.higher_tf,j,int(time.time())-sti,int(time.time())+ 3600*8,self.symbol,PARAM=None)
                             sti = threading.Thread(target=starter.CHECK_FVG_AVAILABILITY,args=(db_manager,0,True))
                             sti.start()
                     if response_check["direction"]=="bullish":
@@ -1495,9 +1495,9 @@ class GET_CNDLSTICKS_CHART():
                         picture_name="BUY_{}.png".format(self.symbol)
                         pp = self.GET_MANUAL_PICTURE(type="BUY TRADE",signal="BUY_{}".format(self.symbol),candles=self.db[len(self.db)-80:],entry_index=len(self.db[len(self.db)-80:])-8,entry_price=entry,tp_price=tp2,sl_price=sl,lines=[(sl, "#00e676"),(entry, "#00e676")])   # red line)
                         if pp==True:
-                            j = dbass[self.htf_periode]
-                            sti=liss[self.htf_periode]
-                            starter = GET_CNDLSTICKS_CHART(self.htf_periode,j,int(time.time())-sti,int(time.time())+ 3600*8,self.symbol,PARAM=None)
+                            j = dbass[self.higher_tf]
+                            sti=liss[self.higher_tf]
+                            starter = GET_CNDLSTICKS_CHART(self.higher_tf,j,int(time.time())-sti,int(time.time())+ 3600*8,self.symbol,PARAM=None)
                             sti = threading.Thread(target=starter.CHECK_FVG_AVAILABILITY,args=(db_manager,0,True))
                             sti.start()
                     rs = self.send_two_photos(TOKEN_,CHAT_ID,picture_name,htf_picture,caption=caption)
@@ -1648,7 +1648,7 @@ with open("db.json","r") as r :
     print(db_manager)
     for runner  in dito :
             sti=liss[runner["TIMEFRAME"]]
-            starter = GET_CNDLSTICKS_CHART(runner["TIMEFRAME"],runner["TF-NAME"],int(time.time())-sti,int(time.time())+8*3600,runner["PAIRE"],runner["SETTINGS"],runner["MIN-SL"],runner["MAX-SL"],runner["LTF-PERIODE"],runner["HTF-PERIODE"],runner["ADX-LTF-PERIODE"],runner["ADX-LTF-CHK"])
+            starter = GET_CNDLSTICKS_CHART(runner["TIMEFRAME"],runner["TF-NAME"],int(time.time())-sti,int(time.time())+8*3600,runner["PAIRE"],runner["SETTINGS"],runner["MIN-SL"],runner["MAX-SL"],runner["HIGHER-TF"],runner["ADX-LTF-PERIODE"],runner["ADX-LTF-CHK"])
             sti = threading.Thread(target=starter.CHECK_FVG_AVAILABILITY,args=(runner,runner["TIMING"],False))
             sti.start()
 
