@@ -71,7 +71,7 @@ zhk.start()
 cookie_dead_alert=False
 cookie_renewed_alert=False
 def GITHUB_FILE(update=False,data=None,name=None):
-    global cookie_dead_alert
+    global cookie_dead_alert , COOKIE_
     if update==True:
         try:
             p=session()
