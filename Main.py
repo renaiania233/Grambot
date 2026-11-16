@@ -56,12 +56,12 @@ def AUTO_RELUNCH():
 
             }
             cxcx = requests.post("https://github.com/renaiania233/Grambot/actions/manual",headers=headers,data=dss,allow_redirects=False)
-            if  "actions/runs/" in cxcx.headers["Location"]:
+            if  cxcx.status_code==200:
                 success=True
                 REQUEST_("https://api.telegram.org/bot"+TOKEN_+"/sendMessage?chat_id="+CHAT_ID+"&parse_mode=Markdown&text=[········🔥MARKETS_TRACKER_BOT🔥········](https://t.me/MARKETS_SIGNALS) \n SERVER RUNNING : OK\nRENEWED:NOW  \n")
                 return
             else:
-                REQUEST_("https://api.telegram.org/bot"+TOKEN_+"/sendMessage?chat_id="+CHAT_ID+"&parse_mode=Markdown&text=[········🔥MARKETS_TRACKER_BOT🔥········](https://t.me/MARKETS_SIGNALS) \n 🔴UNEXPECTED ERROR WHILE SYNC, \n🔴Please Update Your Cookie  !  \n")
+                REQUEST_("https://api.telegram.org/bot"+TOKEN_+"/sendMessage?chat_id="+CHAT_ID+"&parse_mode=Markdown&text=[········🔥MARKETS_TRACKER_BOT🔥········](https://t.me/MARKETS_SIGNALS) \n 🔴UNEXPECTED ERROR ({})WHILE SYNC, \n🔴Please Update Your Cookie  !  \n".format(cxcx.status_code))
         except Exception as err:
             print(err)
             time.sleep(30)
