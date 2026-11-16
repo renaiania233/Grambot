@@ -38,7 +38,7 @@ def AUTO_RELUNCH():
                 "accept-language":"fr-FR,fr;q=0.9,ar-DZ;q=0.8,ar;q=0.7,en-US;q=0.6,en;q=0.5",
                 "baggage":"session.id=7704c922-d471-401a-a49d-341cc347c7c5",
                 "content-length":"369",
-                "cookie":os.environ.get("COOKIE"),#"_octo=GH1.1.929647033.1783641681; _device_id=90a830c932a17d311d8cc595ca371818; datadome=DloIDqvQsMLo__CffHftNY2G_hhG6ShTEdq75~h_Imub~o~NrfEjcXiPQOcwobdXQFEKVw6fCb7GIRLDkHAfaeHwAg2jGz~g45C~FVZeXep~vhxzvhicRyfLrmnFCdW8; saved_user_sessions=211106746%3ARlWkHD2k076ZhfLBUQYKeTk-DS4wmt7OqoX2KNRj1hqSIypg; user_session=RlWkHD2k076ZhfLBUQYKeTk-DS4wmt7OqoX2KNRj1hqSIypg; __Host-user_session_same_site=RlWkHD2k076ZhfLBUQYKeTk-DS4wmt7OqoX2KNRj1hqSIypg; logged_in=yes; dotcom_user=renaiania233; ui_eligible=true; color_mode=%7B%22color_mode%22%3A%22auto%22%2C%22light_theme%22%3A%7B%22name%22%3A%22light%22%2C%22color_mode%22%3A%22light%22%7D%2C%22dark_theme%22%3A%7B%22name%22%3A%22dark%22%2C%22color_mode%22%3A%22dark%22%7D%7D; cpu_bucket=lg; preferred_color_mode=light; tz=Africa%2FLagos; _dd_s_v2=id=b972019f-9841-4ee8-8c08-388b2f4c0289&created=1794181486719&expire=1794183269687&c=0; _gh_sess=KfW4c0JcUt7S3RTA%2FCuZ6r4K%2BRTtXD7Eec84WGcayrOIF6xotV148KSZLnv1MzpTVRgEWrSm%2F9NK8m%2BtqpapQSXC12gxyPHlYWo%2B%2BqT1jyojHJeXGeZWS%2B%2Bq5D56shADRpW4hlBShc6T4phdxQo1jiT%2Fav0lrfqVd0yHZHYZJ52ogwcnzCuMp0Ze7AB6rUkEtpfEuRi8gK9g2chpWusGI3MON0TOSnI4x%2FlACjdAgOOabmD1FQkkhdTpBzHRvBt47RW5%2FVKeaHVdUxhaDy5M2vzIryl9avOeh%2BXKRSPVp%2BeZZ227c6rp%2Fu9vYEcJ74cTnbSd%2Bgvjg5IzIAJuO2PrgpY3qXfV3WJmOMYmTH78gdXiy9%2FXanCpS4h85fCUYBCl--boJkWJR0b3cnzgMe--IkrwUwMZK7vRlWt9vcYWKQ%3D%3D",
+                "cookie":COOKIE_,#"_octo=GH1.1.929647033.1783641681; _device_id=90a830c932a17d311d8cc595ca371818; datadome=DloIDqvQsMLo__CffHftNY2G_hhG6ShTEdq75~h_Imub~o~NrfEjcXiPQOcwobdXQFEKVw6fCb7GIRLDkHAfaeHwAg2jGz~g45C~FVZeXep~vhxzvhicRyfLrmnFCdW8; saved_user_sessions=211106746%3ARlWkHD2k076ZhfLBUQYKeTk-DS4wmt7OqoX2KNRj1hqSIypg; user_session=RlWkHD2k076ZhfLBUQYKeTk-DS4wmt7OqoX2KNRj1hqSIypg; __Host-user_session_same_site=RlWkHD2k076ZhfLBUQYKeTk-DS4wmt7OqoX2KNRj1hqSIypg; logged_in=yes; dotcom_user=renaiania233; ui_eligible=true; color_mode=%7B%22color_mode%22%3A%22auto%22%2C%22light_theme%22%3A%7B%22name%22%3A%22light%22%2C%22color_mode%22%3A%22light%22%7D%2C%22dark_theme%22%3A%7B%22name%22%3A%22dark%22%2C%22color_mode%22%3A%22dark%22%7D%7D; cpu_bucket=lg; preferred_color_mode=light; tz=Africa%2FLagos; _dd_s_v2=id=b972019f-9841-4ee8-8c08-388b2f4c0289&created=1794181486719&expire=1794183269687&c=0; _gh_sess=KfW4c0JcUt7S3RTA%2FCuZ6r4K%2BRTtXD7Eec84WGcayrOIF6xotV148KSZLnv1MzpTVRgEWrSm%2F9NK8m%2BtqpapQSXC12gxyPHlYWo%2B%2BqT1jyojHJeXGeZWS%2B%2Bq5D56shADRpW4hlBShc6T4phdxQo1jiT%2Fav0lrfqVd0yHZHYZJ52ogwcnzCuMp0Ze7AB6rUkEtpfEuRi8gK9g2chpWusGI3MON0TOSnI4x%2FlACjdAgOOabmD1FQkkhdTpBzHRvBt47RW5%2FVKeaHVdUxhaDy5M2vzIryl9avOeh%2BXKRSPVp%2BeZZ227c6rp%2Fu9vYEcJ74cTnbSd%2Bgvjg5IzIAJuO2PrgpY3qXfV3WJmOMYmTH78gdXiy9%2FXanCpS4h85fCUYBCl--boJkWJR0b3cnzgMe--IkrwUwMZK7vRlWt9vcYWKQ%3D%3D",
                 "github-verified-fetch":"true",
                 "origin":"https://github.com",
                 "priority":"u=1, i",
@@ -81,7 +81,7 @@ def GITHUB_FILE(update=False,data=None,name=None):
              #   "accept-encoding":"gzip, deflate, br, zstd" ,
                 "accept-language":"fr-FR,fr;q=0.9,ar-DZ;q=0.8,ar;q=0.7,en-US;q=0.6,en;q=0.5",
                 "cache-control":"max-age=0",
-                "cookie":os.environ.get("COOKIE"),#"_octo=GH1.1.929647033.1783641681; _device_id=90a830c932a17d311d8cc595ca371818; datadome=DloIDqvQsMLo__CffHftNY2G_hhG6ShTEdq75~h_Imub~o~NrfEjcXiPQOcwobdXQFEKVw6fCb7GIRLDkHAfaeHwAg2jGz~g45C~FVZeXep~vhxzvhicRyfLrmnFCdW8; saved_user_sessions=211106746%3ARlWkHD2k076ZhfLBUQYKeTk-DS4wmt7OqoX2KNRj1hqSIypg; user_session=RlWkHD2k076ZhfLBUQYKeTk-DS4wmt7OqoX2KNRj1hqSIypg; __Host-user_session_same_site=RlWkHD2k076ZhfLBUQYKeTk-DS4wmt7OqoX2KNRj1hqSIypg; logged_in=yes; dotcom_user=renaiania233; ui_eligible=true; color_mode=%7B%22color_mode%22%3A%22auto%22%2C%22light_theme%22%3A%7B%22name%22%3A%22light%22%2C%22color_mode%22%3A%22light%22%7D%2C%22dark_theme%22%3A%7B%22name%22%3A%22dark%22%2C%22color_mode%22%3A%22dark%22%7D%7D; cpu_bucket=lg; preferred_color_mode=light; tz=Africa%2FLagos; _dd_s_v2=id=b972019f-9841-4ee8-8c08-388b2f4c0289&created=1794181486719&expire=1794183269687&c=0; _gh_sess=KfW4c0JcUt7S3RTA%2FCuZ6r4K%2BRTtXD7Eec84WGcayrOIF6xotV148KSZLnv1MzpTVRgEWrSm%2F9NK8m%2BtqpapQSXC12gxyPHlYWo%2B%2BqT1jyojHJeXGeZWS%2B%2Bq5D56shADRpW4hlBShc6T4phdxQo1jiT%2Fav0lrfqVd0yHZHYZJ52ogwcnzCuMp0Ze7AB6rUkEtpfEuRi8gK9g2chpWusGI3MON0TOSnI4x%2FlACjdAgOOabmD1FQkkhdTpBzHRvBt47RW5%2FVKeaHVdUxhaDy5M2vzIryl9avOeh%2BXKRSPVp%2BeZZ227c6rp%2Fu9vYEcJ74cTnbSd%2Bgvjg5IzIAJuO2PrgpY3qXfV3WJmOMYmTH78gdXiy9%2FXanCpS4h85fCUYBCl--boJkWJR0b3cnzgMe--IkrwUwMZK7vRlWt9vcYWKQ%3D%3D",
+                "cookie":COOKIE_,#"_octo=GH1.1.929647033.1783641681; _device_id=90a830c932a17d311d8cc595ca371818; datadome=DloIDqvQsMLo__CffHftNY2G_hhG6ShTEdq75~h_Imub~o~NrfEjcXiPQOcwobdXQFEKVw6fCb7GIRLDkHAfaeHwAg2jGz~g45C~FVZeXep~vhxzvhicRyfLrmnFCdW8; saved_user_sessions=211106746%3ARlWkHD2k076ZhfLBUQYKeTk-DS4wmt7OqoX2KNRj1hqSIypg; user_session=RlWkHD2k076ZhfLBUQYKeTk-DS4wmt7OqoX2KNRj1hqSIypg; __Host-user_session_same_site=RlWkHD2k076ZhfLBUQYKeTk-DS4wmt7OqoX2KNRj1hqSIypg; logged_in=yes; dotcom_user=renaiania233; ui_eligible=true; color_mode=%7B%22color_mode%22%3A%22auto%22%2C%22light_theme%22%3A%7B%22name%22%3A%22light%22%2C%22color_mode%22%3A%22light%22%7D%2C%22dark_theme%22%3A%7B%22name%22%3A%22dark%22%2C%22color_mode%22%3A%22dark%22%7D%7D; cpu_bucket=lg; preferred_color_mode=light; tz=Africa%2FLagos; _dd_s_v2=id=b972019f-9841-4ee8-8c08-388b2f4c0289&created=1794181486719&expire=1794183269687&c=0; _gh_sess=KfW4c0JcUt7S3RTA%2FCuZ6r4K%2BRTtXD7Eec84WGcayrOIF6xotV148KSZLnv1MzpTVRgEWrSm%2F9NK8m%2BtqpapQSXC12gxyPHlYWo%2B%2BqT1jyojHJeXGeZWS%2B%2Bq5D56shADRpW4hlBShc6T4phdxQo1jiT%2Fav0lrfqVd0yHZHYZJ52ogwcnzCuMp0Ze7AB6rUkEtpfEuRi8gK9g2chpWusGI3MON0TOSnI4x%2FlACjdAgOOabmD1FQkkhdTpBzHRvBt47RW5%2FVKeaHVdUxhaDy5M2vzIryl9avOeh%2BXKRSPVp%2BeZZ227c6rp%2Fu9vYEcJ74cTnbSd%2Bgvjg5IzIAJuO2PrgpY3qXfV3WJmOMYmTH78gdXiy9%2FXanCpS4h85fCUYBCl--boJkWJR0b3cnzgMe--IkrwUwMZK7vRlWt9vcYWKQ%3D%3D",
                 "priority":"u=0, i",
                 "sec-fetch-dest":"document",
                 "sec-fetch-mode":"navigate",
@@ -98,13 +98,13 @@ def GITHUB_FILE(update=False,data=None,name=None):
             if str("TYPE html>") in str(token):
                 if cookie_dead_alert==False:
                     print("COOKIE DEAD !!!")
-                    REQUEST_("https://api.telegram.org/bot"+TOKEN_+"/sendMessage?chat_id="+CHAT_ID+"&parse_mode=Markdown&text=[········🔥MARKETS_TRACKER_BOT🔥········](https://t.me/MARKETS_SIGNALS) \n 🔴ERROR WHILE SYNC, \n🔴Please Update Your Cookie  !  \n")
+                    REQUEST_("https://api.telegram.org/bot"+TOKEN_+"/sendMessage?chat_id="+CHAT_ID+"&parse_mode=Markdown&text=[········🔥MARKETS_TRACKER_BOT🔥········](https://t.me/MARKETS_SIGNALS) \n 🔴ERROR WHILE SYNC, \n🔴Please Update Your Cookie AND RESTART THE SCRIPT !  \n")
                     cookie_dead_alert=True
             else:
-                if str(os.environ.get("COOKIE")) !=str(COOKIE_):
-                    print("cookie RENEWED !")
-                    REQUEST_("https://api.telegram.org/bot"+TOKEN_+"/sendMessage?chat_id="+CHAT_ID+"&parse_mode=Markdown&text=[········🔥MARKETS_TRACKER_BOT🔥········](https://t.me/MARKETS_SIGNALS) \n 🟢 COOKIE UPDATED SUCCESSFULLY  !  \n")
-                    COOKIE_= os.environ.get("COOKIE")
+           #     if str(os.environ.get("COOKIE")) !=str(COOKIE_):
+           #         print("cookie RENEWED !")
+           #         REQUEST_("https://api.telegram.org/bot"+TOKEN_+"/sendMessage?chat_id="+CHAT_ID+"&parse_mode=Markdown&text=[········🔥MARKETS_TRACKER_BOT🔥········](https://t.me/MARKETS_SIGNALS) \n 🟢 COOKIE UPDATED SUCCESSFULLY  !  \n")
+           #         COOKIE_= os.environ.get("COOKIE")
                 cookie_dead_alert=False
 
 
@@ -1468,10 +1468,11 @@ class GET_CNDLSTICKS_CHART():
 
         if True :
                     response_check = self.detect_finished_run(self.db,self.param)
+                    print(response_check)
                     if response_check==None:
                         break
                     
-                    if adxdb[response_check["index"]] !=None and  adxdb[response_check["index"]] <self.adx_var_check:continue
+                    if adxdb[response_check["index"]] !=None and  adxdb[response_check["index"]] <self.adx_var_check:print("ADX BELOW VALUE");continue
 
                     print("BOOOOM")
                     picture_name=""
