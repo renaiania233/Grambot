@@ -1556,9 +1556,10 @@ class GET_CNDLSTICKS_CHART():
                         if pp==True:
                             j = dbass[self.higher_tf]
                             sti=liss[self.higher_tf]
-                            starter = GET_CNDLSTICKS_CHART(self.higher_tf,j,int(time.time())-sti,int(time.time())+ 3600*8,self.symbol,PARAM=None)
-                            sti = threading.Thread(target=starter.CHECK_FVG_AVAILABILITY,args=(db_manager,0,True,False,False,True))
-                            sti.start()
+                            starts = GET_CNDLSTICKS_CHART(self.higher_tf,j,int(time.time())-sti,int(time.time())+ 3600*8,self.symbol,PARAM=None)
+                            stis = threading.Thread(target=starts.CHECK_FVG_AVAILABILITY,args=(db_manager,0,True,False,False,True))
+                            stis.start()
+                            stis.join()
                     if response_check["direction"]=="bullish":
                         sl=float(response_check["bottom"])
                         entry=float(response_check["top"])
@@ -1574,9 +1575,10 @@ class GET_CNDLSTICKS_CHART():
                         if pp==True:
                             j = dbass[self.higher_tf]
                             sti=liss[self.higher_tf]
-                            starter = GET_CNDLSTICKS_CHART(self.higher_tf,j,int(time.time())-sti,int(time.time())+ 3600*8,self.symbol,PARAM=None)
-                            sti = threading.Thread(target=starter.CHECK_FVG_AVAILABILITY,args=(db_manager,0,True,False,False,True))
-                            sti.start()
+                            startb = GET_CNDLSTICKS_CHART(self.higher_tf,j,int(time.time())-sti,int(time.time())+ 3600*8,self.symbol,PARAM=None)
+                            stib = threading.Thread(target=startb.CHECK_FVG_AVAILABILITY,args=(db_manager,0,True,False,False,True))
+                            stib.start()
+                            stib.join()
                     rs = self.send_two_photos(TOKEN_,CHAT_ID,picture_name,htf_picture,caption=caption)
                     if rs["ok"]==True: 
                         if response_check not in ALREADY_ALERTED_TRADES:
