@@ -1528,8 +1528,8 @@ class GET_CNDLSTICKS_CHART():
                     print(response_check)
                     if response_check==None:
                         continue
-                    
-                    if adxdb[response_check["index"]] !=None and  adxdb[response_check["index"]] <self.adx_var_check:print("ADX BELOW VALUE");continue
+                    if self.adx_periode !=0:
+                        if adxdb[response_check["index"]] !=None and  adxdb[response_check["index"]] <self.adx_var_check:print("ADX BELOW VALUE");continue
 
                     print("BOOOOM")
                     picture_name=""
