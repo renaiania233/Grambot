@@ -19,7 +19,7 @@ from requests import session
 
 
 from matplotlib.patches import Rectangle
-TOKEN_ = os.environ.get("TELEGRAM_BOT_TOKEN2")
+TOKEN_ = os.environ.get("TELEGRAM_BOT_TOKEN")
 print(TOKEN_)
 CHAT_ID=os.environ.get("TELEGRAM_CHAT_ID")
 print(CHAT_ID)
