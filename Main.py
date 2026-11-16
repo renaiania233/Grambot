@@ -1581,7 +1581,7 @@ class GET_CNDLSTICKS_CHART():
                             stib.join()
                     rs = self.send_two_photos(TOKEN_,CHAT_ID,picture_name,htf_picture,caption=caption)
                     if rs["ok"]==True: 
-                        if response_check not in ALREADY_ALERTED_TRADES:
+                        #if response_check not in ALREADY_ALERTED_TRADES:
                             ALREADY_ALERTED_TRADES.append(id__)
                             with open("TRADES.json","w") as w :         
                                 db_trades[id__]={"TRADE-TYPE":trade_type,"PAIRE":self.symbol,"TIME-FRAME":self.tf,"ENTRY":math.trunc(entry*factor)/factor,"STOP-LOSS":math.trunc(sl*factor)/factor,"TP2":math.trunc(tp2*factor)/factor,"PR_min":self.price_min,"PR_max":self.price_max}
