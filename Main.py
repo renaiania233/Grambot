@@ -1223,7 +1223,7 @@ class GET_CNDLSTICKS_CHART():
             )
         return r.json()
      
-    def CHECK_FVG_AVAILABILITY(self,management,timing___,pic,result_byID=False,send_confirmation=False):
+    def CHECK_FVG_AVAILABILITY(self,management,timing___,pic,result_byID=False,send_confirmation=False,generate_only=False):
       already_alerted_started_ok =False
       self.db=[]
       ssxx = self.PREPARE_REQUEST()
@@ -1277,7 +1277,8 @@ class GET_CNDLSTICKS_CHART():
             print("lets execute ")
             spp = self.GET_MANUAL_PICTURE(type="CHART",signal="pic_{}".format(self.symbol),candles=self.db[len(self.db)-80:],entry_index=len(self.db[len(self.db)-80:]),entry_price=0,tp_price=0,sl_price=0,take_picture_only=True)
             print(spp)
-            if spp==True:
+            if spp==True: 
+                if generate_only==True:return
                                     
                               #      TOKEN = "8953744107:AAGT84f18dCY4Lwxnam1P_TixecJ9LHDuU8"
                                  #   CHAT_ID = "-1004324675339"
@@ -1555,7 +1556,7 @@ class GET_CNDLSTICKS_CHART():
                             j = dbass[self.higher_tf]
                             sti=liss[self.higher_tf]
                             starter = GET_CNDLSTICKS_CHART(self.higher_tf,j,int(time.time())-sti,int(time.time())+ 3600*8,self.symbol,PARAM=None)
-                            sti = threading.Thread(target=starter.CHECK_FVG_AVAILABILITY,args=(db_manager,0,True))
+                            sti = threading.Thread(target=starter.CHECK_FVG_AVAILABILITY,args=(db_manager,0,True,True))
                             sti.start()
                     if response_check["direction"]=="bullish":
                         sl=float(response_check["bottom"])
@@ -1573,7 +1574,7 @@ class GET_CNDLSTICKS_CHART():
                             j = dbass[self.higher_tf]
                             sti=liss[self.higher_tf]
                             starter = GET_CNDLSTICKS_CHART(self.higher_tf,j,int(time.time())-sti,int(time.time())+ 3600*8,self.symbol,PARAM=None)
-                            sti = threading.Thread(target=starter.CHECK_FVG_AVAILABILITY,args=(db_manager,0,True))
+                            sti = threading.Thread(target=starter.CHECK_FVG_AVAILABILITY,args=(db_manager,0,True,True))
                             sti.start()
                     rs = self.send_two_photos(TOKEN_,CHAT_ID,picture_name,htf_picture,caption=caption)
                     if rs["ok"]==True: 
