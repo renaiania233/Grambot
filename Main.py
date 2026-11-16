@@ -340,7 +340,7 @@ def MAIN_TELEGRAM_RESPONDER():
                 elif "show_result_for_trade_id" in msg :
                     try:
                         
-                        trade_id=int(msg.split()[1])
+                        trade_id=str(msg.split()[1])
                         print(trade_id)
                         if trade_id in list(db_trades.keys()) :
                             j = dbass[str(db_trades[trade_id]["TIME-FRAME"])]
