@@ -1468,6 +1468,7 @@ class GET_CNDLSTICKS_CHART():
 
         if True :
                     response_check = self.detect_finished_run(self.db,self.param)
+                    print("RESPONSE FVGS")
                     print(response_check)
                     if response_check==None:
                         break
