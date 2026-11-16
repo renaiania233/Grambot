@@ -450,9 +450,9 @@ class GET_CNDLSTICKS_CHART():
                     "start_idx": i,
                     "end_idx": j,
                     "finish_idx": j + 1,
-                    "start_ctm": candles[i]["ctm"],
-                    "end_ctm": candles[j]["ctm"],
-                    "finish_ctm": candles[j + 1]["ctm"],
+                    "start_ctm": candles[i]["time"],
+                    "end_ctm": candles[j]["time"],
+                    "finish_ctm": candles[j + 1]["time"],
                 })
             i = j + 1
      
@@ -499,10 +499,10 @@ class GET_CNDLSTICKS_CHART():
             "top": top,
             "bottom": bottom,
             "mid": (top + bottom) / 2,
-            "start_ctm": run[0]["ctm"],       # first candle of the series
-            "end_ctm": run[-1]["ctm"], 
+            "start_ctm": run[0]["time"],       # first candle of the series
+            "end_ctm": run[-1]["time"], 
             "index":self.db.index(run[-1]),       # last candle of the series
-            "finish_ctm": candles[-1]["ctm"], # the opposite candle that ended it
+            "finish_ctm": candles[-1]["time"], # the opposite candle that ended it
         }
      
     def PREPARE_REQUEST(self,confirmation=False):
