@@ -1198,7 +1198,7 @@ class GET_CNDLSTICKS_CHART():
 
  
  
-    def send_two_photos(token, chat_id, photo1, photo2, caption=""):
+    def send_two_photos(self,token, chat_id, photo1, photo2, caption=""):
         """
         Sends 2 local images as ONE album message with a caption.
         token   : your bot token from @BotFather
