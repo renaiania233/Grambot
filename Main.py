@@ -1278,7 +1278,7 @@ class GET_CNDLSTICKS_CHART():
             spp = self.GET_MANUAL_PICTURE(type="CHART",signal="pic_{}".format(self.symbol),candles=self.db[len(self.db)-80:],entry_index=len(self.db[len(self.db)-80:]),entry_price=0,tp_price=0,sl_price=0,take_picture_only=True)
             print(spp)
             if spp==True: 
-                if generate_only==True:return
+                                    if generate_only==True:return
                                     
                               #      TOKEN = "8953744107:AAGT84f18dCY4Lwxnam1P_TixecJ9LHDuU8"
                                  #   CHAT_ID = "-1004324675339"
