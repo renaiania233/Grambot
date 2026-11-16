@@ -1527,7 +1527,7 @@ class GET_CNDLSTICKS_CHART():
                     print("RESPONSE FVGS")
                     print(response_check)
                     if response_check==None:
-                        break
+                        continue
                     
                     if adxdb[response_check["index"]] !=None and  adxdb[response_check["index"]] <self.adx_var_check:print("ADX BELOW VALUE");continue
 
