@@ -1538,7 +1538,7 @@ class GET_CNDLSTICKS_CHART():
                     htf_picture="pic_{}.png".format(self.symbol)
                     caption=""
                     factor =10**6
-                    id__=response_check["end_ctm"]
+                    id__=str(response_check["end_ctm"])
                     trade_type=""
                     if id__ in ALREADY_ALERTED_TRADES:continue
                     if response_check["direction"]=="bearish":
