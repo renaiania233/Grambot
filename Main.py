@@ -183,13 +183,10 @@ indexed_db={"last_message":None}
 
 ##############################################################
 PRICE_ALERTS_DB=[]
-def PRICE_ALERT(paire,price,max_alerts=3,interval=60,data__=None,ping=False):
+def PRICE_ALERT(paire,price,max_alerts=3,interval=60,data__=None):
     already_alrtd=0
-    added=False
     reached=False
     updated_sync=False
-    print(paire)
-    print("fuckkkkkkkk")
     ws = websocket.create_connection(
         "wss://node1-app.litemarkets.com/cabinet/socket.io/?EIO=4&transport=websocket",
         header={
@@ -209,7 +206,7 @@ def PRICE_ALERT(paire,price,max_alerts=3,interval=60,data__=None,ping=False):
         sslopt={"cert_reqs": ssl.CERT_NONE},
         timeout=None
     )
-    ws.settimeout(10)
+    #ws.settimeout(10)
 
     try:
         # Engine.IO handshake
@@ -235,21 +232,26 @@ def PRICE_ALERT(paire,price,max_alerts=3,interval=60,data__=None,ping=False):
         #print("Subscribed to {}".format(paire))
 
         while True:
-            time.sleep(2)
-            if data__ not in PRICE_ALERTS_DB and added==True and ping==False and  reached==False:
+            while pause ==True:
+                time.sleep(5)
+                continue
+            time.sleep(5)
+            if data__ not in PRICE_ALERTS_DB  and  reached==False:
                 return 
             try:
                 response = ws.recv()
             except Exception as e :
-                time.sleep(5)
                 continue
                 #print("INVALID PAIRE REQUESTED !")
                 
                # return None
 
             if response == "2":
-                ws.send("3")
-                continue
+                try:
+                    ws.send("3")
+                except Exception as e :
+                    continue
+
 
             if not response.startswith("42"):
                 continue
@@ -268,19 +270,13 @@ def PRICE_ALERT(paire,price,max_alerts=3,interval=60,data__=None,ping=False):
                         "spread": data[5],
                         "extra": data[6]
                     }
-                    if ping==True:
-                        return  data[2]
-                    if data not in PRICE_ALERTS_DB and added==False:
-                        if data__ not in PRICE_ALERTS_DB:
-                            PRICE_ALERTS_DB.append(data__)
-                        updx= GITHUB_FILE(update=True,data=json.dumps(PRICE_ALERTS_DB),name="DB_WAITLIST_ALERTS")
-                        ssd= REQUEST_("https://api.telegram.org/bot"+TOKEN_+"/sendMessage?chat_id="+CHAT_ID+"&parse_mode=Markdown&text=[········🔥MARKETS_TRACKER_BOT🔥········](https://t.me/MARKETS_SIGNALS) \n✅ALERT ADDED INTO WAITLIST:\n-PAIRE: {}\n-PRICE: {}\n-MAX-ALERTS: {}\n-INTERVAL :{}\n➖➖➖➖➖➖".format(paire,price,max_alerts,interval))
-                        added=True
+                    
+
                     if price>=data__["CURRENT-PRICE"] :
                         if data[2]>=price or reached==True:
                                 reached=True
                                 already_alrtd+=1
-                                ssd= REQUEST_("https://api.telegram.org/bot"+TOKEN_+"/sendMessage?chat_id="+CHAT_ID+"&parse_mode=Markdown&text=[········🔥MARKETS_TRACKER_BOT🔥········](https://t.me/MARKETS_SIGNALS) \n✅ PRICE-ALERT FOR :\n➖ {} >= {} WAS REACHED NOW!\n➖CURRENT_PRICE: {}\n➖➖➖ALERT({}/{})➖➖➖".format(paire,price,data[2],already_alrtd,max_alerts))
+                                ssd= REQUEST_("https://api.telegram.org/bot"+TOKEN_+"/sendMessage?chat_id="+CHAT_ID+"&parse_mode=Markdown&text=[········🔥MARKETS_TRACKER_BOT🔥········](https://t.me/MARKETS_SIGNALS) \n🔔➖➖➖PRICE-ALERT➖➖➖🔔\n➖ {} >= {} WAS REACHED NOW!\n➖CURRENT_PRICE: {}\n➖➖➖ALERT({}/{})➖➖➖".format(paire,price,data[2],already_alrtd,max_alerts))
                                 time.sleep(interval)
                                 if updated_sync==False:
                                     updated_sync=True
@@ -291,7 +287,7 @@ def PRICE_ALERT(paire,price,max_alerts=3,interval=60,data__=None,ping=False):
                         if data[2]<=price or reached==True:
                                 reached=True
                                 already_alrtd+=1
-                                ssd= REQUEST_("https://api.telegram.org/bot"+TOKEN_+"/sendMessage?chat_id="+CHAT_ID+"&parse_mode=Markdown&text=[········🔥MARKETS_TRACKER_BOT🔥········](https://t.me/MARKETS_SIGNALS) \n✅ PRICE-ALERT FOR :\n➖ {} <= {} WAS REACHED NOW!\n➖CURRENT_PRICE: {}\n➖➖➖ALERT({}/{})➖➖➖".format(paire,price,data[2],already_alrtd,max_alerts))
+                                ssd= REQUEST_("https://api.telegram.org/bot"+TOKEN_+"/sendMessage?chat_id="+CHAT_ID+"&parse_mode=Markdown&text=[········🔥MARKETS_TRACKER_BOT🔥········](https://t.me/MARKETS_SIGNALS) \n🔔➖➖➖PRICE-ALERT➖➖➖🔔\n➖ {} <= {} WAS REACHED NOW!\n➖CURRENT_PRICE: {}\n➖➖➖ALERT({}/{})➖➖➖".format(paire,price,data[2],already_alrtd,max_alerts))
                                 time.sleep(interval)
                                 if updated_sync==False:
                                     updated_sync=True
@@ -312,8 +308,11 @@ def PRICE_ALERT(paire,price,max_alerts=3,interval=60,data__=None,ping=False):
                 print(e)
                 continue
 
-    except KeyboardInterrupt:
-        print("Stopped")
+    except Exception as e :#KeyboardInterrupt:
+        print(e)
+        print("RELUNCHING FUNCTION FROM 0")
+        PRICE_ALERT(paire,price,max_alerts=max_alerts,interval=interval,data__=data__)
+        return
 
     finally:
         ws.close()
@@ -494,20 +493,22 @@ def MAIN_TELEGRAM_RESPONDER():
                             #if targetted["RUNNING"]==True:
                                 del db_manager[index]
                                 ssd= REQUEST_("https://api.telegram.org/bot"+TOKEN_+"/sendMessage?chat_id="+CHAT_ID+"&parse_mode=Markdown&text=[········🔥MARKETS_TRACKER_BOT🔥········](https://t.me/MARKETS_SIGNALS) \n  🚫 {} KILLED FROM DB-LISTENNERS \n  ".format(str(targetted)))
-                        
+                                
                         except IndexError :
                             keyboard = {
                                 "inline_keyboard": [
                                     [
                                         {
                                             "text": "SHOW-ACTIVE-LISTENNERS",
-                                            "callback_data": "show\\_current\\_listenners"
+                                            "callback_data": "show_current_listenners"
                                         }
                                     ]
                                 ]
                             }
-                            ssd= REQUEST_("https://api.telegram.org/bot"+TOKEN_+"/sendMessage?chat_id="+CHAT_ID+"&parse_mode=Markdown&reply_markup="+json.dumps(keyboard)+"&text=[········🔥MARKETS_TRACKER_BOT🔥········](https://t.me/MARKETS_SIGNALS) \n  ❌ ({}) NOT IN DB-LISTENNERS \n-CLICK HERE TO SHOW ACTIVE-LISTENNERS\n  ".format(str(index)))
-
+                            
+                            ssd= REQUEST_("https://api.telegram.org/bot"+TOKEN_+"/sendMessage?chat_id="+CHAT_ID+"&reply_markup="+json.dumps(keyboard)+"&text=[········🔥MARKETS_TRACKER_BOT🔥········](https://t.me/MARKETS_SIGNALS) \n  ❌ ({}) NOT IN DB-LISTENNERS \n-CLICK HERE TO SHOW ACTIVE-LISTENNERS\n  ".format(str(index)))
+                            message_id=ssd.json()["result"]["message_id"]
+                            ssd = REQUEST_("https://api.telegram.org/bot"+TOKEN_+"/editMessageReplyMarkup?chat_id="+CHAT_ID+"&message_id="+message_id+"&reply_markup="+json.dumps(keyboard))
                     #UNBLOCK_MESSAGES()
                         
 
@@ -536,16 +537,23 @@ def MAIN_TELEGRAM_RESPONDER():
                     except Exception as e :
                         print("erroiii"+str(e))
                         ssd= REQUEST_("https://api.telegram.org/bot"+TOKEN_+"/sendMessage?chat_id="+CHAT_ID+"&parse_mode=Markdown&text=[········🔥MARKETS_TRACKER_BOT🔥········](https://t.me/MARKETS_SIGNALS) \n  ❌ INVALID COMMAND/ARGUMENTS : COMMAND <TRADE-ID>  ")
-                elif "pause_all_listenners" in msg :
+                elif "pause_server" in msg :
                     for listener_ in db_manager:
                         listener_["RUNNING"]=False
+                    for alert in PRICE_ALERTS_DB:
+                        alert["ACTIVE"]=False
+                    updx= GITHUB_FILE(update=True,data=json.dumps(PRICE_ALERTS_DB),name="DB_WAITLIST_ALERTS")
                     pause=True
-                    ssd= REQUEST_("https://api.telegram.org/bot"+TOKEN_+"/sendMessage?chat_id="+CHAT_ID+"&parse_mode=Markdown&text=[········🔥MARKETS_TRACKER_BOT🔥········](https://t.me/MARKETS_SIGNALS) \n✅ ALL CURRENT ACTIVE LISTENNERS ARE CURRENTLY SUSPENDED ! ")
-                elif "resume_all_listenners" in msg:
+
+                    ssd= REQUEST_("https://api.telegram.org/bot"+TOKEN_+"/sendMessage?chat_id="+CHAT_ID+"&parse_mode=Markdown&text=[········🔥MARKETS_TRACKER_BOT🔥········](https://t.me/MARKETS_SIGNALS) \n✅ ALL CURRENT ACTIVE SERVICES CURRENTLY SUSPENDED ! ")
+                elif "resume_server" in msg:
                     for listener_ in db_manager:
                         listener_["RUNNING"]=True
+                    for alert in PRICE_ALERTS_DB:
+                        alert["ACTIVE"]=True
+                    updx= GITHUB_FILE(update=True,data=json.dumps(PRICE_ALERTS_DB),name="DB_WAITLIST_ALERTS")
                     pause=False
-                    ssd= REQUEST_("https://api.telegram.org/bot"+TOKEN_+"/sendMessage?chat_id="+CHAT_ID+"&parse_mode=Markdown&text=[········🔥MARKETS_TRACKER_BOT🔥········](https://t.me/MARKETS_SIGNALS) \n✅ ALL CURRENT ACTIVE LISTENNERS ARE CURRENTLY RELUNCHED SUCCESSFULLY ! ")
+                    ssd= REQUEST_("https://api.telegram.org/bot"+TOKEN_+"/sendMessage?chat_id="+CHAT_ID+"&parse_mode=Markdown&text=[········🔥MARKETS_TRACKER_BOT🔥········](https://t.me/MARKETS_SIGNALS) \n✅ ALL CURRENT ACTIVE SERVICES ARE CURRENTLY RELUNCHED SUCCESSFULLY ! ")
                 elif "set_price_alert" in msg:
                     if len(msg.split())==5 or len(msg.split())==3:
                         paire=msg.split()[1]
@@ -566,17 +574,25 @@ def MAIN_TELEGRAM_RESPONDER():
                     strt=GET_CNDLSTICKS_CHART("60","60 m",int(time.time()),int(time.time())+8*3600,paire,0,0,0,0,0 ,0)
                     availability= strt.PREPARE_REQUEST()
                     print (availability)
+
                     if availability==True:
                         current_price_= float(strt.db[-1]["close"])
-                        print(current_price_)
+                        ppld={"PAIRE":paire,"PRICE":price,"ACTIVE":True,"CURRENT-PRICE":float(current_price_),"MAX-ALERTS":max_alerts,"INTERVAL":interval}
+                        if ppld not in PRICE_ALERTS_DB:
+                            PRICE_ALERTS_DB.append(ppld)
+                            updx= GITHUB_FILE(update=True,data=json.dumps(PRICE_ALERTS_DB),name="DB_WAITLIST_ALERTS")
+                            ssd= REQUEST_("https://api.telegram.org/bot"+TOKEN_+"/sendMessage?chat_id="+CHAT_ID+"&parse_mode=Markdown&text=[········🔥MARKETS_TRACKER_BOT🔥········](https://t.me/MARKETS_SIGNALS) \n✅ALERT ADDED INTO WAITLIST:\n-PAIRE: {}\n-PRICE: {}\n-MAX-ALERTS: {}\n-INTERVAL :{}\n➖➖➖➖➖➖".format(paire,price,max_alerts,interval))
+                            print(current_price_)
+                        else:
+                            ssd= REQUEST_("https://api.telegram.org/bot"+TOKEN_+"/sendMessage?chat_id="+CHAT_ID+"&parse_mode=Markdown&text=[········🔥MARKETS_TRACKER_BOT🔥········](https://t.me/MARKETS_SIGNALS) \n🚫  REQUESTED ALERT WAS ALREADY LUCNHED ON THE DB ! \n  ")
                     else:
                     ###################
                     #current_price_=PRICE_ALERT(paire,price,max_alerts,interval,data__=None,ping=True)
                     #if current_price_==None:
                         ssd= REQUEST_("https://api.telegram.org/bot"+TOKEN_+"/sendMessage?chat_id="+CHAT_ID+"&parse_mode=Markdown&text=[········🔥MARKETS_TRACKER_BOT🔥········](https://t.me/MARKETS_SIGNALS) \n  ❌ {} INVALID PAIRE !\nUNABLE TO SET PRICE ALERT FOR THIS PAIRE!")
                         continue
-                    ppld={"PAIRE":paire,"PRICE":price,"CURRENT-PRICE":float(current_price_),"MAX-ALERTS":max_alerts,"INTERVAL":interval}
-                    luncher=threading.Thread(target=PRICE_ALERT,args=(paire,price,max_alerts,interval,ppld,False))
+                    
+                    luncher=threading.Thread(target=PRICE_ALERT,args=(paire,price,max_alerts,interval,ppld))
                     luncher .start()
                 elif "remove_price_alert" in msg:
                     if len(msg.split()) < 2 :
@@ -587,7 +603,9 @@ def MAIN_TELEGRAM_RESPONDER():
                                 targetted= PRICE_ALERTS_DB[index]
                             #if targetted["RUNNING"]==True:
                                 del PRICE_ALERTS_DB[index]
-                                ssd= REQUEST_("https://api.telegram.org/bot"+TOKEN_+"/sendMessage?chat_id="+CHAT_ID+"&parse_mode=Markdown&text=[········🔥MARKETS_TRACKER_BOT🔥········](https://t.me/MARKETS_SIGNALS) \n  🚫 {} KILLED FROM WAITLIST ALERTS \n  ".format(str(targetted)))
+                                updx= GITHUB_FILE(update=True,data=json.dumps(PRICE_ALERTS_DB),name="DB_WAITLIST_ALERTS")
+                                ssd= REQUEST_("https://api.telegram.org/bot"+TOKEN_+"/sendMessage?chat_id="+CHAT_ID+"&parse_mode=Markdown&text=[········🔥MARKETS_TRACKER_BOT🔥········](https://t.me/MARKETS_SIGNALS) \n  🚫 {} REMOVED FROM WAITLIST ALERTS \n  ".format(str(targetted)))
+                                message_id=ssd.json()["result"]["message_id"]
                         ##############
                         
                         ##############
@@ -624,18 +642,19 @@ def MAIN_TELEGRAM_RESPONDER():
                  #           )
 
                  #           ssd = REQUEST_(url)
-                            ssd= REQUEST_("https://api.telegram.org/bot"+TOKEN_+"/sendMessage?chat_id="+CHAT_ID+"&parse_mode=Markdown&reply_markup="+json.dumps(keyboard)+"&text=[········🔥MARKETS_TRACKER_BOT🔥········](https://t.me/MARKETS_SIGNALS) \n  ❌ ({}) NOT IN WAITLIST ALERTS \n-CLICK HERE TO SHOW LIST-ALERTS-DB\n  ".format(str(index)))
-                            keyboard = {
-                                "inline_keyboard": [
-                                    [
-                                        {
-                                            "text": "SET-PRICE-ALERT {} {} ".format("ETHUSD","3535.6"),
-                                            "callback_data": "set_price_alert {} {} {} {}".format("ETHUSD","2345.5",3,60)
-                                        }
-                                    ]
-                                ]
-                            }
-                            ssd= REQUEST_("https://api.telegram.org/bot"+TOKEN_+"/sendMessage?chat_id="+CHAT_ID+"&reply_markup="+json.dumps(keyboard)+"&text=➖➖➖➖➖➖➖➖➖")
+                            ssd = REQUEST_("https://api.telegram.org/bot"+TOKEN_+"/editMessageReplyMarkup?chat_id="+CHAT_ID+"&message_id="+message_id+"&reply_markup="+json.dumps(keyboard))
+                            #ssd= REQUEST_("https://api.telegram.org/bot"+TOKEN_+"/sendMessage?chat_id="+CHAT_ID+"&parse_mode=Markdown&reply_markup="+json.dumps(keyboard)+"&text=[········🔥MARKETS_TRACKER_BOT🔥········](https://t.me/MARKETS_SIGNALS) \n  ❌ ({}) NOT IN WAITLIST ALERTS \n-CLICK HERE TO SHOW LIST-ALERTS-DB\n  ".format(str(index)))
+                            #keyboard = {
+                            #    "inline_keyboard": [
+                            #        [
+                            #            {
+                            #                "text": "SET-PRICE-ALERT {} {} ".format("ETHUSD","3535.6"),
+                            #                "callback_data": "set_price_alert {} {} {} {}".format("ETHUSD","2345.5",3,60)
+                            #            }
+                            #        ]
+                            #    ]
+                            #}
+                            #ssd= REQUEST_("https://api.telegram.org/bot"+TOKEN_+"/sendMessage?chat_id="+CHAT_ID+"&reply_markup="+json.dumps(keyboard)+"&text=➖➖➖➖➖➖➖➖➖")
                 elif "show_waitlist_price_alerts" in msg :
                     msg = ""#json.dumps(db_manager)#.replace('}, "','}, \n\n"')
                     for index , runner in enumerate(PRICE_ALERTS_DB):
@@ -2000,21 +2019,22 @@ with open("TRADES.json","r") as r :
 response1= GITHUB_FILE(update=False,data=None,name="db")
 with open("db.json","w") as w :
         w.write(json.dumps(response1))
-#####################################
-response2= GITHUB_FILE(update=False,data=None,name="DB_WAITLIST_ALERTS")
-PRICE_ALERTS_DB=response2
-for  alert_ in PRICE_ALERTS_DB:
-    luncher=threading.Thread(target=PRICE_ALERT,args=(alert_["PAIRE"],alert_["PRICE"],alert_["MAX-ALERTS"],alert_["INTERVAL"],alert_,False))
-    luncher .start()
+
 ####################################
 with open("db.json","r") as r :
     dito =json.loads(r.read())
     db_manager=dito
     print(db_manager)
     for runner  in dito :
+            if runner["RUNNING"]==True:pause=True
             sti=liss[runner["TIMEFRAME"]]
             starter = GET_CNDLSTICKS_CHART(runner["TIMEFRAME"],runner["TF-NAME"],int(time.time())-sti,int(time.time())+8*3600,runner["PAIRE"],runner["SETTINGS"],runner["MIN-SL"],runner["MAX-SL"],runner["HIGHER-TF"],runner["ADX-LTF-PERIODE"],runner["ADX-LTF-CHK"])
             sti = threading.Thread(target=starter.CHECK_FVG_AVAILABILITY,args=(runner,runner["TIMING"],False))
             sti.start()
-
+#####################################
+response2= GITHUB_FILE(update=False,data=None,name="DB_WAITLIST_ALERTS")
+PRICE_ALERTS_DB=response2
+for  alert_ in PRICE_ALERTS_DB:
+    luncher=threading.Thread(target=PRICE_ALERT,args=(alert_["PAIRE"],alert_["PRICE"],alert_["MAX-ALERTS"],alert_["INTERVAL"],alert_))
+    luncher .start()
 MAIN_TELEGRAM_RESPONDER()
