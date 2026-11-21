@@ -366,7 +366,8 @@ def MAIN_TELEGRAM_RESPONDER():
             #print("--------------------------------------------")
             if "callback_query" not in str(ssd):
                 try:
-                    checkpoint = (ssd["result"][-1]["message"]["date"])
+                    checkpoint = (ssd["result"]["update_id"])#[-1]["message"]["date"])
+
                 except:
                     print("currently there is no recent message on thrr group ")
                     time.sleep(10)
@@ -374,7 +375,8 @@ def MAIN_TELEGRAM_RESPONDER():
             else:
                 #####################################
                     try:
-                        checkpoint = ssd["result"][-1]["callback_query"]["message"]["date"]
+                        checkpoint = ssd["result"]["update_id"]#[-1]["callback_query"]["message"]["date"]
+                        answer_button= REQUEST_("https://api.telegram.org/bot"+TOKEN_+"/answerCallbackQuery?callback_query_id="+str(ssd["result"]["callback_query"]["id"]))
                     except:
                         print("currently there is no recent message on thrr group ")
                         time.sleep(10)
@@ -382,8 +384,8 @@ def MAIN_TELEGRAM_RESPONDER():
                     ####################################
             #print(str(checkpoint) +"  "+ssd["result"][-1]["message"]["text"])
             #print(indexed_db["last_message"])
-            if indexed_db["last_message"]==None:indexed_db["last_message"]=checkpoint; time.sleep(10);continue
-            elif indexed_db["last_message"]!=checkpoint:
+            #if indexed_db["last_message"]==None:indexed_db["last_message"]=checkpoint; time.sleep(10);continue
+            if indexed_db["last_message"]!=checkpoint:
                 indexed_db["last_message"]=checkpoint
                 #BLOCK_MESSAGES()
                 if "callback_query" not in str(ssd):
