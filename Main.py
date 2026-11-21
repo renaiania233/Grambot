@@ -629,8 +629,8 @@ def MAIN_TELEGRAM_RESPONDER():
                                 "inline_keyboard": [
                                     [
                                         {
-                                            "text": "SET-PRICE-ALERT {} {} ".format("XAUUSD","3535.6"),
-                                            "callback_data": "set_price_alert {} {} {} {}".format("XAUUSD","2345.5",3,60)
+                                            "text": "SET-PRICE-ALERT {} {} ".format("ETHUSD","3535.6"),
+                                            "callback_data": "set_price_alert {} {} {} {}".format("ETHUSD","2345.5",3,60)
                                         }
                                     ]
                                 ]
