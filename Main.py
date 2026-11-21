@@ -539,9 +539,9 @@ def MAIN_TELEGRAM_RESPONDER():
                             [
                                 {
                                     "text": "ALERT AT XAUUSD 3737.05",
-                                    "callback_data": f"alert|XAUUSD|3737.05"
+                                    "callback_data": "alert|XAUUSD|3737.05"
                                 }]]}
-                            ssd= REQUEST_("https://api.telegram.org/bot"+TOKEN_+"/sendMessage?reply_markup="+str(keyboard)+"chat_id="+CHAT_ID+"&parse_mode=Markdown&text=[········🔥MARKETS_TRACKER_BOT🔥········](https://t.me/MARKETS_SIGNALS) \n  ❌ ({}) NOT IN WAITLIST ALERTS \n-run /show\\_waitlist\\_price\\_alerts to show WAITLIST INDEXES\n  ".format(str(index)))
+                            ssd= REQUEST_("https://api.telegram.org/bot"+TOKEN_+"/sendMessage?reply_markup="+str(keyboard)+"&chat_id="+CHAT_ID+"&parse_mode=Markdown&text=[········🔥MARKETS_TRACKER_BOT🔥········](https://t.me/MARKETS_SIGNALS) \n  ❌ ({}) NOT IN WAITLIST ALERTS \n-run /show\\_waitlist\\_price\\_alerts to show WAITLIST INDEXES\n  ".format(str(index)))
 
                 elif "show_waitlist_price_alerts" in msg :
                     msg = ""#json.dumps(db_manager)#.replace('}, "','}, \n\n"')
