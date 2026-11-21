@@ -499,20 +499,20 @@ def MAIN_TELEGRAM_RESPONDER():
                                 "inline_keyboard": [
                                     [
                                         {
-                                            "text": "SHOW-ACTIVE-LISTENNERS",
-                                            "callback_data": "show_current_listenners"
+                                            "text": "🟢SHOW-ACTIVE-LISTENNERS🟢",
+                                            "callback_data": "/show_current_listenners"
                                         }
                                     ]
                                 ]
                             }
                             
-                            ssd= REQUEST_("https://api.telegram.org/bot"+TOKEN_+"/sendMessage?chat_id="+CHAT_ID+"&reply_markup="+json.dumps(keyboard)+"&text=[········🔥MARKETS_TRACKER_BOT🔥········](https://t.me/MARKETS_SIGNALS) \n  ❌ ({}) NOT IN DB-LISTENNERS \n-CLICK HERE TO SHOW ACTIVE-LISTENNERS\n  ".format(str(index)))
+                            ssd= REQUEST_("https://api.telegram.org/bot"+TOKEN_+"/sendMessage?chat_id="+CHAT_ID+"&parse_mode=Markdown&text=[········🔥MARKETS_TRACKER_BOT🔥········](https://t.me/MARKETS_SIGNALS) \n  ❌ ({}) NOT IN DB-LISTENNERS \n-CLICK HERE TO SHOW ACTIVE-LISTENNERS\n  ".format(str(index)))
                             message_id=str(ssd.json()["result"]["message_id"])
                             ssd = REQUEST_("https://api.telegram.org/bot"+TOKEN_+"/editMessageReplyMarkup?chat_id="+CHAT_ID+"&message_id="+message_id+"&reply_markup="+json.dumps(keyboard))
                     #UNBLOCK_MESSAGES()
                         
 
-                elif "show_result_for_trade_id" in msg :
+                elif "/show_result_for_trade_id" in msg :
                     try:
                         
                         trade_id=str(msg.split()[1])
@@ -537,7 +537,7 @@ def MAIN_TELEGRAM_RESPONDER():
                     except Exception as e :
                         print("erroiii"+str(e))
                         ssd= REQUEST_("https://api.telegram.org/bot"+TOKEN_+"/sendMessage?chat_id="+CHAT_ID+"&parse_mode=Markdown&text=[········🔥MARKETS_TRACKER_BOT🔥········](https://t.me/MARKETS_SIGNALS) \n  ❌ INVALID COMMAND/ARGUMENTS : COMMAND <TRADE-ID>  ")
-                elif "pause_server" in msg :
+                elif "/pause_server" in msg :
                     for listener_ in db_manager:
                         listener_["RUNNING"]=False
                     for alert in PRICE_ALERTS_DB:
@@ -546,7 +546,7 @@ def MAIN_TELEGRAM_RESPONDER():
                     pause=True
 
                     ssd= REQUEST_("https://api.telegram.org/bot"+TOKEN_+"/sendMessage?chat_id="+CHAT_ID+"&parse_mode=Markdown&text=[········🔥MARKETS_TRACKER_BOT🔥········](https://t.me/MARKETS_SIGNALS) \n✅ ALL CURRENT ACTIVE SERVICES CURRENTLY SUSPENDED ! ")
-                elif "resume_server" in msg:
+                elif "/resume_server" in msg:
                     for listener_ in db_manager:
                         listener_["RUNNING"]=True
                     for alert in PRICE_ALERTS_DB:
@@ -554,7 +554,7 @@ def MAIN_TELEGRAM_RESPONDER():
                     updx= GITHUB_FILE(update=True,data=json.dumps(PRICE_ALERTS_DB),name="DB_WAITLIST_ALERTS")
                     pause=False
                     ssd= REQUEST_("https://api.telegram.org/bot"+TOKEN_+"/sendMessage?chat_id="+CHAT_ID+"&parse_mode=Markdown&text=[········🔥MARKETS_TRACKER_BOT🔥········](https://t.me/MARKETS_SIGNALS) \n✅ ALL CURRENT ACTIVE SERVICES ARE CURRENTLY RELUNCHED SUCCESSFULLY ! ")
-                elif "set_price_alert" in msg:
+                elif "/set_price_alert" in msg:
                     if len(msg.split())==5 or len(msg.split())==3:
                         paire=msg.split()[1]
                         print(paire)
@@ -594,7 +594,7 @@ def MAIN_TELEGRAM_RESPONDER():
                     
                     luncher=threading.Thread(target=PRICE_ALERT,args=(paire,price,max_alerts,interval,ppld))
                     luncher .start()
-                elif "remove_price_alert" in msg:
+                elif "/remove_price_alert" in msg:
                     if len(msg.split()) < 2 :
                         ssd= REQUEST_("https://api.telegram.org/bot"+TOKEN_+"/sendMessage?chat_id="+CHAT_ID+"&parse_mode=Markdown&text=[········🔥MARKETS_TRACKER_BOT🔥········](https://t.me/MARKETS_SIGNALS) \n🚫  NO ENOUGH PARAMETERS ,CHECK THIS FORM:  remove_price_alert <INDEX[0,1,2,3....]> \n  ")
                     else:
@@ -613,8 +613,8 @@ def MAIN_TELEGRAM_RESPONDER():
                                 "inline_keyboard": [
                                     [
                                         {
-                                            "text": "SHOW-WAITLIST-ALERTS",
-                                            "callback_data": "show_waitlist_price_alerts"
+                                            "text": "🔔SHOW-WAITLIST-ALERTS🔔",
+                                            "callback_data": "/show_waitlist_price_alerts"
                                         }
                                     ]
                                 ]
@@ -657,7 +657,7 @@ def MAIN_TELEGRAM_RESPONDER():
                             #    ]
                             #}
                             #ssd= REQUEST_("https://api.telegram.org/bot"+TOKEN_+"/sendMessage?chat_id="+CHAT_ID+"&reply_markup="+json.dumps(keyboard)+"&text=➖➖➖➖➖➖➖➖➖")
-                elif "show_waitlist_price_alerts" in msg :
+                elif "/show_waitlist_price_alerts" in msg :
                     msg = ""#json.dumps(db_manager)#.replace('}, "','}, \n\n"')
                     for index , runner in enumerate(PRICE_ALERTS_DB):
                         msg+="{})  {} \n\n".format(index,runner)
@@ -1869,19 +1869,21 @@ class GET_CNDLSTICKS_CHART():
                             stib.join()
                     rs = self.send_two_photos(TOKEN_,CHAT_ID,picture_name,htf_picture,caption=caption)
                     if rs["ok"]==True: 
+                            message_id = str(rs["result"][0]["message_id"])
                         #if response_check not in ALREADY_ALERTED_TRADES:
                             ######################################################################
                             keyboard = {
                                 "inline_keyboard": [
                                     [
                                         {
-                                            "text": "SET-ALERT {} {} ".format(self.symbol,math.trunc(entry*factor)/factor),
-                                            "callback_data": "set_price_alert {} {} {} {}".format(self.symbol,math.trunc(entry*factor)/factor,3,60)
+                                            "text": "🔔SET-ALERT {} {} 🔔".format(self.symbol,math.trunc(entry*factor)/factor),
+                                            "callback_data": "/set_price_alert {} {} {} {}".format(self.symbol,math.trunc(entry*factor)/factor,3,60)
                                         }
                                     ]
                                 ]
                             }
-                            ssd= REQUEST_("https://api.telegram.org/bot"+TOKEN_+"/sendMessage?chat_id="+CHAT_ID+"&reply_markup="+json.dumps(keyboard)+"&text=➖➖➖➖➖➖➖➖➖")
+                            ssd = REQUEST_("https://api.telegram.org/bot"+TOKEN_+"/editMessageReplyMarkup?chat_id="+CHAT_ID+"&message_id="+message_id+"&reply_markup="+json.dumps(keyboard))
+                            #ssd= REQUEST_("https://api.telegram.org/bot"+TOKEN_+"/sendMessage?chat_id="+CHAT_ID+"&reply_markup="+json.dumps(keyboard)+"&text=➖➖➖➖➖➖➖➖➖")
                             ###########################################################################
                             ALREADY_ALERTED_TRADES.append(id__)
                             with open("TRADES.json","w") as w :         
