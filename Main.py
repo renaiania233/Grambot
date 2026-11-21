@@ -289,7 +289,8 @@ def PRICE_ALERT(paire,price,max_alerts=3,interval=60,data__=None,already_alrtd=0
                         if data[2]>=price or reached==True:
                                 reached=True
                                 already_alrtd+=1
-                                ssd= REQUEST_("https://api.telegram.org/bot"+TOKEN_+"/sendMessage?chat_id="+CHAT_ID+"&parse_mode=Markdown&text=[········🔥MARKETS_TRACKER_BOT🔥········](https://t.me/MARKETS_SIGNALS) \n🔔➖➖➖PRICE-ALERT➖➖➖🔔\n➖ {} >= {} WAS REACHED NOW!\n➖CURRENT_PRICE: {}\n➖➖➖ALERT({}/{})➖➖➖".format(paire,price,data[2],already_alrtd,max_alerts))
+                                ssd= REQUEST_("https://api.telegram.org/bot"+TOKEN_+"/sendMessage?chat_id="+CHAT_ID+"&parse_mode=Markdown&text=[········🔥MARKETS_TRACKER_BOT🔥········](https://t.me/MARKETS_SIGNALS) \n🔔➖➖➖PRICE-ALERT➖➖➖🔔\n➖ {} >= {} WAS REACHED NOW!\n➖CURRENT-PRICE: {}\n➖➖➖ALERT({}/{})➖➖➖".format(paire,price,data[2],already_alrtd,max_alerts))
+                                print(ssd.text)
                                 time.sleep(interval)
                                 if updated_sync==False:
                                     updated_sync=True
@@ -300,7 +301,8 @@ def PRICE_ALERT(paire,price,max_alerts=3,interval=60,data__=None,already_alrtd=0
                         if data[2]<=price or reached==True:
                                 reached=True
                                 already_alrtd+=1
-                                ssd= REQUEST_("https://api.telegram.org/bot"+TOKEN_+"/sendMessage?chat_id="+CHAT_ID+"&parse_mode=Markdown&text=[········🔥MARKETS_TRACKER_BOT🔥········](https://t.me/MARKETS_SIGNALS) \n🔔➖➖➖PRICE-ALERT➖➖➖🔔\n➖ {} <= {} WAS REACHED NOW!\n➖CURRENT_PRICE: {}\n➖➖➖ALERT({}/{})➖➖➖".format(paire,price,data[2],already_alrtd,max_alerts))
+                                ssd= REQUEST_("https://api.telegram.org/bot"+TOKEN_+"/sendMessage?chat_id="+CHAT_ID+"&parse_mode=Markdown&text=[········🔥MARKETS_TRACKER_BOT🔥········](https://t.me/MARKETS_SIGNALS) \n🔔➖➖➖PRICE-ALERT➖➖➖🔔\n➖ {} <= {} WAS REACHED NOW!\n➖CURRENT-PRICE: {}\n➖➖➖ALERT({}/{})➖➖➖".format(paire,price,data[2],already_alrtd,max_alerts))
+                                print(ssd.text)
                                 time.sleep(interval)
                                 if updated_sync==False:
                                     updated_sync=True
@@ -597,7 +599,7 @@ def MAIN_TELEGRAM_RESPONDER():
                         if ppld not in PRICE_ALERTS_DB:
                             PRICE_ALERTS_DB.append(ppld)
                             updx= GITHUB_FILE(update=True,data=json.dumps(PRICE_ALERTS_DB),name="DB_WAITLIST_ALERTS")
-                            ssd= REQUEST_("https://api.telegram.org/bot"+TOKEN_+"/sendMessage?chat_id="+CHAT_ID+"&parse_mode=Markdown&text=[········🔥MARKETS_TRACKER_BOT🔥········](https://t.me/MARKETS_SIGNALS) \n✅ALERT ADDED INTO WAITLIST:\n-PAIRE: {}\n-PRICE: {}\n-MAX-ALERTS: {}\n-INTERVAL :{}\n➖➖➖➖➖➖".format(paire,price,max_alerts,interval))
+                            ssd= REQUEST_("https://api.telegram.org/bot"+TOKEN_+"/sendMessage?chat_id="+CHAT_ID+"&parse_mode=Markdown&text=[········🔥MARKETS_TRACKER_BOT🔥········](https://t.me/MARKETS_SIGNALS) \n✅ALERT ADDED INTO WAITLIST:\n-PAIRE: {}\n-PRICE: {}\n-MAX-ALERTS: {}\n-INTERVAL :{}\n-SET-WHEN-PRICE: {}\n➖➖➖➖➖➖".format(paire,price,max_alerts,interval,current_price_))
                             print(current_price_)
                         else:
                             ssd= REQUEST_("https://api.telegram.org/bot"+TOKEN_+"/sendMessage?chat_id="+CHAT_ID+"&parse_mode=Markdown&text=[········🔥MARKETS_TRACKER_BOT🔥········](https://t.me/MARKETS_SIGNALS) \n🚫  REQUESTED ALERT WAS ALREADY LUCNHED ON THE DB ! \n  ")
