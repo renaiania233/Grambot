@@ -16,6 +16,7 @@ matplotlib.use("Agg")
 import matplotlib.pyplot as plt
 import math
 from requests import session
+import urllib.parse
 
 
 from matplotlib.patches import Rectangle
@@ -535,13 +536,38 @@ def MAIN_TELEGRAM_RESPONDER():
                         ##############
                         except IndexError :
                             keyboard = {
-                        "inline_keyboard": [
-                            [
-                                {
-                                    "text": "ALERT AT XAUUSD 3737.05",
-                                    "callback_data": "alert|XAUUSD|3737.05"
-                                }]]}
-                            ssd= REQUEST_("https://api.telegram.org/bot"+TOKEN_+"/sendMessage?reply_markup="+str(keyboard)+"&chat_id="+CHAT_ID+"&parse_mode=Markdown&text=[········🔥MARKETS_TRACKER_BOT🔥········](https://t.me/MARKETS_SIGNALS) \n  ❌ ({}) NOT IN WAITLIST ALERTS \n-run /show\\_waitlist\\_price\\_alerts to show WAITLIST INDEXES\n  ".format(str(index)))
+                                "inline_keyboard": [
+                                    [
+                                        {
+                                            "text": "ALERT AT XAUUSD 3737.05",
+                                            "callback_data": "alert|XAUUSD|3737.05"
+                                        }
+                                    ]
+                                ]
+                            }
+
+                            text = (
+                                "[········🔥MARKETS_TRACKER_BOT🔥········](https://t.me/MARKETS_SIGNALS)\n"
+                                "❌ ({}) NOT IN WAITLIST ALERTS\n"
+                                "Run /show\\_waitlist\\_price\\_alerts to show WAITLIST INDEXES"
+                            ).format(index)
+
+                            params = {
+                                "chat_id": CHAT_ID,
+                                "parse_mode": "Markdown",
+                                "text": text,
+                                "reply_markup": json.dumps(keyboard)
+                            }
+
+                            url = (
+                                "https://api.telegram.org/bot"
+                                + TOKEN_
+                                + "/sendMessage?"
+                                + urllib.parse.urlencode(params)
+                            )
+
+                            ssd = REQUEST_(url)
+                            #ssd= REQUEST_("https://api.telegram.org/bot"+TOKEN_+"/sendMessage?chat_id="+CHAT_ID+"&parse_mode=Markdown&"+reply_markup="+json.dumps(keyboard)+"&text=[········🔥MARKETS_TRACKER_BOT🔥········](https://t.me/MARKETS_SIGNALS) \n  ❌ ({}) NOT IN WAITLIST ALERTS \n-run /show\\_waitlist\\_price\\_alerts to show WAITLIST INDEXES\n  ".format(str(index)))
 
                 elif "show_waitlist_price_alerts" in msg :
                     msg = ""#json.dumps(db_manager)#.replace('}, "','}, \n\n"')
