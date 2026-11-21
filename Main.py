@@ -366,7 +366,7 @@ def MAIN_TELEGRAM_RESPONDER():
             #print("--------------------------------------------")
             if "callback_query" not in str(ssd):
                 try:
-                    checkpoint = (ssd["result"]["update_id"])#[-1]["message"]["date"])
+                    checkpoint = (ssd["result"][-1]["update_id"])#[-1]["message"]["date"])
 
                 except:
                     print("currently there is no recent message on thrr group ")
@@ -375,7 +375,7 @@ def MAIN_TELEGRAM_RESPONDER():
             else:
                 #####################################
                     try:
-                        checkpoint = ssd["result"]["update_id"]#[-1]["callback_query"]["message"]["date"]
+                        checkpoint = ssd["result"][-1]["update_id"]#[-1]["callback_query"]["message"]["date"]
                         answer_button= REQUEST_("https://api.telegram.org/bot"+TOKEN_+"/answerCallbackQuery?callback_query_id="+str(ssd["result"]["callback_query"]["id"]))
                     except:
                         print("currently there is no recent message on thrr group ")
