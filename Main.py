@@ -189,16 +189,27 @@ def PRICE_ALERT(paire,price,max_alerts=3,interval=60,data__=None,ping=False):
     reached=False
     updated_sync=False
     print(paire)
+    print("fuckkkkkkkk")
     ws = websocket.create_connection(
         "wss://node1-app.litemarkets.com/cabinet/socket.io/?EIO=4&transport=websocket",
         header={
+            "Host": "node1-app.litemarkets.com",
+            "Connection": "Upgrade",
+            "Pragma": "no-cache",
+            "Cache-Control": "no-cache",
+            "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:141.0) Gecko/20100101 Firefox/141.0",
+            "Upgrade": "websocket",
             "Origin": "https://my.litefinance.org",
-            "User-Agent": "Mozilla/5.0"
+            "Sec-WebSocket-Version": "13",
+           # "Accept-Encoding": "gzip, deflate, br, zstd",
+            "Accept-Language": "en-US,en;q=0.9,fr-FR;q=0.8,fr;q=0.7",
+            "Sec-WebSocket-Key": "Wqs6lkAHpGgcsdErRFOihQ==",
+            "Sec-WebSocket-Extensions": "permessage-deflate; client_max_window_bits"
         },
         sslopt={"cert_reqs": ssl.CERT_NONE},
         timeout=None
     )
-    ws.settimeout(5)
+    ws.settimeout(10)
 
     try:
         # Engine.IO handshake
@@ -230,9 +241,11 @@ def PRICE_ALERT(paire,price,max_alerts=3,interval=60,data__=None,ping=False):
             try:
                 response = ws.recv()
             except Exception as e :
-                print("INVALID PAIRE REQUESTED !")
+                time.sleep(5)
+                continue
+                #print("INVALID PAIRE REQUESTED !")
                 
-                return None
+               # return None
 
             if response == "2":
                 ws.send("3")
@@ -549,9 +562,17 @@ def MAIN_TELEGRAM_RESPONDER():
                         ssd= REQUEST_("https://api.telegram.org/bot"+TOKEN_+"/sendMessage?chat_id="+CHAT_ID+"&parse_mode=Markdown&text=[········🔥MARKETS_TRACKER_BOT🔥········](https://t.me/MARKETS_SIGNALS) \n {} : WAS AN INVALID COMMAND ❌\nSET_PRICE_ALERT <PAIRE> <PRICE> <MAX-ALERTS(3)!> <INTERVAL(60)!>".format(msg))
                         continue
                     
-                    
-                    current_price_=PRICE_ALERT(paire,price,max_alerts,interval,data__=None,ping=True)
-                    if current_price_==None:
+                    ###################
+                    strt=GET_CNDLSTICKS_CHART("60","60 m",int(time.time()),int(time.time())+8*3600,paire,0,0,0,0,0 ,0)
+                    availability= strt.PREPARE_REQUEST()
+                    print (availability)
+                    if availability==True:
+                        current_price_= float(strt.db[-1]["close"])
+                        print(current_price_)
+                    else:
+                    ###################
+                    #current_price_=PRICE_ALERT(paire,price,max_alerts,interval,data__=None,ping=True)
+                    #if current_price_==None:
                         ssd= REQUEST_("https://api.telegram.org/bot"+TOKEN_+"/sendMessage?chat_id="+CHAT_ID+"&parse_mode=Markdown&text=[········🔥MARKETS_TRACKER_BOT🔥········](https://t.me/MARKETS_SIGNALS) \n  ❌ {} INVALID PAIRE !\nUNABLE TO SET PRICE ALERT FOR THIS PAIRE!")
                         continue
                     ppld={"PAIRE":paire,"PRICE":price,"CURRENT-PRICE":float(current_price_),"MAX-ALERTS":max_alerts,"INTERVAL":interval}
@@ -753,7 +774,7 @@ class GET_CNDLSTICKS_CHART():
             "finish_ctm": candles[-1]["time"], # the opposite candle that ended it
         }
      
-    def PREPARE_REQUEST(self,confirmation=False):
+    def PREPARE_REQUEST(self):
         try:
             payload = {
                 "period": self.tf,
@@ -791,19 +812,14 @@ class GET_CNDLSTICKS_CHART():
             except KeyError:
                 if str("empty") in str(self.response) or "EMPTY" in str(self.response):
                     time.sleep(10)
-                    self.PREPARE_REQUEST(confirmation=confirmation)
+                    self.PREPARE_REQUEST()
                     return
                 ssd= REQUEST_("https://api.telegram.org/bot"+TOKEN_+"/sendMessage?chat_id="+CHAT_ID+"&parse_mode=Markdown&text=[········🔥MARKETS_TRACKER_BOT🔥········](https://t.me/MARKETS_SIGNALS) \n {}  ".format(str(self.response).replace("_"," " ,999)))
                 return False
             except Exception as err:
-               # print(err)
+                print(err)
                 return None
-            print("##################")
-            if confirmation==True:
-                self.db2=[]
-                for i in range(0,len(self.response["data"]["t"])):
-                    self.db2.append({"time":self.response["data"]["t"][i],"open":self.response["data"]["o"][i],"close":self.response["data"]["c"][i],"high":self.response["data"]["h"][i],"low":self.response["data"]["l"][i]})
-                return True
+        
             for i in range(0,len(self.response["data"]["t"])):
                     self.db.append({"time":self.response["data"]["t"][i],"open":self.response["data"]["o"][i],"close":self.response["data"]["c"][i],"high":self.response["data"]["h"][i],"low":self.response["data"]["l"][i]})
             print(len(self.db))
@@ -814,8 +830,9 @@ class GET_CNDLSTICKS_CHART():
             return True
         except Exception as e :
             print(e)
-            print("errornni")
-            self.PREPARE_REQUEST(confirmation=confirmation)
+            print("ERROR WHILE REQUESTING THE SERVER")
+            self.PREPARE_REQUEST()
+            return
 
     def CALCULATE_RSI(self,prices,period=10):
         prices = np.array(prices)
