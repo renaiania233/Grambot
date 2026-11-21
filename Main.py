@@ -507,7 +507,7 @@ def MAIN_TELEGRAM_RESPONDER():
                             }
                             
                             ssd= REQUEST_("https://api.telegram.org/bot"+TOKEN_+"/sendMessage?chat_id="+CHAT_ID+"&reply_markup="+json.dumps(keyboard)+"&text=[········🔥MARKETS_TRACKER_BOT🔥········](https://t.me/MARKETS_SIGNALS) \n  ❌ ({}) NOT IN DB-LISTENNERS \n-CLICK HERE TO SHOW ACTIVE-LISTENNERS\n  ".format(str(index)))
-                            message_id=ssd.json()["result"]["message_id"]
+                            message_id=str(ssd.json()["result"]["message_id"])
                             ssd = REQUEST_("https://api.telegram.org/bot"+TOKEN_+"/editMessageReplyMarkup?chat_id="+CHAT_ID+"&message_id="+message_id+"&reply_markup="+json.dumps(keyboard))
                     #UNBLOCK_MESSAGES()
                         
@@ -605,8 +605,7 @@ def MAIN_TELEGRAM_RESPONDER():
                                 del PRICE_ALERTS_DB[index]
                                 updx= GITHUB_FILE(update=True,data=json.dumps(PRICE_ALERTS_DB),name="DB_WAITLIST_ALERTS")
                                 ssd= REQUEST_("https://api.telegram.org/bot"+TOKEN_+"/sendMessage?chat_id="+CHAT_ID+"&parse_mode=Markdown&text=[········🔥MARKETS_TRACKER_BOT🔥········](https://t.me/MARKETS_SIGNALS) \n  🚫 {} REMOVED FROM WAITLIST ALERTS \n  ".format(str(targetted)))
-                                message_id=ssd.json()["result"]["message_id"]
-                        ##############
+                                                        ##############
                         
                         ##############
                         except IndexError :
@@ -642,8 +641,11 @@ def MAIN_TELEGRAM_RESPONDER():
                  #           )
 
                  #           ssd = REQUEST_(url)
+                            
+                            ssd= REQUEST_("https://api.telegram.org/bot"+TOKEN_+"/sendMessage?chat_id="+CHAT_ID+"&parse_mode=Markdown&text=[········🔥MARKETS_TRACKER_BOT🔥········](https://t.me/MARKETS_SIGNALS) \n  ❌ ({}) NOT IN WAITLIST ALERTS \n-CLICK HERE TO SHOW LIST-ALERTS-DB\n  ".format(str(index)))
+                            message_id=str(ssd.json()["result"]["message_id"])
                             ssd = REQUEST_("https://api.telegram.org/bot"+TOKEN_+"/editMessageReplyMarkup?chat_id="+CHAT_ID+"&message_id="+message_id+"&reply_markup="+json.dumps(keyboard))
-                            #ssd= REQUEST_("https://api.telegram.org/bot"+TOKEN_+"/sendMessage?chat_id="+CHAT_ID+"&parse_mode=Markdown&reply_markup="+json.dumps(keyboard)+"&text=[········🔥MARKETS_TRACKER_BOT🔥········](https://t.me/MARKETS_SIGNALS) \n  ❌ ({}) NOT IN WAITLIST ALERTS \n-CLICK HERE TO SHOW LIST-ALERTS-DB\n  ".format(str(index)))
+
                             #keyboard = {
                             #    "inline_keyboard": [
                             #        [
