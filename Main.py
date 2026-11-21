@@ -351,36 +351,45 @@ def MAIN_TELEGRAM_RESPONDER():
             ssd = REQUEST_("https://api.telegram.org/bot"+TOKEN_+"/getUpdates?offset=-1").json()
             #print(ssd)
             #print("--------------------------------------------")
-            try:
-                checkpoint = (ssd["result"][-1]["message"]["date"])
-            except:
-                print("currently there is no recent message on thrr group ")
-                #####################################
+            if "callback_query" not in str(ssd):
                 try:
-                    checkpoint = ssd["result"][-1]["callback_query"]["message"]["date"]
+                    checkpoint = (ssd["result"][-1]["message"]["date"])
                 except:
-
-                ####################################
+                    print("currently there is no recent message on thrr group ")
                     time.sleep(10)
                     continue
+            else:
+                #####################################
+                    try:
+                        checkpoint = ssd["result"][-1]["callback_query"]["message"]["date"]
+                    except:
+                        print("currently there is no recent message on thrr group ")
+                        time.sleep(10)
+                        continue
+                    ####################################
             #print(str(checkpoint) +"  "+ssd["result"][-1]["message"]["text"])
             #print(indexed_db["last_message"])
             if indexed_db["last_message"]==None:indexed_db["last_message"]=checkpoint; time.sleep(10);continue
             elif indexed_db["last_message"]!=checkpoint:
                 indexed_db["last_message"]=checkpoint
                 #BLOCK_MESSAGES()
-                try:
-                    msg=ssd["result"][-1]["message"]["text"]
-                    if "callback_query" in str(ssd):
-                        raise ("error handler")
-                    #print(msg)
-                except :
-                    ############################
+                if "callback_query" not in str(ssd):
                     try:
-                        msg=ssd["result"][-1]["callback_query"]["data"]
-                    except:
-                    ###########################
+                        msg=ssd["result"][-1]["message"]["text"]
+                        if "callback_query" in str(ssd):
+                            raise ("error handler")
+                        #print(msg)
+                    except :
                         msg=""
+                else:
+                    ############################
+                        try:
+                            msg=ssd["result"][-1]["callback_query"]["data"]
+                            print(msg)
+                        except:
+                            msg=""
+                        ###########################
+                print(msg)
                 if "/is_bot_online" in msg:
                     ssd= REQUEST_("https://api.telegram.org/bot"+TOKEN_+"/sendMessage?chat_id="+CHAT_ID+"&parse_mode=Markdown&text=[········🔥MARKETS_TRACKER_BOT🔥········](https://t.me/MARKETS_SIGNALS) \n BOT-STATUS : RUNNING ONLIGNE ✅")
                     time.sleep(2)
@@ -602,7 +611,7 @@ def MAIN_TELEGRAM_RESPONDER():
                                     ]
                                 ]
                             }
-                            ssd= REQUEST_("https://api.telegram.org/bot"+TOKEN_+"/sendMessage?chat_id="+CHAT_ID+"&reply_markup="+json.dumps(keyboard)+"&text=➖➖➖➖➖➖➖➖➖➖➖➖")
+                            ssd= REQUEST_("https://api.telegram.org/bot"+TOKEN_+"/sendMessage?chat_id="+CHAT_ID+"&reply_markup="+json.dumps(keyboard)+"&text=➖➖➖➖➖➖➖➖➖")
                 elif "show_waitlist_price_alerts" in msg :
                     msg = ""#json.dumps(db_manager)#.replace('}, "','}, \n\n"')
                     for index , runner in enumerate(PRICE_ALERTS_DB):
@@ -1825,13 +1834,13 @@ class GET_CNDLSTICKS_CHART():
                                 "inline_keyboard": [
                                     [
                                         {
-                                            "text": "SET-PRICE-ALERT {} {} ".format(self.symbol,math.trunc(entry*factor)/factor),
+                                            "text": "SET-ALERT {} {} ".format(self.symbol,math.trunc(entry*factor)/factor),
                                             "callback_data": "set_price_alert {} {} {} {}".format(self.symbol,math.trunc(entry*factor)/factor,3,60)
                                         }
                                     ]
                                 ]
                             }
-                            ssd= REQUEST_("https://api.telegram.org/bot"+TOKEN_+"/sendMessage?chat_id="+CHAT_ID+"&reply_markup="+json.dumps(keyboard)+"&text=➖➖➖➖➖➖➖➖➖➖➖➖")
+                            ssd= REQUEST_("https://api.telegram.org/bot"+TOKEN_+"/sendMessage?chat_id="+CHAT_ID+"&reply_markup="+json.dumps(keyboard)+"&text=➖➖➖➖➖➖➖➖➖")
                             ###########################################################################
                             ALREADY_ALERTED_TRADES.append(id__)
                             with open("TRADES.json","w") as w :         
