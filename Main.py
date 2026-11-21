@@ -17,6 +17,7 @@ import matplotlib.pyplot as plt
 import math
 from requests import session
 import urllib.parse
+import copy
 
 
 from matplotlib.patches import Rectangle
@@ -235,6 +236,7 @@ def PRICE_ALERT(paire,price,max_alerts=3,interval=60,data__=None):
             print("hoho")
             while pause ==True:
                 time.sleep(5)
+                print("PRICE ALERT CURRENTLY PAUSED !")
                 continue
             time.sleep(5)
             if data__ not in PRICE_ALERTS_DB  and  reached==False:
@@ -243,6 +245,8 @@ def PRICE_ALERT(paire,price,max_alerts=3,interval=60,data__=None):
                 response = ws.recv()
                 print(response)
             except Exception as e :
+                print("nn")
+                print(e)
                 continue
                 #print("INVALID PAIRE REQUESTED !")
                 
@@ -251,11 +255,14 @@ def PRICE_ALERT(paire,price,max_alerts=3,interval=60,data__=None):
             if response == "2":
                 try:
                     ws.send("3")
-                except Exception as e :
+                except Exception as e 
+                    print("xx"):
+                    print(e)
                     continue
 
 
             if not response.startswith("42"):
+
                 continue
 
             try:
@@ -273,7 +280,7 @@ def PRICE_ALERT(paire,price,max_alerts=3,interval=60,data__=None):
                         "extra": data[6]
                     }
                     
-
+                    print(price_data)
                     if price>=data__["CURRENT-PRICE"] :
                         if data[2]>=price or reached==True:
                                 reached=True
@@ -356,12 +363,12 @@ def MAIN_TELEGRAM_RESPONDER():
    # global pause
     while True:
         try:
-            if json.dumps(old_db_manager)!=json.dumps(db_manager):
+            if old_db_manager!=db_manager:
                 with open("db.json","w") as w :
                     w.write(json.dumps(db_manager))
                 ####################################
                 updx= GITHUB_FILE(update=True,data=json.dumps(db_manager),name="db")
-                old_db_manager=db_manager.copy()
+                old_db_manager=copy.deepcopy(db_manager)
 #####################################
             print("currently there is no recent message on the group !")
             ssd = REQUEST_("https://api.telegram.org/bot"+TOKEN_+"/getUpdates?offset=-1").json()
