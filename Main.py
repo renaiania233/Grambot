@@ -184,10 +184,10 @@ indexed_db={"last_message":None}
 
 ##############################################################
 PRICE_ALERTS_DB=[]
-def PRICE_ALERT(paire,price,max_alerts=3,interval=60,data__=None):
-    already_alrtd=0
-    reached=False
-    updated_sync=False
+def PRICE_ALERT(paire,price,max_alerts=3,interval=60,data__=None,already_alrtd=0,reached=False,updated_sync=False):
+    already_alrtd=already_alrtd
+    reached=reached
+    updated_sync=updated_sync
     ws = websocket.create_connection(
         "wss://node1-app.litemarkets.com/cabinet/socket.io/?EIO=4&transport=websocket",
         header={
@@ -247,7 +247,9 @@ def PRICE_ALERT(paire,price,max_alerts=3,interval=60,data__=None):
             except Exception as e :
                 print("nn")
                 print(e)
-                continue
+                ws.close()
+                PRICE_ALERT(paire,price,max_alerts=max_alerts,interval=interval,data__=data__,already_alrtd=already_alrtd,reached=reached,updated_sync=updated_sync)
+                return
                 #print("INVALID PAIRE REQUESTED !")
                 
                # return None
@@ -258,7 +260,9 @@ def PRICE_ALERT(paire,price,max_alerts=3,interval=60,data__=None):
                 except Exception as e: 
                     print("xx")
                     print(e)
-                    continue
+                    ws.close()
+                    PRICE_ALERT(paire,price,max_alerts=max_alerts,interval=interval,data__=data__,already_alrtd=already_alrtd,reached=reached,updated_sync=updated_sync)
+                    return
 
 
             if not response.startswith("42"):
@@ -320,11 +324,12 @@ def PRICE_ALERT(paire,price,max_alerts=3,interval=60,data__=None):
     except Exception as e :#KeyboardInterrupt:
         print(e)
         print("RELUNCHING FUNCTION FROM 0")
-        PRICE_ALERT(paire,price,max_alerts=max_alerts,interval=interval,data__=data__)
+        ws.close()
+        PRICE_ALERT(paire,price,max_alerts=max_alerts,interval=interval,data__=data__,already_alrtd=already_alrtd,reached=reached,updated_sync=updated_sync)
         return
 
-    finally:
-        ws.close()
+#    finally:
+ #       ws.close()
 
 
 #####################################################################################################################################
@@ -578,7 +583,7 @@ def MAIN_TELEGRAM_RESPONDER():
                             max_alerts=3
                             interval=60
                     else:
-                        ssd= REQUEST_("https://api.telegram.org/bot"+TOKEN_+"/sendMessage?chat_id="+CHAT_ID+"&parse_mode=Markdown&text=[········🔥MARKETS_TRACKER_BOT🔥········](https://t.me/MARKETS_SIGNALS) \n {} : WAS AN INVALID COMMAND ❌\n-COMMAND <PAIRE> <PRICE> <MAX-ALERTS(3)!> <INTERVAL(60)!>".format(msg))
+                        ssd= REQUEST_("https://api.telegram.org/bot"+TOKEN_+"/sendMessage?chat_id="+CHAT_ID+"&parse_mode=Markdown&text=[········🔥MARKETS_TRACKER_BOT🔥········](https://t.me/MARKETS_SIGNALS) \n❌ NO ENOUGH ARGUMENTS  !\n-COMMAND <PAIRE> <PRICE> <MAX-ALERTS(3)!> <INTERVAL(60)!>")
                         continue
                     
                     ###################
@@ -615,7 +620,7 @@ def MAIN_TELEGRAM_RESPONDER():
                             #if targetted["RUNNING"]==True:
                                 del PRICE_ALERTS_DB[index]
                                 updx= GITHUB_FILE(update=True,data=json.dumps(PRICE_ALERTS_DB),name="DB_WAITLIST_ALERTS")
-                                ssd= REQUEST_("https://api.telegram.org/bot"+TOKEN_+"/sendMessage?chat_id="+CHAT_ID+"&parse_mode=Markdown&text=[········🔥MARKETS_TRACKER_BOT🔥········](https://t.me/MARKETS_SIGNALS) \n  🚫 {} REMOVED FROM WAITLIST ALERTS \n  ".format(str(targetted)))
+                                ssd= REQUEST_("https://api.telegram.org/bot"+TOKEN_+"/sendMessage?chat_id="+CHAT_ID+"&parse_mode=Markdown&text=[········🔥MARKETS_TRACKER_BOT🔥········](https://t.me/MARKETS_SIGNALS) \n  🚫 {} \n-REMOVED FROM WAITLIST ALERTS \n  ".format(str(targetted)))
                                                         ##############
                         
                         ##############
