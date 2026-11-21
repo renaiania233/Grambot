@@ -602,7 +602,7 @@ def MAIN_TELEGRAM_RESPONDER():
                                     ]
                                 ]
                             }
-                            ssd= REQUEST_("https://api.telegram.org/bot"+TOKEN_+"/sendMessage?chat_id="+CHAT_ID+"&reply_markup="+json.dumps(keyboard)+"&text=")
+                            ssd= REQUEST_("https://api.telegram.org/bot"+TOKEN_+"/sendMessage?chat_id="+CHAT_ID+"&reply_markup="+json.dumps(keyboard)+"&text=➖➖➖➖➖➖➖➖➖➖➖➖")
                 elif "show_waitlist_price_alerts" in msg :
                     msg = ""#json.dumps(db_manager)#.replace('}, "','}, \n\n"')
                     for index , runner in enumerate(PRICE_ALERTS_DB):
@@ -1831,7 +1831,7 @@ class GET_CNDLSTICKS_CHART():
                                     ]
                                 ]
                             }
-                            ssd= REQUEST_("https://api.telegram.org/bot"+TOKEN_+"/sendMessage?chat_id="+CHAT_ID+"&reply_markup="+json.dumps(keyboard)+"&text=[········🔥MARKETS_TRACKER_BOT🔥········](https://t.me/MARKETS_SIGNALS) \n")
+                            ssd= REQUEST_("https://api.telegram.org/bot"+TOKEN_+"/sendMessage?chat_id="+CHAT_ID+"&reply_markup="+json.dumps(keyboard)+"&text=➖➖➖➖➖➖➖➖➖➖➖➖")
                             ###########################################################################
                             ALREADY_ALERTED_TRADES.append(id__)
                             with open("TRADES.json","w") as w :         
