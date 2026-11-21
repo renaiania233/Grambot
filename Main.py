@@ -229,7 +229,7 @@ def PRICE_ALERT(paire,price,max_alerts=3,interval=60,data__=None):
             '42["chart_subscribe",{"server":18,"symbol":"%s"}]'%(paire)
         )
 
-        #print("Subscribed to {}".format(paire))
+        print("Subscribed to {}".format(paire))
 
         while True:
             while pause ==True:
@@ -240,6 +240,7 @@ def PRICE_ALERT(paire,price,max_alerts=3,interval=60,data__=None):
                 return 
             try:
                 response = ws.recv()
+                print(response)
             except Exception as e :
                 continue
                 #print("INVALID PAIRE REQUESTED !")
@@ -354,7 +355,7 @@ def MAIN_TELEGRAM_RESPONDER():
    # global pause
     while True:
         try:
-            if old_db_manager!=db_manager:
+            if json.dumps(old_db_manager)!=json.dumps(db_manager):
                 with open("db.json","w") as w :
                     w.write(json.dumps(db_manager))
                 ####################################
@@ -569,7 +570,7 @@ def MAIN_TELEGRAM_RESPONDER():
                             max_alerts=3
                             interval=60
                     else:
-                        ssd= REQUEST_("https://api.telegram.org/bot"+TOKEN_+"/sendMessage?chat_id="+CHAT_ID+"&parse_mode=Markdown&text=[········🔥MARKETS_TRACKER_BOT🔥········](https://t.me/MARKETS_SIGNALS) \n {} : WAS AN INVALID COMMAND ❌\nSET_PRICE_ALERT <PAIRE> <PRICE> <MAX-ALERTS(3)!> <INTERVAL(60)!>".format(msg))
+                        ssd= REQUEST_("https://api.telegram.org/bot"+TOKEN_+"/sendMessage?chat_id="+CHAT_ID+"&parse_mode=Markdown&text=[········🔥MARKETS_TRACKER_BOT🔥········](https://t.me/MARKETS_SIGNALS) \n {} : WAS AN INVALID COMMAND ❌\n-COMMAND <PAIRE> <PRICE> <MAX-ALERTS(3)!> <INTERVAL(60)!>".format(msg))
                         continue
                     
                     ###################
@@ -591,7 +592,7 @@ def MAIN_TELEGRAM_RESPONDER():
                     ###################
                     #current_price_=PRICE_ALERT(paire,price,max_alerts,interval,data__=None,ping=True)
                     #if current_price_==None:
-                        ssd= REQUEST_("https://api.telegram.org/bot"+TOKEN_+"/sendMessage?chat_id="+CHAT_ID+"&parse_mode=Markdown&text=[········🔥MARKETS_TRACKER_BOT🔥········](https://t.me/MARKETS_SIGNALS) \n  ❌ {} INVALID PAIRE !\nUNABLE TO SET PRICE ALERT FOR THIS PAIRE!")
+                        ssd= REQUEST_("https://api.telegram.org/bot"+TOKEN_+"/sendMessage?chat_id="+CHAT_ID+"&parse_mode=Markdown&text=[········🔥MARKETS_TRACKER_BOT🔥········](https://t.me/MARKETS_SIGNALS) \n  ❌ {} INVALID PAIRE !\nUNABLE TO SET PRICE ALERT FOR THIS PAIRE!".format(paire))
                         continue
                     
                     luncher=threading.Thread(target=PRICE_ALERT,args=(paire,price,max_alerts,interval,ppld))
