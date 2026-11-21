@@ -501,7 +501,7 @@ def MAIN_TELEGRAM_RESPONDER():
                                     [
                                         {
                                             "text": "SHOW-ACTIVE-LISTENNERS",
-                                            "callback_data": "show_current_listenners"
+                                            "callback_data": "show\\_current\\_listenners"
                                         }
                                     ]
                                 ]
