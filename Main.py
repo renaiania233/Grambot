@@ -223,7 +223,7 @@ def PRICE_ALERT(paire,price,max_alerts=3,interval=60,data__=None,ping=False):
 
         while True:
             time.sleep(2)
-            if data not in PRICE_ALERTS_DB and added==True and ping==False and  reached==False:
+            if data__ not in PRICE_ALERTS_DB and added==True and ping==False and  reached==False:
                 return 
             try:
                 response = ws.recv()
