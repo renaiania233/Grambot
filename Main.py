@@ -256,7 +256,8 @@ def PRICE_ALERT(paire,price,max_alerts=3,interval=60,data__=None,ping=False):
                     if ping==True:
                         return  data[2]
                     if data not in PRICE_ALERTS_DB and added==False:
-                        PRICE_ALERTS_DB.append(data__)
+                        if data__ not in PRICE_ALERTS_DB:
+                            PRICE_ALERTS_DB.append(data__)
                         updx= GITHUB_FILE(update=True,data=json.dumps(PRICE_ALERTS_DB),name="DB_WAITLIST_ALERTS")
                         ssd= REQUEST_("https://api.telegram.org/bot"+TOKEN_+"/sendMessage?chat_id="+CHAT_ID+"&parse_mode=Markdown&text=[········🔥MARKETS_TRACKER_BOT🔥········](https://t.me/MARKETS_SIGNALS) \n✅ALERT ADDED INTO WAITLIST:\n-PAIRE: {}\n-PRICE: {}\n-MAX-ALERTS: {}\n-INTERVAL :{}\n➖➖➖➖➖➖".format(paire,price,max_alerts,interval))
                         added=True
@@ -529,9 +530,18 @@ def MAIN_TELEGRAM_RESPONDER():
                             #if targetted["RUNNING"]==True:
                                 del PRICE_ALERTS_DB[index]
                                 ssd= REQUEST_("https://api.telegram.org/bot"+TOKEN_+"/sendMessage?chat_id="+CHAT_ID+"&parse_mode=Markdown&text=[········🔥MARKETS_TRACKER_BOT🔥········](https://t.me/MARKETS_SIGNALS) \n  🚫 {} KILLED FROM WAITLIST ALERTS \n  ".format(str(targetted)))
+                        ##############
                         
+                        ##############
                         except IndexError :
-                            ssd= REQUEST_("https://api.telegram.org/bot"+TOKEN_+"/sendMessage?chat_id="+CHAT_ID+"&parse_mode=Markdown&text=[········🔥MARKETS_TRACKER_BOT🔥········](https://t.me/MARKETS_SIGNALS) \n  ❌ ({}) NOT IN WAITLIST ALERTS \n-run /show\\_waitlist_price\\_alerts to show WAITLIST INDEXES\n  ".format(str(index)))
+                            keyboard = {
+                        "inline_keyboard": [
+                            [
+                                {
+                                    "text": "ALERT AT ",
+                                    "callback_data": f"alert|XAUUSD|3737.05"
+                                }]]}
+                            ssd= REQUEST_("https://api.telegram.org/bot"+TOKEN_+"/sendMessage?reply_markup="+keyboard+"chat_id="+CHAT_ID+"&parse_mode=Markdown&text=[········🔥MARKETS_TRACKER_BOT🔥········](https://t.me/MARKETS_SIGNALS) \n  ❌ ({}) NOT IN WAITLIST ALERTS \n-run /show\\_waitlist\\_price\\_alerts to show WAITLIST INDEXES\n  ".format(str(index)))
 
                 elif "show_waitlist_price_alerts" in msg :
                     msg = ""#json.dumps(db_manager)#.replace('}, "','}, \n\n"')
