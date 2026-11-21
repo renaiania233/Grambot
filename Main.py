@@ -256,9 +256,9 @@ def PRICE_ALERT(paire,price,max_alerts=3,interval=60,data__=None,ping=False):
                     if ping==True:
                         return  data[2]
                     if data not in PRICE_ALERTS_DB and added==False:
-                        PRICE_ALERTS_DB.append(data)
+                        PRICE_ALERTS_DB.append(data__)
                         updx= GITHUB_FILE(update=True,data=json.dumps(PRICE_ALERTS_DB),name="DB_WAITLIST_ALERTS")
-                        ssd= REQUEST_("https://api.telegram.org/bot"+TOKEN_+"/sendMessage?chat_id="+CHAT_ID+"&parse_mode=Markdown&text=[········🔥MARKETS_TRACKER_BOT🔥········](https://t.me/MARKETS_SIGNALS) \n✅ALERT ADDED INTO WAITLIST:\n PAIRE: {}\nPRICE: {},MAX-ALERTS: {},INTERVAL :{}\n................".format(paire,price,max_alerts,interval))
+                        ssd= REQUEST_("https://api.telegram.org/bot"+TOKEN_+"/sendMessage?chat_id="+CHAT_ID+"&parse_mode=Markdown&text=[········🔥MARKETS_TRACKER_BOT🔥········](https://t.me/MARKETS_SIGNALS) \n✅ALERT ADDED INTO WAITLIST:\n-PAIRE: {}\n-PRICE: {}\n-MAX-ALERTS: {}\n-INTERVAL :{}\n➖➖➖➖➖➖".format(paire,price,max_alerts,interval))
                         added=True
                     if price>=data__["CURRENT-PRICE"] :
                         if data[2]>=price or reached==True:
