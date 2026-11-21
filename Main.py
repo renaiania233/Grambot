@@ -188,6 +188,7 @@ def PRICE_ALERT(paire,price,max_alerts=3,interval=60,data__=None,ping=False):
     added=False
     reached=False
     updated_sync=False
+    print(paire)
     ws = websocket.create_connection(
         "wss://node1-app.litemarkets.com/cabinet/socket.io/?EIO=4&transport=websocket",
         header={
@@ -535,6 +536,8 @@ def MAIN_TELEGRAM_RESPONDER():
                 elif "set_price_alert" in msg:
                     if len(msg.split())==5 or len(msg.split())==3:
                         paire=msg.split()[1]
+                        print(paire)
+                        print(msg.split())
                         price=float(msg.split()[2])
                         if len(msg.split())==5:
                             max_alerts=int(msg.split()[3])
