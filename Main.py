@@ -375,7 +375,7 @@ def MAIN_TELEGRAM_RESPONDER():
                 except :
                     ############################
                     try:
-                        msg=ssd["callback_query"]["data"]
+                        msg=ssd["result"][-1]["callback_query"]["data"]
                     except:
                     ###########################
                         msg=""
