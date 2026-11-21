@@ -232,6 +232,7 @@ def PRICE_ALERT(paire,price,max_alerts=3,interval=60,data__=None):
         print("Subscribed to {}".format(paire))
 
         while True:
+            print("hoho")
             while pause ==True:
                 time.sleep(5)
                 continue
@@ -385,8 +386,8 @@ def MAIN_TELEGRAM_RESPONDER():
                     ####################################
             #print(str(checkpoint) +"  "+ssd["result"][-1]["message"]["text"])
             #print(indexed_db["last_message"])
-            #if indexed_db["last_message"]==None:indexed_db["last_message"]=checkpoint; time.sleep(10);continue
-            if indexed_db["last_message"]!=checkpoint:
+            if indexed_db["last_message"]==None:indexed_db["last_message"]=checkpoint; time.sleep(10);continue
+            elif indexed_db["last_message"]!=checkpoint:
                 indexed_db["last_message"]=checkpoint
                 #BLOCK_MESSAGES()
                 if "callback_query" not in str(ssd):
