@@ -528,10 +528,10 @@ def MAIN_TELEGRAM_RESPONDER():
                                 targetted= PRICE_ALERTS_DB[index]
                             #if targetted["RUNNING"]==True:
                                 del PRICE_ALERTS_DB[index]
-                                ssd= REQUEST_("https://api.telegram.org/bot"+TOKEN_+"/sendMessage?chat_id="+CHAT_ID+"&parse_mode=Markdown&text=[········🔥MARKETS_TRACKER_BOT🔥········](https://t.me/MARKETS_SIGNALS) \n  🚫 {} KILLED FROM PRICE_ALERTS_DB \n  ".format(str(targetted)))
+                                ssd= REQUEST_("https://api.telegram.org/bot"+TOKEN_+"/sendMessage?chat_id="+CHAT_ID+"&parse_mode=Markdown&text=[········🔥MARKETS_TRACKER_BOT🔥········](https://t.me/MARKETS_SIGNALS) \n  🚫 {} KILLED FROM WAITLIST ALERTS \n  ".format(str(targetted)))
                         
                         except IndexError :
-                            ssd= REQUEST_("https://api.telegram.org/bot"+TOKEN_+"/sendMessage?chat_id="+CHAT_ID+"&parse_mode=Markdown&text=[········🔥MARKETS_TRACKER_BOT🔥········](https://t.me/MARKETS_SIGNALS) \n  ❌ ({}) NOT IN PRICE_ALERTS_DB \nrun /show_wating_price_alerts to show WAITLIST INDEXES\n  ".format(str(index)))
+                            ssd= REQUEST_("https://api.telegram.org/bot"+TOKEN_+"/sendMessage?chat_id="+CHAT_ID+"&parse_mode=Markdown&text=[········🔥MARKETS_TRACKER_BOT🔥········](https://t.me/MARKETS_SIGNALS) \n  ❌ ({}) NOT IN WAITLIST ALERTS \n-run /show\\_waitlist_price\\_alerts to show WAITLIST INDEXES\n  ".format(str(index)))
 
                 elif "show_waitlist_price_alerts" in msg :
                     msg = ""#json.dumps(db_manager)#.replace('}, "','}, \n\n"')
@@ -539,7 +539,7 @@ def MAIN_TELEGRAM_RESPONDER():
                         msg+="{})  {} \n\n".format(index,runner)
 
                     if msg=="":msg="\n\nNO PRICE ALERT WATING IN THE DB, EMPTY DB !"
-                    ssd= REQUEST_("https://api.telegram.org/bot"+TOKEN_+"/sendMessage?chat_id="+CHAT_ID+"&parse_mode=Markdown&text=[········🔥MARKETS_TRACKER_BOT🔥········](https://t.me/MARKETS_SIGNALS) \n 🆗 THIS IS THE CURRENT WAIT_LIST FOR PRICES ALERTS : \n{}  ".format(str(msg)))
+                    ssd= REQUEST_("https://api.telegram.org/bot"+TOKEN_+"/sendMessage?chat_id="+CHAT_ID+"&parse_mode=Markdown&text=[········🔥MARKETS_TRACKER_BOT🔥········](https://t.me/MARKETS_SIGNALS) \n 🆗 THIS IS THE CURRENT WAIT-LIST FOR PRICES ALERTS : \n{}  ".format(str(msg)))
 
                 else:
                     ssd= REQUEST_("https://api.telegram.org/bot"+TOKEN_+"/sendMessage?chat_id="+CHAT_ID+"&parse_mode=Markdown&text=[········🔥MARKETS_TRACKER_BOT🔥········](https://t.me/MARKETS_SIGNALS) \n {} : WAS AN INVALID COMMAND ❌".format(msg))
