@@ -471,7 +471,17 @@ def MAIN_TELEGRAM_RESPONDER():
                                 ssd= REQUEST_("https://api.telegram.org/bot"+TOKEN_+"/sendMessage?chat_id="+CHAT_ID+"&parse_mode=Markdown&text=[········🔥MARKETS_TRACKER_BOT🔥········](https://t.me/MARKETS_SIGNALS) \n  🚫 {} KILLED FROM DB-LISTENNERS \n  ".format(str(targetted)))
                         
                         except IndexError :
-                            ssd= REQUEST_("https://api.telegram.org/bot"+TOKEN_+"/sendMessage?chat_id="+CHAT_ID+"&parse_mode=Markdown&text=[········🔥MARKETS_TRACKER_BOT🔥········](https://t.me/MARKETS_SIGNALS) \n  ❌ ({}) NOT IN DB-LISTENNERS | INVALID SELECTION !\n  ".format(str(index)))
+                            keyboard = {
+                                "inline_keyboard": [
+                                    [
+                                        {
+                                            "text": "SHOW-ACTIVE-LISTENNERS",
+                                            "callback_data": "show_current_listenners"
+                                        }
+                                    ]
+                                ]
+                            }
+                            ssd= REQUEST_("https://api.telegram.org/bot"+TOKEN_+"/sendMessage?chat_id="+CHAT_ID+"&parse_mode=Markdown&reply_markup="+json.dumps(keyboard)+"&text=[········🔥MARKETS_TRACKER_BOT🔥········](https://t.me/MARKETS_SIGNALS) \n  ❌ ({}) NOT IN DB-LISTENNERS \n-CLICK HERE TO SHOW ACTIVE-LISTENNERS\n  ".format(str(index)))
 
                     #UNBLOCK_MESSAGES()
                         
@@ -580,7 +590,17 @@ def MAIN_TELEGRAM_RESPONDER():
 
                  #           ssd = REQUEST_(url)
                             ssd= REQUEST_("https://api.telegram.org/bot"+TOKEN_+"/sendMessage?chat_id="+CHAT_ID+"&parse_mode=Markdown&reply_markup="+json.dumps(keyboard)+"&text=[········🔥MARKETS_TRACKER_BOT🔥········](https://t.me/MARKETS_SIGNALS) \n  ❌ ({}) NOT IN WAITLIST ALERTS \n-CLICK HERE TO SHOW LIST-ALERTS-DB\n  ".format(str(index)))
-
+                            keyboard = {
+                                "inline_keyboard": [
+                                    [
+                                        {
+                                            "text": "SET-PRICE-ALERT {} {} ".format("XAUUSD","3535.6"),
+                                            "callback_data": "set_price_alert {} {} {} {}".format("XAUUSD","2345.5",3,60)
+                                        }
+                                    ]
+                                ]
+                            }
+                            ssd= REQUEST_("https://api.telegram.org/bot"+TOKEN_+"/sendMessage?chat_id="+CHAT_ID+"&reply_markup="+json.dumps(keyboard)+"&text=[········🔥MARKETS_TRACKER_BOT🔥········](https://t.me/MARKETS_SIGNALS) \n")
                 elif "show_waitlist_price_alerts" in msg :
                     msg = ""#json.dumps(db_manager)#.replace('}, "','}, \n\n"')
                     for index , runner in enumerate(PRICE_ALERTS_DB):
@@ -1774,6 +1794,8 @@ class GET_CNDLSTICKS_CHART():
                             stis = threading.Thread(target=starts.CHECK_FVG_AVAILABILITY,args=(db_manager,0,True,False,False,True))
                             stis.start()
                             stis.join()
+
+                            
                     if response_check["direction"]=="bullish":
                         sl=float(response_check["bottom"])
                         entry=float(response_check["top"])
@@ -1796,6 +1818,19 @@ class GET_CNDLSTICKS_CHART():
                     rs = self.send_two_photos(TOKEN_,CHAT_ID,picture_name,htf_picture,caption=caption)
                     if rs["ok"]==True: 
                         #if response_check not in ALREADY_ALERTED_TRADES:
+                            ######################################################################
+                            keyboard = {
+                                "inline_keyboard": [
+                                    [
+                                        {
+                                            "text": "SET-PRICE-ALERT {} {} ".format(self.symbol,math.trunc(entry*factor)/factor),
+                                            "callback_data": "set_price_alert {} {} {} {}".format(self.symbol,math.trunc(entry*factor)/factor,3,60)
+                                        }
+                                    ]
+                                ]
+                            }
+                            ssd= REQUEST_("https://api.telegram.org/bot"+TOKEN_+"/sendMessage?chat_id="+CHAT_ID+"&reply_markup="+json.dumps(keyboard)+"&text=[········🔥MARKETS_TRACKER_BOT🔥········](https://t.me/MARKETS_SIGNALS) \n")
+                            ###########################################################################
                             ALREADY_ALERTED_TRADES.append(id__)
                             with open("TRADES.json","w") as w :         
                                 db_trades[id__]={"TRADE-TYPE":trade_type,"PAIRE":self.symbol,"TIME-FRAME":self.tf,"ENTRY":math.trunc(entry*factor)/factor,"STOP-LOSS":math.trunc(sl*factor)/factor,"TP2":math.trunc(tp2*factor)/factor,"PR_min":self.price_min,"PR_max":self.price_max}
