@@ -255,7 +255,7 @@ def PRICE_ALERT(paire,price,max_alerts=3,interval=60,data__=None):
             if response == "2":
                 try:
                     ws.send("3")
-                except Exception as e 
+                except Exception as e: 
                     print("xx"):
                     print(e)
                     continue
