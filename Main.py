@@ -355,8 +355,14 @@ def MAIN_TELEGRAM_RESPONDER():
                 checkpoint = (ssd["result"][-1]["message"]["date"])
             except:
                 print("currently there is no recent message on thrr group ")
-                time.sleep(10)
-                continue
+                #####################################
+                try:
+                    checkpoint = ssd["result"][-1]["callback_query"]["message"]["date"]
+                except:
+
+                ####################################
+                    time.sleep(10)
+                    continue
             #print(str(checkpoint) +"  "+ssd["result"][-1]["message"]["text"])
             #print(indexed_db["last_message"])
             if indexed_db["last_message"]==None:indexed_db["last_message"]=checkpoint; time.sleep(10);continue
@@ -366,7 +372,13 @@ def MAIN_TELEGRAM_RESPONDER():
                 try:
                     msg=ssd["result"][-1]["message"]["text"]
                     #print(msg)
-                except :msg=""
+                except :
+                    ############################
+                    try:
+                        msg=ssd["callback_query"]["data"]
+                    except:
+                    ###########################
+                        msg=""
                 if "/is_bot_online" in msg:
                     ssd= REQUEST_("https://api.telegram.org/bot"+TOKEN_+"/sendMessage?chat_id="+CHAT_ID+"&parse_mode=Markdown&text=[········🔥MARKETS_TRACKER_BOT🔥········](https://t.me/MARKETS_SIGNALS) \n BOT-STATUS : RUNNING ONLIGNE ✅")
                     time.sleep(2)
@@ -539,8 +551,8 @@ def MAIN_TELEGRAM_RESPONDER():
                                 "inline_keyboard": [
                                     [
                                         {
-                                            "text": "ALERT AT XAUUSD 3737.05",
-                                            "callback_data": "alert|XAUUSD|3737.05"
+                                            "text": "SHOW-WAITLIST-ALERTS",
+                                            "callback_data": "show_waitlist_price_alerts"
                                         }
                                     ]
                                 ]
@@ -567,7 +579,7 @@ def MAIN_TELEGRAM_RESPONDER():
                  #           )
 
                  #           ssd = REQUEST_(url)
-                            ssd= REQUEST_("https://api.telegram.org/bot"+TOKEN_+"/sendMessage?chat_id="+CHAT_ID+"&parse_mode=Markdown&reply_markup="+json.dumps(keyboard)+"&text=[········🔥MARKETS_TRACKER_BOT🔥········](https://t.me/MARKETS_SIGNALS) \n  ❌ ({}) NOT IN WAITLIST ALERTS \n-run /show\\_waitlist\\_price\\_alerts to show WAITLIST INDEXES\n  ".format(str(index)))
+                            ssd= REQUEST_("https://api.telegram.org/bot"+TOKEN_+"/sendMessage?chat_id="+CHAT_ID+"&parse_mode=Markdown&reply_markup="+json.dumps(keyboard)+"&text=[········🔥MARKETS_TRACKER_BOT🔥········](https://t.me/MARKETS_SIGNALS) \n  ❌ ({}) NOT IN WAITLIST ALERTS \n-CLICK HERE TO SHOW LIST-ALERTS-DB\n  ".format(str(index)))
 
                 elif "show_waitlist_price_alerts" in msg :
                     msg = ""#json.dumps(db_manager)#.replace('}, "','}, \n\n"')
