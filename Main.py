@@ -361,6 +361,7 @@ def MAIN_TELEGRAM_RESPONDER():
                 updx= GITHUB_FILE(update=True,data=json.dumps(db_manager),name="db")
                 old_db_manager=db_manager.copy()
 #####################################
+            print("currently there is no recent message on the group !")
             ssd = REQUEST_("https://api.telegram.org/bot"+TOKEN_+"/getUpdates?offset=-1").json()
             #print(ssd)
             #print("--------------------------------------------")
@@ -369,17 +370,15 @@ def MAIN_TELEGRAM_RESPONDER():
                     checkpoint = (ssd["result"][-1]["update_id"])#[-1]["message"]["date"])
 
                 except:
-                    print("currently there is no recent message on thrr group ")
+                    #print("currently there is no recent message on thrr group ")
                     time.sleep(10)
                     continue
             else:
                 #####################################
                     try:
                         checkpoint = ssd["result"][-1]["update_id"]#[-1]["callback_query"]["message"]["date"]
-                        answer_button= REQUEST_("https://api.telegram.org/bot"+TOKEN_+"/answerCallbackQuery?callback_query_id="+str(ssd["result"][-1]["callback_query"]["id"]))
-                        print(answer_button.json())
                     except:
-                        print("currently there is no recent message on thrr group ")
+                       # print("currently there is no recent message on thrr group ")
                         time.sleep(10)
                         continue
                     ####################################
@@ -398,6 +397,8 @@ def MAIN_TELEGRAM_RESPONDER():
                 else:
                     ############################
                         try:
+                            answer_button= REQUEST_("https://api.telegram.org/bot"+TOKEN_+"/answerCallbackQuery?callback_query_id="+str(ssd["result"][-1]["callback_query"]["id"]))
+                            print(answer_button.json())
                             msg=ssd["result"][-1]["callback_query"]["data"]
                             print(msg)
                         except:
