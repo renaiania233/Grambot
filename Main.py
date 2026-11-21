@@ -289,31 +289,33 @@ def PRICE_ALERT(paire,price,max_alerts=3,interval=60,data__=None,already_alrtd=0
                         if data[2]>=price or reached==True:
                                 reached=True
                                 already_alrtd+=1
-                                ssd= REQUEST_("https://api.telegram.org/bot"+TOKEN_+"/sendMessage?chat_id="+CHAT_ID+"&parse_mode=Markdown&text=[········🔥MARKETS_TRACKER_BOT🔥········](https://t.me/MARKETS_SIGNALS) \n🔔➖➖➖PRICE-ALERT➖➖➖🔔\n➖ {} >= {} WAS REACHED NOW!\n➖CURRENT-PRICE: {}\n➖➖➖ALERT({}/{})➖➖➖".format(paire,price,data[2],already_alrtd,max_alerts))
-                                print(ssd.text)
+                                ssd= REQUEST_("https://api.telegram.org/bot"+TOKEN_+"/sendMessage?chat_id="+CHAT_ID+"&parse_mode=Markdown&text=[········🔥MARKETS_TRACKER_BOT🔥········](https://t.me/MARKETS_SIGNALS) \n🔔➖➖➖PRICE-ALERT➖➖➖🔔\n\n- {} >= {} WAS REACHED NOW!\n-CURRENT-PRICE: {}\n\n➖➖➖ALERT({}/{})➖➖➖".format(paire,price,data[2],already_alrtd,max_alerts))
+                                #print(ssd.text)
                                 time.sleep(interval)
                                 if updated_sync==False:
                                     updated_sync=True
                                     if data__ in PRICE_ALERTS_DB:
                                         PRICE_ALERTS_DB.remove(data__)
                                         updx= GITHUB_FILE(update=True,data=json.dumps(PRICE_ALERTS_DB),name="DB_WAITLIST_ALERTS")
+                                        print("updated here")
                     if price<=data__["CURRENT-PRICE"] :
                         if data[2]<=price or reached==True:
                                 reached=True
                                 already_alrtd+=1
-                                ssd= REQUEST_("https://api.telegram.org/bot"+TOKEN_+"/sendMessage?chat_id="+CHAT_ID+"&parse_mode=Markdown&text=[········🔥MARKETS_TRACKER_BOT🔥········](https://t.me/MARKETS_SIGNALS) \n🔔➖➖➖PRICE-ALERT➖➖➖🔔\n➖ {} <= {} WAS REACHED NOW!\n➖CURRENT-PRICE: {}\n➖➖➖ALERT({}/{})➖➖➖".format(paire,price,data[2],already_alrtd,max_alerts))
-                                print(ssd.text)
+                                ssd= REQUEST_("https://api.telegram.org/bot"+TOKEN_+"/sendMessage?chat_id="+CHAT_ID+"&parse_mode=Markdown&text=[········🔥MARKETS_TRACKER_BOT🔥········](https://t.me/MARKETS_SIGNALS) \n🔔➖➖➖PRICE-ALERT➖➖➖🔔\n\n- {} <= {} WAS REACHED NOW!\n-CURRENT-PRICE: {}\n\n➖➖➖ALERT({}/{})➖➖➖".format(paire,price,data[2],already_alrtd,max_alerts))
+                                #print(ssd.text)
                                 time.sleep(interval)
                                 if updated_sync==False:
                                     updated_sync=True
                                     if data__ in PRICE_ALERTS_DB:
                                         PRICE_ALERTS_DB.remove(data__)
                                         updx= GITHUB_FILE(update=True,data=json.dumps(PRICE_ALERTS_DB),name="DB_WAITLIST_ALERTS")
-
+                                        print("updated here")
                     if already_alrtd>=max_alerts:
                         if data__ in PRICE_ALERTS_DB:
                             PRICE_ALERTS_DB.remove(data__)
                             updx= GITHUB_FILE(update=True,data=json.dumps(PRICE_ALERTS_DB),name="DB_WAITLIST_ALERTS")
+                            print("updated here at end ")
                         return True
 
 
