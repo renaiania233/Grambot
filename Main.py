@@ -2041,7 +2041,7 @@ with open("db.json","r") as r :
     db_manager=dito
     print(db_manager)
     for runner  in dito :
-            if runner["RUNNING"]==True:pause=True
+            if runner["RUNNING"]==False:pause=True
             sti=liss[runner["TIMEFRAME"]]
             starter = GET_CNDLSTICKS_CHART(runner["TIMEFRAME"],runner["TF-NAME"],int(time.time())-sti,int(time.time())+8*3600,runner["PAIRE"],runner["SETTINGS"],runner["MIN-SL"],runner["MAX-SL"],runner["HIGHER-TF"],runner["ADX-LTF-PERIODE"],runner["ADX-LTF-CHK"])
             sti = threading.Thread(target=starter.CHECK_FVG_AVAILABILITY,args=(runner,runner["TIMING"],False))
