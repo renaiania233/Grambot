@@ -236,16 +236,16 @@ def PRICE_ALERT(paire,price,max_alerts=3,interval=60,data__=None,already_alrtd=0
             print("hoho")
             while pause ==True:
                 time.sleep(5)
-                print("PRICE ALERT CURRENTLY PAUSED !")
+              #  print("PRICE ALERT CURRENTLY PAUSED !")
                 continue
             time.sleep(5)
             if data__ not in PRICE_ALERTS_DB  and  reached==False:
                 return 
             try:
                 response = ws.recv()
-                print(response)
+                #print(response)
             except Exception as e :
-                print("nn")
+             #   print("nn")
                 print(e)
                 ws.close()
                 PRICE_ALERT(paire,price,max_alerts=max_alerts,interval=interval,data__=data__,already_alrtd=already_alrtd,reached=reached,updated_sync=updated_sync)
@@ -258,7 +258,7 @@ def PRICE_ALERT(paire,price,max_alerts=3,interval=60,data__=None,already_alrtd=0
                 try:
                     ws.send("3")
                 except Exception as e: 
-                    print("xx")
+                    #print("xx")
                     print(e)
                     ws.close()
                     PRICE_ALERT(paire,price,max_alerts=max_alerts,interval=interval,data__=data__,already_alrtd=already_alrtd,reached=reached,updated_sync=updated_sync)
@@ -284,7 +284,7 @@ def PRICE_ALERT(paire,price,max_alerts=3,interval=60,data__=None,already_alrtd=0
                         "extra": data[6]
                     }
                     
-                    print(price_data)
+                   # print(price_data)
                     if price>=data__["CURRENT-PRICE"] :
                         if data[2]>=price or reached==True:
                                 reached=True
@@ -297,7 +297,7 @@ def PRICE_ALERT(paire,price,max_alerts=3,interval=60,data__=None,already_alrtd=0
                                     if data__ in PRICE_ALERTS_DB:
                                         PRICE_ALERTS_DB.remove(data__)
                                         updx= GITHUB_FILE(update=True,data=json.dumps(PRICE_ALERTS_DB),name="DB_WAITLIST_ALERTS")
-                                        print("updated here")
+                                        #print("updated here")
                     if price<=data__["CURRENT-PRICE"] :
                         if data[2]<=price or reached==True:
                                 reached=True
@@ -310,12 +310,12 @@ def PRICE_ALERT(paire,price,max_alerts=3,interval=60,data__=None,already_alrtd=0
                                     if data__ in PRICE_ALERTS_DB:
                                         PRICE_ALERTS_DB.remove(data__)
                                         updx= GITHUB_FILE(update=True,data=json.dumps(PRICE_ALERTS_DB),name="DB_WAITLIST_ALERTS")
-                                        print("updated here")
+                                        #print("updated here")
                     if already_alrtd>=max_alerts:
                         if data__ in PRICE_ALERTS_DB:
                             PRICE_ALERTS_DB.remove(data__)
                             updx= GITHUB_FILE(update=True,data=json.dumps(PRICE_ALERTS_DB),name="DB_WAITLIST_ALERTS")
-                            print("updated here at end ")
+                        #    print("updated here at end ")
                         return True
 
 
