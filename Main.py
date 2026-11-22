@@ -230,10 +230,10 @@ def PRICE_ALERT(paire,price,max_alerts=3,interval=60,data__=None,already_alrtd=0
             '42["chart_subscribe",{"server":18,"symbol":"%s"}]'%(paire)
         )
 
-        print("Subscribed to {}".format(paire))
+        #print("Subscribed to {}".format(paire))
 
         while True:
-            print("hoho")
+            #print("hoho")
             while pause ==True:
                 time.sleep(5)
               #  print("PRICE ALERT CURRENTLY PAUSED !")
