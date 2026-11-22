@@ -1889,7 +1889,9 @@ class GET_CNDLSTICKS_CHART():
                             stib.join()
                     rs = self.send_two_photos(TOKEN_,CHAT_ID,picture_name,htf_picture,caption=caption)
                     if rs["ok"]==True: 
+                            print(rs)
                             message_id = str(rs["result"][0]["message_id"])
+                            print(message_id)
                         #if response_check not in ALREADY_ALERTED_TRADES:
                             ######################################################################
                             keyboard = {
@@ -1903,6 +1905,7 @@ class GET_CNDLSTICKS_CHART():
                                 ]
                             }
                             ssd = REQUEST_("https://api.telegram.org/bot"+TOKEN_+"/editMessageReplyMarkup?chat_id="+CHAT_ID+"&message_id="+message_id+"&reply_markup="+json.dumps(keyboard))
+                            print(ssd.text)
                             #ssd= REQUEST_("https://api.telegram.org/bot"+TOKEN_+"/sendMessage?chat_id="+CHAT_ID+"&reply_markup="+json.dumps(keyboard)+"&text=➖➖➖➖➖➖➖➖➖")
                             ###########################################################################
                             ALREADY_ALERTED_TRADES.append(id__)
