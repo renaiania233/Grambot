@@ -523,7 +523,9 @@ def MAIN_TELEGRAM_RESPONDER():
                                 targetted= db_manager[index]
                             #if targetted["RUNNING"]==True:
                                 del db_manager[index]
-                                ssd= REQUEST_("https://api.telegram.org/bot"+TOKEN_+"/sendMessage?chat_id="+CHAT_ID+"&parse_mode=Markdown&text=[········🔥MARKETS_TRACKER_BOT🔥········](https://t.me/MARKETS_SIGNALS) \n  🚫 {} KILLED FROM DB-TRACKERSS \n  ".format(str(targetted)))
+                                ssd= REQUEST_("https://api.telegram.org/bot"+TOKEN_+"/sendMessage?chat_id="+CHAT_ID+"&parse_mode=Markdown&text=[········🔥MARKETS_TRACKER_BOT🔥········](https://t.me/MARKETS_SIGNALS) \n  🚫 {} KILLED FROM DB-TRACKERS \n  ".format(str(targetted)))
+                                message_id=str(ssd.json()["result"]["message_id"])
+                                ssd = REQUEST_("https://api.telegram.org/bot"+TOKEN_+"/editMessageReplyMarkup?chat_id="+CHAT_ID+"&message_id="+message_id+"&reply_markup="+json.dumps(keyboard))
                                 
                         except IndexError :
                             
@@ -640,6 +642,8 @@ def MAIN_TELEGRAM_RESPONDER():
                                 del PRICE_ALERTS_DB[index]
                                 updx= GITHUB_FILE(update=True,data=json.dumps(PRICE_ALERTS_DB),name="DB_WAITLIST_ALERTS")
                                 ssd= REQUEST_("https://api.telegram.org/bot"+TOKEN_+"/sendMessage?chat_id="+CHAT_ID+"&parse_mode=Markdown&text=[········🔥MARKETS_TRACKER_BOT🔥········](https://t.me/MARKETS_SIGNALS) \n  🚫 {} \n-REMOVED FROM WAITLIST ALERTS \n  ".format(str(targetted)))
+                                message_id=str(ssd.json()["result"]["message_id"])
+                                ssd = REQUEST_("https://api.telegram.org/bot"+TOKEN_+"/editMessageReplyMarkup?chat_id="+CHAT_ID+"&message_id="+message_id+"&reply_markup="+json.dumps(keyboard))
                                                         ##############
                         
                         ##############
