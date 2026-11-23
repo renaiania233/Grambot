@@ -445,7 +445,7 @@ def MAIN_TELEGRAM_RESPONDER():
                         ssd= REQUEST_("https://api.telegram.org/bot"+TOKEN_+"/sendMessage?chat_id="+CHAT_ID+"&parse_mode=Markdown&text=[········🔥MARKETS_TRACKER_BOT🔥········](https://t.me/MARKETS_SIGNALS) \n🚫   CHECK THIS COMMAND FORMAT:  COMMAND <PAIRE> <TIMEFRAME> \n {}  ".format(e))
               #      UNBLOCK_MESSAGES()
                     
-                elif "/start_new_listenner_on" in msg :
+                elif "/start_new_tracker_on" in msg :
                  #   BLOCK_MESSAGES()
                     if len(msg.split()) < 10 :
                         ssd= REQUEST_("https://api.telegram.org/bot"+TOKEN_+"/sendMessage?chat_id="+CHAT_ID+"&parse_mode=Markdown&text=[········🔥MARKETS_TRACKER_BOT🔥········](https://t.me/MARKETS_SIGNALS) \n🚫  NO ENOUGH PARAMETERS ,CHECK THIS FORM:  COMMAND <PAIRE> <TIMEFRAME(BASE)-PICTURE> <NBR-CANDLES> <MIN-SL-DISTANCE> <MAX-SL-DISTANCE> <HIGHER-TF-PICTURE> <ADX-LTF-PERIODE> <ADX-VAR-CHK> <REFRESH(sec)>\n  ")
@@ -490,43 +490,45 @@ def MAIN_TELEGRAM_RESPONDER():
                         else:
                             ssd= REQUEST_("https://api.telegram.org/bot"+TOKEN_+"/sendMessage?chat_id="+CHAT_ID+"&parse_mode=Markdown&text=[········🔥MARKETS_TRACKER_BOT🔥········](https://t.me/MARKETS_SIGNALS) \n🚫  REQUESTED RUNNER WAS ALREADY RUNING ON THE DB ! \n  ")
                   #  UNBLOCK_MESSAGES()
-                elif "/show_current_listenners" in msg :
-                    print("listenner")
+                elif "/show_active_trackers" in msg :
+                    print("show trackers")
                     msg = ""#json.dumps(db_manager)#.replace('}, "','}, \n\n"')
                     for index , runner in enumerate(db_manager):
                         msg+="{})  {} \n\n".format(index,runner)
 
-                    if msg=="":msg="\n\nNO LISTENNER CURRENTLY ON !, DB EMPTY"
+                    if msg=="":msg="\n\nNO ACTIVE TRACKER !, DB EMPTY"
                     ssd= REQUEST_("https://api.telegram.org/bot"+TOKEN_+"/sendMessage?chat_id="+CHAT_ID+"&parse_mode=Markdown&text=[········🔥MARKETS_TRACKER_BOT🔥········](https://t.me/MARKETS_SIGNALS) \n 🆗 THIS IS THE CURRENT DB-STATUS: \n{}  ".format(str(msg)))
                  #   print(ssd.text)
                     #UNBLOCK_MESSAGES()
-                elif "/kill_listenner" in msg : 
+                elif "/kill_tracker" in msg : 
 
                    # BLOCK_MESSAGES()
-
+                    keyboard = {
+                                "inline_keyboard": [
+                                    [
+                                        {
+                                            "text": "🟢SHOW-ACTIVE-TRACKERS🟢",
+                                            "callback_data": "/show_active_trackers"
+                                        }
+                                    ]
+                                ]
+                            }
                     if len(msg.split()) < 2 :
-                        ssd= REQUEST_("https://api.telegram.org/bot"+TOKEN_+"/sendMessage?chat_id="+CHAT_ID+"&parse_mode=Markdown&text=[········🔥MARKETS_TRACKER_BOT🔥········](https://t.me/MARKETS_SIGNALS) \n🚫  NO ENOUGH PARAMETERS ,CHECK THIS FORM:  COMMAND <INDEX[0,1,2,3,4,5,6,....]> \n  ")
+                        ssd= REQUEST_("https://api.telegram.org/bot"+TOKEN_+"/sendMessage?chat_id="+CHAT_ID+"&parse_mode=Markdown&text=[········🔥MARKETS_TRACKER_BOT🔥········](https://t.me/MARKETS_SIGNALS) \n🚫  NO ENOUGH PARAMETERS ,CHECK THIS FORM:  COMMAND <INDEX> \n  ")
+                        message_id=str(ssd.json()["result"]["message_id"])
+                        ssd = REQUEST_("https://api.telegram.org/bot"+TOKEN_+"/editMessageReplyMarkup?chat_id="+CHAT_ID+"&message_id="+message_id+"&reply_markup="+json.dumps(keyboard))
                     else:
                         index = int(msg.split()[-1])
                         try:
                                 targetted= db_manager[index]
                             #if targetted["RUNNING"]==True:
                                 del db_manager[index]
-                                ssd= REQUEST_("https://api.telegram.org/bot"+TOKEN_+"/sendMessage?chat_id="+CHAT_ID+"&parse_mode=Markdown&text=[········🔥MARKETS_TRACKER_BOT🔥········](https://t.me/MARKETS_SIGNALS) \n  🚫 {} KILLED FROM DB-LISTENNERS \n  ".format(str(targetted)))
+                                ssd= REQUEST_("https://api.telegram.org/bot"+TOKEN_+"/sendMessage?chat_id="+CHAT_ID+"&parse_mode=Markdown&text=[········🔥MARKETS_TRACKER_BOT🔥········](https://t.me/MARKETS_SIGNALS) \n  🚫 {} KILLED FROM DB-TRACKERSS \n  ".format(str(targetted)))
                                 
                         except IndexError :
-                            keyboard = {
-                                "inline_keyboard": [
-                                    [
-                                        {
-                                            "text": "🟢SHOW-ACTIVE-LISTENNERS🟢",
-                                            "callback_data": "/show_current_listenners"
-                                        }
-                                    ]
-                                ]
-                            }
                             
-                            ssd= REQUEST_("https://api.telegram.org/bot"+TOKEN_+"/sendMessage?chat_id="+CHAT_ID+"&parse_mode=Markdown&text=[········🔥MARKETS_TRACKER_BOT🔥········](https://t.me/MARKETS_SIGNALS) \n  ❌ ({}) NOT IN DB-LISTENNERS \n-CLICK HERE TO SHOW ACTIVE-LISTENNERS\n  ".format(str(index)))
+                            
+                            ssd= REQUEST_("https://api.telegram.org/bot"+TOKEN_+"/sendMessage?chat_id="+CHAT_ID+"&parse_mode=Markdown&text=[········🔥MARKETS_TRACKER_BOT🔥········](https://t.me/MARKETS_SIGNALS) \n  ❌ ({}) NOT IN DB-TRACKERS \n-CLICK HERE TO SHOW ACTIVE-TRACKERS\n  ".format(str(index)))
                             message_id=str(ssd.json()["result"]["message_id"])
                             ssd = REQUEST_("https://api.telegram.org/bot"+TOKEN_+"/editMessageReplyMarkup?chat_id="+CHAT_ID+"&message_id="+message_id+"&reply_markup="+json.dumps(keyboard))
                     #UNBLOCK_MESSAGES()
@@ -615,8 +617,21 @@ def MAIN_TELEGRAM_RESPONDER():
                     luncher=threading.Thread(target=PRICE_ALERT,args=(paire,price,max_alerts,interval,ppld))
                     luncher .start()
                 elif "/remove_price_alert" in msg:
+                    keyboard = {
+                                "inline_keyboard": [
+                                    [
+                                        {
+                                            "text": "🔔SHOW-WAITLIST-ALERTS🔔",
+                                            "callback_data": "/show_waitlist_price_alerts"
+                                        }
+                                    ]
+                                ]
+                            }
                     if len(msg.split()) < 2 :
-                        ssd= REQUEST_("https://api.telegram.org/bot"+TOKEN_+"/sendMessage?chat_id="+CHAT_ID+"&parse_mode=Markdown&text=[········🔥MARKETS_TRACKER_BOT🔥········](https://t.me/MARKETS_SIGNALS) \n🚫  NO ENOUGH PARAMETERS ,CHECK THIS FORM:  remove_price_alert <INDEX[0,1,2,3....]> \n  ")
+                        ssd= REQUEST_("https://api.telegram.org/bot"+TOKEN_+"/sendMessage?chat_id="+CHAT_ID+"&parse_mode=Markdown&text=[········🔥MARKETS_TRACKER_BOT🔥········](https://t.me/MARKETS_SIGNALS) \n🚫  NO ENOUGH PARAMETERS ,CHECK THIS FORM:  <COMMAND> <INDEX> \n  ")
+                        message_id=str(ssd.json()["result"]["message_id"])
+                        ssd = REQUEST_("https://api.telegram.org/bot"+TOKEN_+"/editMessageReplyMarkup?chat_id="+CHAT_ID+"&message_id="+message_id+"&reply_markup="+json.dumps(keyboard))
+
                     else:
                         index = int(msg.split()[-1])
                         try:
@@ -629,16 +644,7 @@ def MAIN_TELEGRAM_RESPONDER():
                         
                         ##############
                         except IndexError :
-                            keyboard = {
-                                "inline_keyboard": [
-                                    [
-                                        {
-                                            "text": "🔔SHOW-WAITLIST-ALERTS🔔",
-                                            "callback_data": "/show_waitlist_price_alerts"
-                                        }
-                                    ]
-                                ]
-                            }
+                            
 
                #             text = (
                #                 "[········🔥MARKETS_TRACKER_BOT🔥········](https://t.me/MARKETS_SIGNALS)\n"
@@ -1568,7 +1574,7 @@ class GET_CNDLSTICKS_CHART():
         elif ssxx== True:
             if send_confirmation==True:
                 if already_alerted_started_ok==False:
-                    ssd= REQUEST_("https://api.telegram.org/bot"+TOKEN_+"/sendMessage?chat_id="+CHAT_ID+"&parse_mode=Markdown&text=[········🔥MARKETS_TRACKER_BOT🔥········](https://t.me/MARKETS_SIGNALS) \n✅LISTENNER STARTED ON :\nPAIRE: {}\nTIME-FRAME: {}\nFVG(inCANDLES): {}\nMIN-SL: {}\nMAX-SL: {}\nHIGHER-TF: {}\nLTF-ADX-PERIOD: {}\nADX-VAR-CHK: {}\n REFRESH(sec): {}\n-----------".format(self.symbol,self.tf,self.param,self.min_sl,self.max_sl,self.higher_tf,self.adx_periode,self.adx_var_check,timing___))
+                    ssd= REQUEST_("https://api.telegram.org/bot"+TOKEN_+"/sendMessage?chat_id="+CHAT_ID+"&parse_mode=Markdown&text=[········🔥MARKETS_TRACKER_BOT🔥········](https://t.me/MARKETS_SIGNALS) \n✅TRACKER STARTED ON :\nPAIRE: {}\nTIME-FRAME: {}\nFVG(inCANDLES): {}\nMIN-SL: {}\nMAX-SL: {}\nHIGHER-TF: {}\nLTF-ADX-PERIOD: {}\nADX-VAR-CHK: {}\n REFRESH(sec): {}\n-----------".format(self.symbol,self.tf,self.param,self.min_sl,self.max_sl,self.higher_tf,self.adx_periode,self.adx_var_check,timing___))
                     already_alerted_started_ok=True
                     di = {"PAIRE":self.symbol,"RUNNING":True,"TF-NAME":self.tfcc,"TIMEFRAME":self.tf,"TIMING":timing___,"SETTINGS":self.param,"MIN-SL":self.min_sl,"MAX-SL":self.max_sl,"HIGHER-TF":self.higher_tf,"ADX-LTF-PERIODE":self.adx_periode,"ADX-LTF-CHK":self.adx_var_check}
                     if di not in db_manager:
