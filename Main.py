@@ -448,7 +448,7 @@ def MAIN_TELEGRAM_RESPONDER():
                 elif "/start_new_listenner_on" in msg :
                  #   BLOCK_MESSAGES()
                     if len(msg.split()) < 10 :
-                        ssd= REQUEST_("https://api.telegram.org/bot"+TOKEN_+"/sendMessage?chat_id="+CHAT_ID+"&parse_mode=Markdown&text=[········🔥MARKETS_TRACKER_BOT🔥········](https://t.me/MARKETS_SIGNALS) \n🚫  NO ENOUGH PARAMETERS ,CHECK THIS FORM:  COMMAND <PAIRE> <TIMEFRAME> <UNKNOWN-PARAM> <MIN-SL-DISTANCE> <MAX-SL-DISTANCE> <LTF-PERIODE-HMA> <HIGHER-TF-HMA> <LTF-ADX-PERIODE> <LTF-ADX-VARIABLE-CHECK> <REFRESH(sec)>\n  ")
+                        ssd= REQUEST_("https://api.telegram.org/bot"+TOKEN_+"/sendMessage?chat_id="+CHAT_ID+"&parse_mode=Markdown&text=[········🔥MARKETS_TRACKER_BOT🔥········](https://t.me/MARKETS_SIGNALS) \n🚫  NO ENOUGH PARAMETERS ,CHECK THIS FORM:  COMMAND <PAIRE> <TIMEFRAME(BASE)-PICTURE> <NBR-CANDLES> <MIN-SL-DISTANCE> <MAX-SL-DISTANCE> <HIGHER-TF-PICTURE> <ADX-LTF-PERIODE> <ADX-VAR-CHK> <REFRESH(sec)>\n  ")
                         #UNBLOCK_MESSAGES()
                         #continue
                     else:
@@ -1887,25 +1887,27 @@ class GET_CNDLSTICKS_CHART():
                             stib = threading.Thread(target=startb.CHECK_FVG_AVAILABILITY,args=(db_manager,0,True,False,False,True))
                             stib.start()
                             stib.join()
-                    rs = self.send_two_photos(TOKEN_,CHAT_ID,picture_name,htf_picture,caption=caption)
-                    if rs["ok"]==True: 
-                            print(rs)
-                            message_id = str(rs["result"][0]["message_id"])
-                            print(message_id)
-                        #if response_check not in ALREADY_ALERTED_TRADES:
-                            ######################################################################
-                            keyboard = {
+                    keyboard = {
                                 "inline_keyboard": [
                                     [
                                         {
-                                            "text": "🔔SET-ALERT {} {} 🔔".format(self.symbol,math.trunc(entry*factor)/factor),
+                                            "text": "🔔SET-ALERT {} | {} 🔔".format(self.symbol,math.trunc(entry*factor)/factor),
                                             "callback_data": "/set_price_alert {} {} {} {}".format(self.symbol,math.trunc(entry*factor)/factor,3,60)
                                         }
                                     ]
                                 ]
                             }
-                            ssd = REQUEST_("https://api.telegram.org/bot"+TOKEN_+"/editMessageReplyMarkup?chat_id="+CHAT_ID+"&message_id="+message_id+"&reply_markup="+json.dumps(keyboard))
-                            print(ssd.text)
+                    ssd= REQUEST_("https://api.telegram.org/bot"+TOKEN_+"/sendMessage?chat_id="+CHAT_ID+"&reply_markup="+json.dumps(keyboard)+"&text=➖➖➖➖➖➖➖➖➖")
+                    rs = self.send_two_photos(TOKEN_,CHAT_ID,picture_name,htf_picture,caption=caption)
+                    if rs["ok"]==True: 
+                            #print(rs)
+                            #message_id = str(rs["result"][0]["message_id"])
+                            #print(message_id)
+                        #if response_check not in ALREADY_ALERTED_TRADES:
+                            ######################################################################
+                            
+                            #ssd = REQUEST_("https://api.telegram.org/bot"+TOKEN_+"/editMessageReplyMarkup?chat_id="+CHAT_ID+"&message_id="+message_id+"&reply_markup="+json.dumps(keyboard))
+                            #print(ssd.text)
                             #ssd= REQUEST_("https://api.telegram.org/bot"+TOKEN_+"/sendMessage?chat_id="+CHAT_ID+"&reply_markup="+json.dumps(keyboard)+"&text=➖➖➖➖➖➖➖➖➖")
                             ###########################################################################
                             ALREADY_ALERTED_TRADES.append(id__)
